@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-content>
+    <div>
+      <h4 class="mb-32">Tranferir Adolescente</h4>
+      <p class="mb-0 fw-medium">
+        Mediante este menu se va poder transferir un adolescente a otro SOA.
+      </p>
+      <p class="mb-0 fw-medium"><strong>Pasos:</strong></p>
+      <p class="mb-0 fw-medium">
+        <strong>1.- </strong>Da click en el boton
+        <strong>"Iniciar Transferencia"</strong>.
+      </p>
+      <p class="mb-0 fw-medium">
+        <strong>2.- </strong>Selecciona el <strong>Adolescente</strong> a
+        transferir.
+      </p>
+      <p class="mb-0 fw-medium">
+        <strong>3.- </strong>Selecciona el nuevo <strong>SOA</strong> para la
+        transferencia.
+      </p>
+      <p class="mb-0 fw-medium">
+        <strong>4.- </strong>Y por ultimo, dale click en
+        <strong>"Transferir Adolescente"</strong> para terminar el proceso.
+      </p>
+    </div>
+    <div class="container-button">
+      <button
+        mat-raised-button
+        class="me-8 mb-8"
+        color="primary"
+        id="button-transfer"
+        (click)="showForm()"
+      >
+        <strong>Iniciar Transferencia</strong>
+      </button>
+    </div>
+
+    <div *ngIf="showTransferForm">
+      <form [formGroup]="formForTransfer">
+        <mat-form-field>
+          <mat-select formControlName="id_teen">
+            <mat-option *ngFor="let dTeen of teenData" [value]="dTeen.id_teen">
+              {{ dTeen.name }} {{ dTeen.surnameFather }}
+              {{ dTeen.surnameMother }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Campo 2" />
+        </mat-form-field>
+        <button mat-raised-button color="primary">Enviar Formulario</button>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
