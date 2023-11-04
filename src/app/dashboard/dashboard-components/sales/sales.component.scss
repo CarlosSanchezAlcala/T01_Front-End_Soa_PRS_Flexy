@@ -2,10 +2,35 @@
     max-width: 1400px;
 }
 
+.container-general-transfer {
+  max-height: 16.5rem;
+  min-height: 16.5rem;
+}
+
 .container-button {
     margin: 10px 10px 10px 10px;
 }
 
-#button-transfer {
+#button-transfer,
+#button-transfer-teen,
+#button-cancel-teen {
     color: white;
+}
+
+#button-transfer-teen,
+#button-cancel-teen {
+  margin: 10px 10px 10px 10px;
+}
+
+.container-form {
+  width: 40%;
+  display: flex;
+  margin-left: 43rem;
+  margin-top: -14rem;
+}
+
+.container-functions-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

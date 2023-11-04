@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="container-general-transfer">
   <mat-card-content>
     <div>
       <h4 class="mb-32">Tranferir Adolescente</h4>
@@ -35,9 +35,10 @@
       </button>
     </div>
 
-    <div *ngIf="showTransferForm">
-      <form [formGroup]="formForTransfer">
+    <div class="container-form" *ngIf="showTransferForm">
+      <form [formGroup]="formForTransfer" (ngSubmit)="onSubmitForm()">
         <mat-form-field>
+          <mat-label>Adolescente:</mat-label>
           <mat-select formControlName="id_teen">
             <mat-option *ngFor="let dTeen of teenData" [value]="dTeen.id_teen">
               {{ dTeen.name }} {{ dTeen.surnameFather }}
@@ -46,9 +47,19 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Campo 2" />
+          <mat-label>Soa:</mat-label>
+          <mat-select formControlName="id_operativeunit">
+            <mat-option *ngFor="let dOperativeUnit of operativeUnitData" [value]="dOperativeUnit.id_operativeunit">
+              {{ dOperativeUnit.name }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-        <button mat-raised-button color="primary">Enviar Formulario</button>
+        <div class="container-functions-buttons">
+          <button mat-raised-button id="button-transfer-teen" color="primary"><strong>Transferir adolescente</strong>
+          </button>
+          <button mat-raised-button id="button-cancel-teen" color="primary" (click)="hideForm()"><strong>Cancelar
+            operación</strong></button>
+        </div>
       </form>
     </div>
   </mat-card-content>
