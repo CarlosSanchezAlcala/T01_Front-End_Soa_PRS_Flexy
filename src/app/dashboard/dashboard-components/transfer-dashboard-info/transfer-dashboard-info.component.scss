@@ -26,7 +26,7 @@
   width: 40%;
   display: flex;
   margin-left: 43rem;
-  margin-top: -14rem;
+  margin-top: -10rem;
 }
 
 .container-functions-buttons {
@@ -42,4 +42,15 @@
 #paso3,
 #paso4 {
   margin: 1.5px 0 0 1.5px;
+}
+
+.container-image-dissapear {
+  display: flex;
+  margin-left: 40rem;
+  margin-top: -15rem;
+}
+
+#image-references {
+  width: 25rem;
+  border-radius: 30px;
 }

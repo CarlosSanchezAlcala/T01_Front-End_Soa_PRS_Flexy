@@ -9,9 +9,6 @@ import { TeenDashboardInfoComponent } from './dashboard-components/teen-dashboar
 import { OperativeUnitDashboardInfoComponent } from './dashboard-components/operative-unit-dashboard-info/operative-unit-dashboard-info.component';
 import { TransferDashboardInfoComponent } from './dashboard-components/transfer-dashboard-info/transfer-dashboard-info.component';
 
-
-
-
 @NgModule({
   declarations: [
     DashboardComponent,

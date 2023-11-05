@@ -1,6 +1,7 @@
 <mat-card class="container-general-transfer">
   <mat-card-content>
-    <div>
+    <div class="container-content">
+
       <h4 class="mb-32">Tranferir Adolescente</h4>
       <p class="mb-0 fw-medium" id="information">
         Mediante este menu se va poder transferir un adolescente a otro SOA.
@@ -18,22 +19,29 @@
         <strong>3.- </strong>Selecciona el nuevo <strong>SOA</strong> para la
         transferencia.
       </p>
+
       <p class="mb-0 fw-medium" id="paso4">
         <strong>4.- </strong>Y por ultimo, dale click en
         <strong>"Transferir Adolescente"</strong> para terminar el proceso.
       </p>
+
+      <div class="container-button" *ngIf="!showTransferForm">
+        <button
+          mat-raised-button
+          class="me-8 mb-8"
+          color="primary"
+          id="button-transfer"
+          (click)="showForm()"
+        >
+          <strong>Iniciar Transferencia</strong>
+        </button>
+      </div>
+
+      <div *ngIf="!showTransferForm" class="container-image-dissapear">
+        <img id="image-references" src="assets/images/Soa-Canete.png">
+      </div>
     </div>
-    <div class="container-button">
-      <button
-        mat-raised-button
-        class="me-8 mb-8"
-        color="primary"
-        id="button-transfer"
-        (click)="showForm()"
-      >
-        <strong>Iniciar Transferencia</strong>
-      </button>
-    </div>
+
 
     <div class="container-form" *ngIf="showTransferForm">
       <form [formGroup]="formForTransfer" (ngSubmit)="onSubmitForm()">
