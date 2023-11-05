@@ -1,24 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Teen } from 'src/app/components/component-funcionality/models/teen/teen.model';
-import { OperativeUnitService } from 'src/app/components/component-funcionality/services/operativeUnit/operative-unit.service';
-import { TeenService } from 'src/app/components/component-funcionality/services/teen/teen.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {TeenService} from "../../../components/component-funcionality/services/teen/teen.service";
+import {
+  OperativeUnitService
+} from 'src/app/components/component-funcionality/services/operativeUnit/operative-unit.service';
+import {Teen} from "../../../components/component-funcionality/models/teen/teen.model";
 
 @Component({
-  selector: 'app-sales',
-  templateUrl: './sales.component.html',
-  styleUrls: ['./sales.component.scss'],
+  selector: 'app-transfer-dashboard-info',
+  templateUrl: './transfer-dashboard-info.component.html',
+  styleUrls: ['./transfer-dashboard-info.component.scss']
 })
-export class SalesComponent implements OnInit {
+export class TransferDashboardInfoComponent implements OnInit {
+
   showTransferForm = false;
   teenData: any[] = [];
   operativeUnitData: any[] = [];
   formForTransfer: FormGroup = new FormGroup({});
 
-  constructor(
-    private _teenService: TeenService,
-    private _operativeUnitService: OperativeUnitService,
-    private _fb: FormBuilder
+  constructor(private _teenService: TeenService,
+              private _operativeUnitService: OperativeUnitService,
+              private _fb: FormBuilder
   ) {
     this.formForTransfer = this._fb.group({
       id_teen: [''],
@@ -27,8 +29,8 @@ export class SalesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.findAllDataOperativeUnit();
     this.findAllDataTeen();
+    this.findAllDataOperativeUnit();
   }
 
   showForm() {
@@ -90,4 +92,5 @@ export class SalesComponent implements OnInit {
         this.operativeUnitData = dataReceivedOperativeUnit;
       });
   }
+
 }

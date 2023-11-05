@@ -1,5 +1,5 @@
 .max-width {
-    max-width: 1400px;
+  max-width: 1400px;
 }
 
 .container-general-transfer {
@@ -8,13 +8,13 @@
 }
 
 .container-button {
-    margin: 10px 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
 }
 
 #button-transfer,
 #button-transfer-teen,
 #button-cancel-teen {
-    color: white;
+  color: white;
 }
 
 #button-transfer-teen,
@@ -33,4 +33,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#information,
+#pasos,
+#paso1,
+#paso2,
+#paso3,
+#paso4 {
+  margin: 1.5px 0 0 1.5px;
 }

@@ -2,23 +2,23 @@
   <mat-card-content>
     <div>
       <h4 class="mb-32">Tranferir Adolescente</h4>
-      <p class="mb-0 fw-medium">
+      <p class="mb-0 fw-medium" id="information">
         Mediante este menu se va poder transferir un adolescente a otro SOA.
       </p>
-      <p class="mb-0 fw-medium"><strong>Pasos:</strong></p>
-      <p class="mb-0 fw-medium">
+      <p class="mb-0 fw-medium" id="pasos"><strong>Pasos:</strong></p>
+      <p class="mb-0 fw-medium" id="paso1">
         <strong>1.- </strong>Da click en el boton
         <strong>"Iniciar Transferencia"</strong>.
       </p>
-      <p class="mb-0 fw-medium">
+      <p class="mb-0 fw-medium" id="paso2">
         <strong>2.- </strong>Selecciona el <strong>Adolescente</strong> a
         transferir.
       </p>
-      <p class="mb-0 fw-medium">
+      <p class="mb-0 fw-medium" id="paso3">
         <strong>3.- </strong>Selecciona el nuevo <strong>SOA</strong> para la
         transferencia.
       </p>
-      <p class="mb-0 fw-medium">
+      <p class="mb-0 fw-medium" id="paso4">
         <strong>4.- </strong>Y por ultimo, dale click en
         <strong>"Transferir Adolescente"</strong> para terminar el proceso.
       </p>
@@ -57,7 +57,7 @@
         <div class="container-functions-buttons">
           <button mat-raised-button id="button-transfer-teen" color="primary"><strong>Transferir adolescente</strong>
           </button>
-          <button mat-raised-button id="button-cancel-teen" color="primary" (click)="hideForm()"><strong>Cancelar
+          <button mat-raised-button id="button-cancel-teen" color="warn" (click)="hideForm()"><strong>Cancelar
             operación</strong></button>
         </div>
       </form>
