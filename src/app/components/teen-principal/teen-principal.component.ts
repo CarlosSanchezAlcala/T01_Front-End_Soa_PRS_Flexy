@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class TeenPrincipalComponent implements OnInit {
   teenData: any[] = [];
+  showTransferForm = false;
   attorneyData: any[] = [];
   operativeUnitData: any[] = [];
   funcionaryData: any[] = [];
@@ -33,8 +34,8 @@ export class TeenPrincipalComponent implements OnInit {
   constructor(
     public _teenService: TeenService,
     private _fb: FormBuilder,
-    private _funcionaryService: FuncionaryService,
-    private _asignationService: AsignationService,
+    public _funcionaryService: FuncionaryService,
+    public _asignationService: AsignationService,
     private _dialog: MatDialog
   ) {
     this.teenDataForm = this._fb.group({
@@ -71,6 +72,17 @@ export class TeenPrincipalComponent implements OnInit {
     this.findAllDataActiveTeen();
     this.findAllDataCompleteOperativeUnit();
     this.findAllDataCompleteAttorney();
+    this.findAllDataAttorney();
+    this.findAllDataUbigeo();
+    this.findAllDataFuncionaryRankLegalGuardian();
+  }
+
+  showForm() {
+    this.showTransferForm = true;
+  }
+
+  hideForm() {
+    this.showTransferForm = false;
   }
 
   findAllDataFuncionaryRankLegalGuardian() {
@@ -154,9 +166,11 @@ export class TeenPrincipalComponent implements OnInit {
     if (this._teenService.teenSelected) {
       // Update || Modify
       this.updateDataTeen();
+      window.location.reload();
     } else {
       // Recording || Create
       this.registerNewDataTeenAndAsignation();
+      window.location.reload();
     }
   }
 

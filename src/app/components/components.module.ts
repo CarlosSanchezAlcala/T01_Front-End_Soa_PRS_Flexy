@@ -11,7 +11,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { ExpansionComponent } from './expansion/expansion.component';
 import { ChipsComponent } from './chips/chips.component';
 import { ProgressComponent } from './progress/progress.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProgressSnipperComponent } from './progress-snipper/progress-snipper.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
@@ -23,27 +23,28 @@ import { TeenPrincipalComponent } from './teen-principal/teen-principal.componen
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FeatherModule.pick(allIcons),
-    DemoFlexyModule,
-    ButtonsComponent,
-    SlideToggleComponent,
-    SliderComponent,
-    ToolbarComponent,
-    ProgressSnipperComponent,
-    SnackbarComponent,
-    MenuComponent,
-    TabsComponent,
-    ExpansionComponent,
-    ChipsComponent,
-    ProgressComponent,
-    FormsComponent,
-    AlertsComponent,
-    GridListComponent,
-    TooltipsComponent,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        FeatherModule.pick(allIcons),
+        DemoFlexyModule,
+        ButtonsComponent,
+        SlideToggleComponent,
+        SliderComponent,
+        ToolbarComponent,
+        ProgressSnipperComponent,
+        SnackbarComponent,
+        MenuComponent,
+        TabsComponent,
+        ExpansionComponent,
+        ChipsComponent,
+        ProgressComponent,
+        FormsComponent,
+        AlertsComponent,
+        GridListComponent,
+        TooltipsComponent,
+        FormsModule,
+        ReactiveFormsModule
+    ],
   exports: [
     AlertsComponent,
     FormsComponent,

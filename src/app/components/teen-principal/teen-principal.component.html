@@ -1,7 +1,20 @@
-<mat-card class="w-100">
+
+<div class="container-button" *ngIf="!showTransferForm">
+  <button
+          mat-raised-button
+          class="me-8 mb-8"
+          color="primary"
+          id="button-transfer"
+          (click)="showForm()"
+  >
+    <strong>Iniciar Transferencia</strong>
+  </button>
+</div>
+
+<mat-card class="w-100" *ngIf="!showTransferForm">
     <mat-card-content>
       <h4 class="mb-56">Adolescentes Infractores</h4>
-  
+
       <div class="table-responsive">
         <table mat-table [dataSource]="teenData" class="text-nowrap w-100">
           <ng-container matColumnDef="dni">
@@ -12,14 +25,14 @@
               </p>
             </td>
           </ng-container>
-  
+
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Nombres</th>
             <td mat-cell *matCellDef="let element">
               <p class="mb-0 fw-medium">{{ element.name }}</p>
             </td>
           </ng-container>
-  
+
           <ng-container matColumnDef="surnames">
             <th mat-header-cell *matHeaderCellDef>Apellidos</th>
             <td mat-cell *matCellDef="let element">
@@ -28,7 +41,7 @@
               </p>
             </td>
           </ng-container>
-  
+
           <ng-container matColumnDef="phoneNumber">
             <th mat-header-cell *matHeaderCellDef>Celular</th>
             <td mat-cell *matCellDef="let element">
@@ -37,7 +50,7 @@
               </p>
             </td>
           </ng-container>
-  
+
           <ng-container matColumnDef="operativeUnit">
             <th mat-header-cell *matHeaderCellDef>Soa</th>
             <td mat-cell *matCellDef="let element">
@@ -53,7 +66,7 @@
               </p>
             </td>
           </ng-container>
-  
+
           <ng-container matColumnDef="attorney">
             <th mat-header-cell *matHeaderCellDef>Apoderado</th>
             <td mat-cell *matCellDef="let element">
@@ -70,12 +83,12 @@
     </mat-card-content>
   </mat-card>
 
-  <form id="formColumn" [formGroup]="teenDataForm" (ngSubmit)="saveTeen()">
+  <form id="formColumn" [formGroup]="teenDataForm" (ngSubmit)="saveTeen()" *ngIf="showTransferForm">
 
     <div class="titleWeb" align="center">
       <figure>
         <p style="font-size: 55px" class="lead">
-          {{teenServices.teenSelected && _asignationServices.transactionSelected ? 'Editar datos del Adolescente' : 'Nuevo Adolescente'}}
+          {{_teenService.teenSelected && _asignationService.transactionSelected ? 'Editar datos del Adolescente' : 'Nuevo Adolescente'}}
         </p>
         <figcaption class="blockquote-footer">
           Por favor colocar toda la información que se pide a continuación,
@@ -86,49 +99,49 @@
         </figcaption>
       </figure>
     </div>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Nombre Completo:</mat-label>
       <input matInput formControlName="name">
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Apellido Paterno:</mat-label>
       <input matInput formControlName="surnameFather">
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Apellido Materno:</mat-label>
       <input matInput formControlName="surnameMother">
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Número de DNI:</mat-label>
       <input maxlength="8" minlength="8" matInput formControlName="dni">
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Celular:</mat-label>
       <input maxlength="9" minlength="9" matInput formControlName="phoneNumber">
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Dirección:</mat-label>
       <input matInput formControlName="address">
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Correo Electrónico:</mat-label>
       <input matInput formControlName="email">
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Fecha de Nacimiento:</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="birthade">
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Sexo:</mat-label>
       <mat-select formControlName="gender">
@@ -136,7 +149,7 @@
         <mat-option value="M">Masculino</mat-option>
       </mat-select>
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Soa:</mat-label>
       <mat-select formControlName="id_operativeunit">
@@ -145,21 +158,21 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Crimen cometido:</mat-label>
       <input matInput formControlName="crimeCommitted">
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Apoderado:</mat-label>
       <mat-select formControlName="id_attorney">
         <mat-option *ngFor="let dAttor of attorneyData" [value]="dAttor.id_attorney">
-          {{dAttor.name}} {{dAttor.surnamefather}} {{dAttor.surnamemother}}
+          {{dAttor.name}} {{dAttor.surnameFather}} {{dAttor.surnameMother}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-  
+
     <mat-form-field class="formForRegister formForRegister">
       <mat-label>Ubicación:</mat-label>
       <mat-select formControlName="codubi">
@@ -168,27 +181,27 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  
+
     <form id="formColumnAsignationData" [formGroup]="legalGuardianAsignationFrom" (ngSubmit)="saveTeen()">
-  
+
       <mat-form-field class="formForRegister formForRegister">
         <mat-label>Funcionario:</mat-label>
         <mat-select formControlName="id_funcionary">
           <mat-option *ngFor="let dFunc of funcionaryData" [value]="dFunc.id_funcionary">
-            {{dFunc.name}} {{dFunc.surnamefather}} {{dFunc.surnamemother}}
+            {{dFunc.name}} {{dFunc.surnameFather}} {{dFunc.surnameMother}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-  
+
       <mat-form-field class="formForRegister formForRegister">
         <mat-label>Descripción de la asignación:</mat-label>
         <input matInput formControlName="description">
       </mat-form-field>
-  
+
     </form>
-  
+
     <div id="buttonActions">
-      <button type="button" id="buttonCancel" mat-flat-button color="primary">
+      <button type="button" id="buttonCancel" mat-flat-button color="primary" (click)="hideForm()">
         Cancelar
       </button>
       <button type="submit" id="buttonSave" mat-flat-button color="accent" [disabled]="teenDataForm.invalid">

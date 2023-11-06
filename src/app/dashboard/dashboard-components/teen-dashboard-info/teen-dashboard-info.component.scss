@@ -1,27 +1,31 @@
 .table-responsive {
-    overflow-x: auto;
-  }
-  
-  td, th {
-    text-align: center;
-    vertical-align: middle;
-  }
-  
-  td.mat-cell {
-    padding: 16px;
-  }
-  
-  th.mat-header-cell:first-of-type,
-  td.mat-cell:first-of-type,
-  td.mat-footer-cell:first-of-type {
-    padding: 16px;
-  }
-  
-  th.mat-header-cell {
-    padding: 16px;
-  }
-  
-  .mat-header-cell {
-    font-size: 14px;
-  }
-  
+  overflow-x: auto;
+}
+
+td, th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+td.mat-cell {
+  padding: 16px;
+}
+
+#container-general-teen {
+  max-height: 38rem;
+  min-height: 38rem;
+}
+
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding: 16px;
+}
+
+th.mat-header-cell {
+  padding: 16px;
+}
+
+.mat-header-cell {
+  font-size: 14px;
+}
