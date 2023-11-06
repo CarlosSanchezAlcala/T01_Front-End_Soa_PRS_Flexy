@@ -7,7 +7,9 @@ import {
 import {Teen} from "../../../components/component-funcionality/models/teen/teen.model";
 import {Observable, startWith} from "rxjs";
 import {map} from "rxjs/operators";
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {OperativeUnit} from "../../../components/component-funcionality/models/operativeUnit/operativeUnit.model";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-transfer-dashboard-info',
@@ -16,8 +18,10 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 })
 export class TransferDashboardInfoComponent implements OnInit {
 
-  filteredOptions!: Observable<any[]>;
-  searchControl = new FormControl();
+  filteredOptionsTeen!: Observable<any[]>;
+  searchControlTeen = new FormControl();
+  filteredOptionsOperativeUnit!: Observable<any[]>;
+  searchControlOperativeUnit = new FormControl();
   showTransferForm = false;
   teenData: any[] = [];
   operativeUnitData: any[] = [];
@@ -25,7 +29,8 @@ export class TransferDashboardInfoComponent implements OnInit {
 
   constructor(private _teenService: TeenService,
               private _operativeUnitService: OperativeUnitService,
-              private _fb: FormBuilder
+              private _fb: FormBuilder,
+              private snackBar: MatSnackBar
   ) {
     this.formForTransfer = this._fb.group({
       id_teen: [''],
@@ -36,23 +41,43 @@ export class TransferDashboardInfoComponent implements OnInit {
   ngOnInit(): void {
     this.findAllDataTeen();
     this.findAllDataOperativeUnit();
-    this.filteredOptions = this.searchControl.valueChanges.pipe(
+    this.filteredOptionsTeen = this.searchControlTeen.valueChanges.pipe(
       startWith(''),
       map(value => typeof value === 'string' ? value : value.name),
       map(name => name ? this._filter(name) : this.teenData.slice())
     );
+    this.filteredOptionsOperativeUnit = this.searchControlOperativeUnit.valueChanges.pipe(
+      startWith(''),
+      map(value => typeof value === 'string' ? value : value.name),
+      map(name => name ? this._filterOperativeUnit(name) : this.operativeUnitData.slice())
+    );
+    const alertMessage = localStorage.getItem('alertMessage');
+    if (alertMessage) {
+      this.openSnackBar(alertMessage, 'Cerrar');
+      localStorage.removeItem('alertMessage');
+    }
   }
 
   onOptionSelected(event: MatAutocompleteSelectedEvent) {
     const dTeen = event.option.value;
-    this.searchControl.setValue(dTeen.name + ' ' + dTeen.surnameFather + ' ' + dTeen.surnameMother);
+    this.searchControlTeen.setValue(dTeen.name + ' ' + dTeen.surnameFather + ' ' + dTeen.surnameMother);
     this.formForTransfer.get('id_teen')?.setValue(dTeen.id_teen);
   }
 
+  onOptionSelectedOperativeUnit(event: MatAutocompleteSelectedEvent) {
+    const dOperativeUnit = event.option.value;
+    this.searchControlOperativeUnit.setValue(dOperativeUnit.name);
+    this.formForTransfer.get('id_operativeunit')?.setValue(dOperativeUnit.id_operativeunit);
+  }
 
   private _filter(name: string): Teen[] {
     const filterValue = name.toLowerCase();
     return this.teenData.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  private _filterOperativeUnit(name: string): OperativeUnit[] {
+    const filterValueOperativeUnit = name.toLowerCase();
+    return this.operativeUnitData.filter(option => option.name.toLowerCase().indexOf(filterValueOperativeUnit) === 0);
   }
 
   showForm() {
@@ -61,7 +86,18 @@ export class TransferDashboardInfoComponent implements OnInit {
 
   hideForm() {
     this.showTransferForm = false;
-    this.searchControl.reset();
+    this.searchControlTeen.reset();
+    this.searchControlOperativeUnit.reset();
+  }
+
+  openSnackBar(message: string, action: string, callback?: () => void) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    }).afterDismissed().subscribe(() => {
+      if (callback) {
+        callback();
+      }
+    });
   }
 
   onSubmitForm() {
@@ -89,12 +125,13 @@ export class TransferDashboardInfoComponent implements OnInit {
     };
 
     this._teenService.transferDataTeen(teen).subscribe((dataTeenTransfer) => {
-      console.log('Teen Transfer: ', dataTeenTransfer);
+      //console.log('Teen Transfer: ', dataTeenTransfer);
       this.hideForm();
     })
 
     this._teenService.saveNewTeen(teen).subscribe((dataTeenSave) => {
-      console.log('Teen Save: ', dataTeenSave);
+      //console.log('Teen Save: ', dataTeenSave);
+      localStorage.setItem('alertMessage', 'Se registró correctamente');
       window.location.reload();
     });
   }
