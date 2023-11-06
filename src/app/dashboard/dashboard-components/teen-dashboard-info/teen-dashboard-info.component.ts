@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { TeenService } from 'src/app/components/component-funcionality/services/teen/teen.service';
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-teen-dashboard-info',
@@ -24,7 +25,7 @@ export class TeenDashboardInfoComponent implements OnInit {
     this.findAllDataActiveTeen();
     this.findAllDataCompleteOperativeUnit();
   }
-  
+
   findAllDataCompleteTeen() {
     this._teenService.findAllDataTeen().subscribe((DataTeenBD: any) => {
       //console.log('Data Teen:', DataTeenBD);

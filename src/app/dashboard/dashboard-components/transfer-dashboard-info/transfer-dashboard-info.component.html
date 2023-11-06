@@ -42,18 +42,19 @@
       </div>
     </div>
 
-
     <div class="container-form" *ngIf="showTransferForm">
       <form [formGroup]="formForTransfer" (ngSubmit)="onSubmitForm()">
         <mat-form-field>
-          <mat-label>Adolescente:</mat-label>
-          <mat-select formControlName="id_teen">
-            <mat-option *ngFor="let dTeen of teenData" [value]="dTeen.id_teen">
-              {{ dTeen.name }} {{ dTeen.surnameFather }}
-              {{ dTeen.surnameMother }}
+          <mat-label>Adolescente</mat-label>
+          <input type="text" placeholder="Escribe el nombre" aria-label="Número" matInput [formControl]="searchControl"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+            <mat-option *ngFor="let dTeen of filteredOptions | async" [value]="dTeen">
+              {{ dTeen.name }} {{ dTeen.surnameFather }} {{ dTeen.surnameMother }}
             </mat-option>
-          </mat-select>
+          </mat-autocomplete>
         </mat-form-field>
+
         <mat-form-field>
           <mat-label>Soa:</mat-label>
           <mat-select formControlName="id_operativeunit">

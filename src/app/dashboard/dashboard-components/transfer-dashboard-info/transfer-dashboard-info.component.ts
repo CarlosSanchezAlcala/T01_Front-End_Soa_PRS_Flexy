@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {TeenService} from "../../../components/component-funcionality/services/teen/teen.service";
 import {
   OperativeUnitService
 } from 'src/app/components/component-funcionality/services/operativeUnit/operative-unit.service';
 import {Teen} from "../../../components/component-funcionality/models/teen/teen.model";
+import {Observable, startWith} from "rxjs";
+import {map} from "rxjs/operators";
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-transfer-dashboard-info',
@@ -13,6 +16,8 @@ import {Teen} from "../../../components/component-funcionality/models/teen/teen.
 })
 export class TransferDashboardInfoComponent implements OnInit {
 
+  filteredOptions!: Observable<any[]>;
+  searchControl = new FormControl();
   showTransferForm = false;
   teenData: any[] = [];
   operativeUnitData: any[] = [];
@@ -31,6 +36,23 @@ export class TransferDashboardInfoComponent implements OnInit {
   ngOnInit(): void {
     this.findAllDataTeen();
     this.findAllDataOperativeUnit();
+    this.filteredOptions = this.searchControl.valueChanges.pipe(
+      startWith(''),
+      map(value => typeof value === 'string' ? value : value.name),
+      map(name => name ? this._filter(name) : this.teenData.slice())
+    );
+  }
+
+  onOptionSelected(event: MatAutocompleteSelectedEvent) {
+    const dTeen = event.option.value;
+    this.searchControl.setValue(dTeen.name + ' ' + dTeen.surnameFather + ' ' + dTeen.surnameMother);
+    this.formForTransfer.get('id_teen')?.setValue(dTeen.id_teen);
+  }
+
+
+  private _filter(name: string): Teen[] {
+    const filterValue = name.toLowerCase();
+    return this.teenData.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   showForm() {
@@ -39,6 +61,7 @@ export class TransferDashboardInfoComponent implements OnInit {
 
   hideForm() {
     this.showTransferForm = false;
+    this.searchControl.reset();
   }
 
   onSubmitForm() {
