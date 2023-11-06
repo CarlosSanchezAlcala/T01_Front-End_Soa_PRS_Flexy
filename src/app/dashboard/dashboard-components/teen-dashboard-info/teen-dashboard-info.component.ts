@@ -27,7 +27,7 @@ export class TeenDashboardInfoComponent implements OnInit {
   }
 
   findAllDataCompleteTeen() {
-    this._teenService.findAllDataTeen().subscribe((DataTeenBD: any) => {
+    this._teenService.findAllDataActive().subscribe((DataTeenBD: any) => {
       //console.log('Data Teen:', DataTeenBD);
       // this.teenData = DataTeenBD;
     });
@@ -35,7 +35,7 @@ export class TeenDashboardInfoComponent implements OnInit {
 
   findAllDataActiveTeen() {
     this._teenService
-      .finAllDataTeenActive()
+      .findAllDataActive()
       .subscribe((DataTeenBDActive: any) => {
         //console.log('Data Teen Active:', DataTeenBDActive);
         this.teenData = DataTeenBDActive;

@@ -92,7 +92,7 @@ export class TransferDashboardInfoComponent implements OnInit {
 
   openSnackBar(message: string, action: string, callback?: () => void) {
     this.snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     }).afterDismissed().subscribe(() => {
       if (callback) {
         callback();
@@ -138,7 +138,7 @@ export class TransferDashboardInfoComponent implements OnInit {
 
   findAllDataTeen() {
     this._teenService
-      .finAllDataTeenActive()
+      .findAllDataActive()
       .subscribe((dataReceivedTeen: any) => {
         console.log('Data teen: ', dataReceivedTeen);
         this.teenData = dataReceivedTeen;
