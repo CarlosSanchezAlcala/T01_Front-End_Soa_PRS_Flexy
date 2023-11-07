@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { OperativeUnitService } from 'src/app/components/component-funcionality/services/operativeUnit/operative-unit.service';
+import {MatPaginator} from "@angular/material/paginator";
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-operative-unit-dashboard-info',
@@ -7,8 +9,18 @@ import { OperativeUnitService } from 'src/app/components/component-funcionality/
   styleUrls: ['./operative-unit-dashboard-info.component.scss'],
 })
 export class OperativeUnitDashboardInfoComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   operativeUnitData: any[] = [];
   funcionaryData: any[] = [];
+  displayedColumns: string[] = [
+    'name',
+    'funcionaryRegistered',
+  ];
+
+  // Manejar el paginator de la tabla (Teen)
+  dataSource = new MatTableDataSource(this.funcionaryData);
 
   constructor(public _operativeUnitService: OperativeUnitService) {}
 
@@ -22,6 +34,8 @@ export class OperativeUnitDashboardInfoComponent implements OnInit {
       .findAllDataOperativeUnit()
       .subscribe((dataOperativeUnit: any) => {
         this.operativeUnitData = dataOperativeUnit;
+        this.dataSource = new MatTableDataSource(this.operativeUnitData);
+        this.dataSource.paginator = this.paginator;
       });
   }
 

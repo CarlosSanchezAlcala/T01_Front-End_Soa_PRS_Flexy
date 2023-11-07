@@ -15,7 +15,7 @@ export class TeenDashboardInfoComponent implements OnInit {
   teenData: any[] = [];
   operativeUnitData: any[] = [];
   displayedColumns: string[] = [
-    'id',
+    'dni',
     'name',
     'surnames',
     'phoneNumber',

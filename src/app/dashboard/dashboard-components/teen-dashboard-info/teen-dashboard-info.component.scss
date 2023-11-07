@@ -1,5 +1,20 @@
+#container-general-teen {
+  max-height: 38rem;
+  min-height: 38rem;
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si el contenido se desborda */
+}
+
 .table-responsive {
   overflow-x: auto;
+  margin-top: -2rem;
+  max-width: 100%;
+  max-height: 100%; /* Asegura que la tabla no sobrepase la altura de su contenedor */
+}
+
+@media screen and (max-width: 600px) {
+  .table-responsive {
+    overflow-x: scroll;
+  }
 }
 
 td, th {
@@ -11,9 +26,9 @@ td.mat-cell {
   padding: 16px;
 }
 
-#container-general-teen {
-  max-height: 38rem;
-  min-height: 38rem;
+#table-content-range {
+  max-height: 12rem;
+  min-height: 12rem;
 }
 
 th.mat-header-cell:first-of-type,

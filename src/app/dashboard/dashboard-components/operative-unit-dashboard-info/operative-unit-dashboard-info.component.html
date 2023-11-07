@@ -1,13 +1,31 @@
 <mat-card class="container-general-transfer">
     <mat-card-content>
       <h4 class="mb-60">Unidades Operativas y Encargados</h4>
-      <div class="d-flex" *ngFor="let soa of operativeUnitData">
-        <div>
-          <p class="fw-bold ps-16 pe-20 fs-12">{{ soa.name }} </p>
-        </div>
-        <div>
-          <p class="ps-16 pe-20 fs-12">{{ getDataFuncionaryInBD(soa.id_funcionary) }}</p>
-        </div>
+
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource" class="text-nowrap w-100" id="table-content-range">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>SOA</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">
+                <strong>{{ element.name }}</strong>
+              </p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="funcionaryRegistered">
+            <th mat-header-cell *matHeaderCellDef>Funcionario</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ element.id_funcionary }}</p>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[7]" [pageSize]="7" showFirstLastButtons></mat-paginator>
       </div>
+
     </mat-card-content>
   </mat-card>

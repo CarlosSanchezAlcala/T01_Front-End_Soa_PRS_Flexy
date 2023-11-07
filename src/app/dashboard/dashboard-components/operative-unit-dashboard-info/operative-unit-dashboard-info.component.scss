@@ -7,6 +7,11 @@
     flex: 1;
 }
 
+td, th {
+  text-align: center;
+  vertical-align: middle;
+}
+
 #funcionary-data-container {
     font-size: 10px;
 }
@@ -14,4 +19,27 @@
 .container-general-transfer {
   max-height: 38rem;
   min-height: 38rem;
+}
+
+.table-responsive {
+  margin-top: -2rem;
+}
+
+#container-general-transfer {
+  max-height: 38rem;
+  min-height: 38rem;
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si el contenido se desborda */
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin-top: -2rem;
+  max-width: 100%;
+  max-height: 100%; /* Asegura que la tabla no sobrepase la altura de su contenedor */
+}
+
+@media screen and (max-width: 600px) {
+  .table-responsive {
+    overflow-x: scroll;
+  }
 }
