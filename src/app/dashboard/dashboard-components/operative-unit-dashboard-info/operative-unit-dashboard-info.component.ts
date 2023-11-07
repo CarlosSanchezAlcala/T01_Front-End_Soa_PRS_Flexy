@@ -41,7 +41,7 @@ export class OperativeUnitDashboardInfoComponent implements OnInit {
     if (funcionary) {
       return `${funcionary.name} ${funcionary.surnameFather} ${funcionary.surnameMother}`;
     } else {
-      return 'El funcionario asignado no fue encontrado.';
+      return 'Director no encontrado.';
     }
   }
 }

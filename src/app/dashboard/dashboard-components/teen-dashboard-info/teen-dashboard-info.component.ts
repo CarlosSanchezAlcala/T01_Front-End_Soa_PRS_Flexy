@@ -1,13 +1,18 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {TeenService} from 'src/app/components/component-funcionality/services/teen/teen.service';
 import {MatPaginator} from "@angular/material/paginator";
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
     selector: 'app-teen-dashboard-info',
     templateUrl: './teen-dashboard-info.component.html',
     styleUrls: ['./teen-dashboard-info.component.scss'],
 })
-export class TeenDashboardInfoComponent implements OnInit {
+export class TeenDashboardInfoComponent implements OnInit, AfterViewInit {
+
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+    teenDatas!: MatTableDataSource<any>;
     teenData: any[] = [];
     operativeUnitData: any[] = [];
     displayedColumns: string[] = [
@@ -41,6 +46,7 @@ export class TeenDashboardInfoComponent implements OnInit {
                 //console.log('Data Teen Active:', DataTeenBDActive);
                 this.teenData = DataTeenBDActive;
             });
+
     }
 
     findAllDataCompleteOperativeUnit() {
@@ -60,5 +66,9 @@ export class TeenDashboardInfoComponent implements OnInit {
         } else {
             return 'Unidad Operativa asignada no fue encontrada.';
         }
+    }
+
+    ngAfterViewInit(): void {
+        
     }
 }
