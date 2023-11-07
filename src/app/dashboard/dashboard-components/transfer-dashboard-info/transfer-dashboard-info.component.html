@@ -44,11 +44,12 @@
 
     <div class="container-form" *ngIf="showTransferForm">
       <form [formGroup]="formForTransfer" (ngSubmit)="onSubmitForm()">
+
         <mat-form-field>
           <mat-label>Adolescente</mat-label>
           <input type="text" placeholder="Escribe el nombre" aria-label="Número" matInput [formControl]="searchControlTeen"
-                 [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+                 [matAutocomplete]="autoTeen">
+          <mat-autocomplete #autoTeen="matAutocomplete" (optionSelected)="onOptionSelected($event)">
             <mat-option *ngFor="let dTeen of filteredOptionsTeen | async" [value]="dTeen">
               {{ dTeen.name }} {{ dTeen.surnameFather }} {{ dTeen.surnameMother }}
             </mat-option>
@@ -56,13 +57,24 @@
         </mat-form-field>
 
         <mat-form-field>
+          <mat-label>Soa</mat-label>
+          <input type="text" placeholder="Escribe el nombre" aria-label="Número" matInput [formControl]="searchControlOperativeUnit"
+                 [matAutocomplete]="autoOperativeUnit">
+          <mat-autocomplete #autoOperativeUnit="matAutocomplete" (optionSelected)="onOptionSelectedOperativeUnit($event)">
+            <mat-option *ngFor="let dOperativeUnit of filteredOptionsOperativeUnit | async" [value]="dOperativeUnit">
+              {{ dOperativeUnit.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!--<mat-form-field>
           <mat-label>Soa:</mat-label>
           <mat-select formControlName="id_operativeunit">
             <mat-option *ngFor="let dOperativeUnit of operativeUnitData" [value]="dOperativeUnit.id_operativeunit">
               {{ dOperativeUnit.name }}
             </mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field>-->
         <div class="container-functions-buttons">
           <button mat-raised-button id="button-transfer-teen" color="primary"><strong>Transferir adolescente</strong>
           </button>

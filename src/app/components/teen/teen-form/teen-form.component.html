@@ -83,7 +83,7 @@
     <mat-label>Apoderado:</mat-label>
     <mat-select formControlName="id_attorney">
       <mat-option *ngFor="let dAttor of attorneyData" [value]="dAttor.id_attorney">
-        {{dAttor.name}} {{dAttor.surnamefather}} {{dAttor.surnamemother}}
+        {{dAttor.name}} {{dAttor.surnameMother}} {{dAttor.surnameMother}}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -103,7 +103,7 @@
       <mat-label>Funcionario:</mat-label>
       <mat-select formControlName="id_funcionary">
         <mat-option *ngFor="let dFunc of funcionaryData" [value]="dFunc.id_funcionary">
-          {{dFunc.name}} {{dFunc.surnamefather}} {{dFunc.surnamemother}}
+          {{dFunc.name}} {{dFunc.surnameFather}} {{dFunc.surnameMother}}
         </mat-option>
       </mat-select>
     </mat-form-field>

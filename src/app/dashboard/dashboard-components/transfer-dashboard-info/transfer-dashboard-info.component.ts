@@ -18,10 +18,13 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class TransferDashboardInfoComponent implements OnInit {
 
+  //Opciones del autocompletado para el Adolescente (Teen)
   filteredOptionsTeen!: Observable<any[]>;
   searchControlTeen = new FormControl();
+  //Opciones del autocompletado para las Unidades Operativas (Operative Unit)
   filteredOptionsOperativeUnit!: Observable<any[]>;
   searchControlOperativeUnit = new FormControl();
+  //Otras opciones (Recolección de Datos)
   showTransferForm = false;
   teenData: any[] = [];
   operativeUnitData: any[] = [];
@@ -149,6 +152,7 @@ export class TransferDashboardInfoComponent implements OnInit {
     this._operativeUnitService
       .findAllDataOperativeUnit()
       .subscribe((dataReceivedOperativeUnit: any) => {
+        console.log('Data Operative Unit: ', dataReceivedOperativeUnit);
         this.operativeUnitData = dataReceivedOperativeUnit;
       });
   }

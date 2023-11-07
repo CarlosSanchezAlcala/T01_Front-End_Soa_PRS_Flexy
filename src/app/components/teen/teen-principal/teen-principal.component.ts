@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TeenService} from '../../component-funcionality/services/teen/teen.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {FuncionaryService} from '../../component-funcionality/services/funcionary/funcionary.service';
@@ -7,6 +7,8 @@ import {AsignationService} from '../../component-funcionality/services/asignatio
 import {MatDialog} from '@angular/material/dialog';
 import {Teen} from "../../component-funcionality/models/teen/teen.model";
 import {Router} from "@angular/router";
+import {MatPaginator} from "@angular/material/paginator";
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-teen-principal',
@@ -14,15 +16,17 @@ import {Router} from "@angular/router";
   styleUrls: ['./teen-principal.component.scss'],
 })
 export class TeenPrincipalComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   teenData: any[] = [];
   showTransferForm = false;
   attorneyData: any[] = [];
   operativeUnitData: any[] = [];
   funcionaryData: any[] = [];
-  teenDataForm: FormGroup = new FormGroup({});
-  legalGuardianAsignationFrom: FormGroup = new FormGroup({});
   ubigeoData: any[] = [];
-  idTeenNecesaryForRegisterAsignation: any[] = [];
+  selectedTeen: any;
+  showDetails = false;
   displayedColumns: string[] = [
     'dni',
     'name',
@@ -32,12 +36,15 @@ export class TeenPrincipalComponent implements OnInit {
     'email',
     'attorney',
     'actions',
+    'details'
   ];
+
+  // Manejar el paginator de la tabla (Teen)
+  dataSource = new MatTableDataSource(this.teenData);
 
   constructor(
     public _teenService: TeenService,
     public _funcionaryService: FuncionaryService,
-    private _dialog: MatDialog,
     private _router: Router,
   ) {
   }
@@ -58,12 +65,26 @@ export class TeenPrincipalComponent implements OnInit {
     });
   }
 
+  showFuncionarioDetails(funcionario: any) {
+    this.selectedTeen = funcionario;
+    this.showDetails = true;
+  }
+
+  closeDetails() {
+    this.selectedTeen = null;
+    this.showDetails = false;
+  }
+
   showForm() {
     this.showTransferForm = true;
   }
 
   hideForm() {
     this.showTransferForm = false;
+  }
+
+  getCompleteConfirmation(confirmation: string): string {
+    return confirmation === 'M' ? 'Masculino' : 'Femenino';
   }
 
   findAllDataFuncionaryRankLegalGuardian() {
@@ -100,10 +121,21 @@ export class TeenPrincipalComponent implements OnInit {
       });
   }
 
+  getDataCompleteUbigeoBD(codubi: string) {
+    const ubigeo = this.ubigeoData.find((item) => item.codubi === codubi);
+    if (ubigeo) {
+      return `${ubigeo.depar} - ${ubigeo.provi} - ${ubigeo.distri}`;
+    } else {
+      return 'Ubigeo no encontrado.';
+    }
+  }
+
   findAllDataActiveTeen() {
     this._teenService.findAllDataActive().subscribe((DataTeenBDActive: any) => {
       //console.log('Data Teen Active:', DataTeenBDActive);
       this.teenData = DataTeenBDActive;
+      this.dataSource = new MatTableDataSource(this.teenData);
+      this.dataSource.paginator = this.paginator;
     });
   }
 
@@ -115,12 +147,6 @@ export class TeenPrincipalComponent implements OnInit {
       });
   }
 
-  findAllDataCompleteAttorney() {
-    this._teenService.findAllDataAttorney().subscribe((dataAttorney: any) => {
-      this.attorneyData = dataAttorney;
-    });
-  }
-
   getDataInformationOperativeUnit(id_operativeunit: number) {
     const soa = this.operativeUnitData.find(
       (item) => item.id_operativeunit === id_operativeunit
@@ -130,6 +156,12 @@ export class TeenPrincipalComponent implements OnInit {
     } else {
       return 'Unidad Operativa asignada no fue encontrada.';
     }
+  }
+
+  findAllDataCompleteAttorney() {
+    this._teenService.findAllDataAttorney().subscribe((dataAttorney: any) => {
+      this.attorneyData = dataAttorney;
+    });
   }
 
   getDataInformationAttorney(id_attorney: number) {
@@ -146,6 +178,7 @@ export class TeenPrincipalComponent implements OnInit {
   updateDataTeen(teen: Teen) {
     this._teenService.teenSelected = teen;
     this.navigateToForm();
+    this.findAllDataActiveTeen();
   }
 
   deleteDataTeen(teen: Teen) {
@@ -154,5 +187,4 @@ export class TeenPrincipalComponent implements OnInit {
       this.findAllDataActiveTeen();
     });
   }
-
 }
