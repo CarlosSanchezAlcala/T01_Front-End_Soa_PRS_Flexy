@@ -1,0 +1,42 @@
+#formColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+#formColumnAsignationData {
+  display: flex;
+  flex-direction: column;
+}
+
+.formForRegister {
+  margin: 0.7rem 0.7rem 0.0rem 0.7rem;
+}
+
+.content{
+  padding-top: 10px;
+}
+
+.row{
+  display: flex;
+  gap: 10px;
+}
+
+// --------------------------------------------------------------------------------
+
+#buttonActions {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0px 25px 20px;
+  button{
+    flex: 1;
+  }
+}
+
+#buttonCancel {
+  margin: 0.7rem 0.7rem 0.0rem 0.7rem;
+}
+
+#buttonSave {
+  margin: 0.7rem 0.7rem 0.0rem 0.7rem;
+}

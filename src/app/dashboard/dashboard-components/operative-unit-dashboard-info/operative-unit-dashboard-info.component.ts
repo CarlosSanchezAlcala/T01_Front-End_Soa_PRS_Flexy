@@ -48,6 +48,15 @@ export class OperativeUnitDashboardInfoComponent implements OnInit {
       });
   }
 
+  getDataInformationCompleteFuncionary(id_funcionary: number) {
+    const funcionary = this.funcionaryData.find((item) => item.id_funcionary === id_funcionary);
+    if (funcionary) {
+      return `${funcionary.name} ${funcionary.surnameFather} ${funcionary.surnameMother}`;
+    } else {
+      return 'Funcionario no encontrado.';
+    }
+  }
+
   getDataFuncionaryInBD(id_funcionary: number) {
     const funcionary = this.funcionaryData.find(
       (item) => item.id_funcionary === id_funcionary

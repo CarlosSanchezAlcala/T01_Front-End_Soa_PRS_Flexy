@@ -25,7 +25,7 @@ td, th {
   margin-top: -2rem;
 }
 
-#container-general-transfer {
+.container-general-transfer {
   max-height: 38rem;
   min-height: 38rem;
   overflow-y: auto; /* Agrega una barra de desplazamiento vertical si el contenido se desborda */
@@ -42,4 +42,8 @@ td, th {
   .table-responsive {
     overflow-x: scroll;
   }
+}
+
+#container-funcionary {
+  font-size: 12.5px;
 }

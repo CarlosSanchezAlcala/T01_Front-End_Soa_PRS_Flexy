@@ -19,7 +19,8 @@ import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
-import { TeenPrincipalComponent } from './teen-principal/teen-principal.component'
+import { TeenPrincipalComponent } from './teen/teen-principal/teen-principal.component';
+import { TeenFormComponent } from './teen/teen-form/teen-form.component'
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { TeenPrincipalComponent } from './teen-principal/teen-principal.componen
     ButtonsComponent,
   ],
   declarations: [
-    TeenPrincipalComponent
+    TeenPrincipalComponent,
+    TeenFormComponent
   ]
 })
 export class ComponentsModule { }

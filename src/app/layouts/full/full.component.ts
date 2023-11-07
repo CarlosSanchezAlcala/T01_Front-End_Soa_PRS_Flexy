@@ -60,7 +60,7 @@ export class FullComponent {
       menu: "Menus",
     },
     {
-      link: "/teen",
+      link: "/teen-list",
       icon: "grid",
       menu: "Adolescentes",
     },

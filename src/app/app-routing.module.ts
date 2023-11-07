@@ -17,7 +17,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { TooltipsComponent } from './components/tooltips/tooltips.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FullComponent } from './layouts/full/full.component';
-import { TeenPrincipalComponent } from './components/teen-principal/teen-principal.component';
+import { TeenPrincipalComponent } from './components/teen/teen-principal/teen-principal.component';
+import {TeenFormComponent} from "./components/teen/teen-form/teen-form.component";
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
       {path:"home", component:DashboardComponent},
       {path:"alerts", component:AlertsComponent},
       {path:"forms", component:FormsComponent},
-      {path:"teen", component:TeenPrincipalComponent},
+      {path:"teen-list", component:TeenPrincipalComponent},
       {path:"grid-list", component:GridListComponent},
       {path:"menu", component:MenuComponent},
       {path:"tabs", component:TabsComponent},
@@ -42,6 +43,7 @@ const routes: Routes = [
       {path:"slide-toggle", component:SlideToggleComponent},
       {path:"tooltip", component:TooltipsComponent},
       {path:"button", component:ButtonsComponent},
+      {path:"teen-form", component: TeenFormComponent}
     ]
   },
 
