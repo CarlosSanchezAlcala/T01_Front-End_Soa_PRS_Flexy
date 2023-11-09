@@ -18,9 +18,14 @@ import { MatTableDataSource } from '@angular/material/table';
 export class TeenPrincipalComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator) paginatorInactive!: MatPaginator;
 
+  //Almacenamiento de los datos de "Adolescente (Activos | Habilitados)"
   teenData: any[] = [];
-  showTransferForm = false;
+  //Almacenamiento de los datos de "Adolescente (Inactivos | Deshabilitados)"
+  teenDataInactive: any[] = [];
+  showDataInactive = false;
+  showDataActive = false;
   attorneyData: any[] = [];
   operativeUnitData: any[] = [];
   funcionaryData: any[] = [];
@@ -39,7 +44,8 @@ export class TeenPrincipalComponent implements OnInit {
   ];
 
   // Manejar el paginator de la tabla (Teen)
-  dataSource = new MatTableDataSource(this.teenData);
+  dataSourceActive = new MatTableDataSource(this.teenData);
+  dataSourceInactive = new MatTableDataSource(this.teenDataInactive);
 
   constructor(
     public _teenService: TeenService,
@@ -56,6 +62,7 @@ export class TeenPrincipalComponent implements OnInit {
     this.findAllDataAttorney();
     this.findAllDataUbigeo();
     this.findAllDataFuncionaryRankLegalGuardian();
+    this.findAllDataInactiveTeen();
   }
 
   navigateToForm() {
@@ -74,12 +81,22 @@ export class TeenPrincipalComponent implements OnInit {
     this.showDetails = false;
   }
 
-  showForm() {
-    this.showTransferForm = true;
+  showActive() {
+    this.showDataActive = true;
+    this.hideInactive();
   }
 
-  hideForm() {
-    this.showTransferForm = false;
+  hideActive() {
+    this.showDataActive = false;
+  }
+
+  showInactive() {
+    this.showDataInactive = true;
+    this.hideActive();
+  }
+
+  hideInactive() {
+    this.showDataInactive = false;
   }
 
   getCompleteConfirmation(confirmation: string): string {
@@ -129,13 +146,24 @@ export class TeenPrincipalComponent implements OnInit {
     }
   }
 
+  //Obtendra todos los datos de adolescente que se encuentran activos.
   findAllDataActiveTeen() {
     this._teenService.findAllDataActive().subscribe((DataTeenBDActive: any) => {
       //console.log('Data Teen Active:', DataTeenBDActive);
       this.teenData = DataTeenBDActive;
-      this.dataSource = new MatTableDataSource(this.teenData);
-      this.dataSource.paginator = this.paginator;
+      this.dataSourceActive = new MatTableDataSource(this.teenData);
+      this.dataSourceActive.paginator = this.paginator;
     });
+  }
+
+  //Obtendra todos los datos de adolescente que se encuentran inactivos.
+  findAllDataInactiveTeen() {
+    this._teenService.findAllDataInactive().subscribe((dataTeenInactive: any) => {
+      //console.log('Data Inactive: ' , dataTeenInactive);
+      this.teenDataInactive = dataTeenInactive;
+      this.dataSourceInactive = new MatTableDataSource(this.teenDataInactive);
+      this.dataSourceInactive.paginator = this.paginatorInactive;
+    })
   }
 
   findAllDataCompleteOperativeUnit() {

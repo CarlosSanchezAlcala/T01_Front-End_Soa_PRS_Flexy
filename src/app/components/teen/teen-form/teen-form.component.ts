@@ -66,7 +66,7 @@ export class TeenFormComponent implements OnInit, OnDestroy {
   }
 
   navigateToTeenList() {
-    this.router.navigate(['teen-list']).then(() => {
+    this.router.navigate(['teen']).then(() => {
       //console.log('Successful navigation to Teen List');
     });
   }
