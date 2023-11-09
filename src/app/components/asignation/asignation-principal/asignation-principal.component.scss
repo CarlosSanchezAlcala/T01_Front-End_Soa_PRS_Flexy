@@ -10,6 +10,11 @@
   padding: 16px;
 }
 
+td, th {
+  text-align: center;
+  vertical-align: middle;
+}
+
 .mat-header-cell,
 .mat-cell,
 .mat-footer-cell {

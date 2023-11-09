@@ -11,15 +11,14 @@ export class FuncionaryPrincipalComponent implements OnInit {
   funcionaryData: any[] = [];
   attorneyData: any[] = [];
   displayedColumns: string[] = [
-    'name',
-    'surnameFather',
-    'surnameMother',
     'dni',
+    'name',
+    'surnames',
     'phoneNumber',
     'range',
     'confirmation',
-    'address',
-    'email',
+    'actions',
+    'moreInformation'
   ];
 
   constructor(public _funcionaryService: FuncionaryService) {}
@@ -27,6 +26,10 @@ export class FuncionaryPrincipalComponent implements OnInit {
   ngOnInit(): void {
     this.findAllDataCompleteFuncionary();
     this.findAllDataActiveFuncionary();
+  }
+
+  getConfirmationLegalGuardian(confirmationLegalGuardian: string) {
+    return confirmationLegalGuardian === 'S' ? 'Confirmado' : 'Rechazado';
   }
 
   findAllDataCompleteFuncionary() {

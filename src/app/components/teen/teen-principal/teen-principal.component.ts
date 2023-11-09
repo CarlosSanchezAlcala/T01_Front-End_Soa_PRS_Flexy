@@ -33,7 +33,6 @@ export class TeenPrincipalComponent implements OnInit {
     'surnames',
     'phoneNumber',
     'operativeUnit',
-    'email',
     'attorney',
     'actions',
     'details'

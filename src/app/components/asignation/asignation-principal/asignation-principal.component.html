@@ -56,8 +56,8 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef class="th mat-header-cell"> Acciones</th>
+        <ng-container class="container-buttoms" matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="th mat-header-cell" style="width: 15rem"> Acciones</th>
           <td mat-cell *matCellDef="let dataTransaccional" class="td mat-cell">
             <button id="buttonEliminar" mat-flat-button color="warn"
                     (click)="deleteDataCompleteAsignation(dataTransaccional)">
