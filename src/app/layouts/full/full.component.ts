@@ -40,6 +40,11 @@ export class FullComponent {
       menu: "Adolescentes",
     },
     {
+      link: "/funcionary",
+      icon: "disc",
+      menu: "Funcionarios",
+    },
+    {
       link: "/asignation",
       icon: "disc",
       menu: "Asignación",

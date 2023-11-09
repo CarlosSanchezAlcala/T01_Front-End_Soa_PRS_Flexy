@@ -1,1 +1,80 @@
-<p>funcionary-principal works!</p>
+<mat-card class="w-100">
+  <mat-card-content>
+    <h4 class="mb-56">Funcionarios</h4>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="funcionaryData" class="text-nowrap w-100">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombres</th>
+          <td mat-cell *matCellDef="let element">
+            <p class="mb-0 fw-medium">{{ element.name }}</p>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="surnameFather">
+          <th mat-header-cell *matHeaderCellDef>Apellido Paterno</th>
+          <td mat-cell *matCellDef="let element">
+            <p class="mb-0 fw-medium">{{ element.surnameFather }}</p>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="surnameMother">
+          <th mat-header-cell *matHeaderCellDef>Apellido Materno</th>
+          <td mat-cell *matCellDef="let element">
+            <p class="mb-0 fw-medium">{{ element.surnameMother }}</p>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dni">
+          <th mat-header-cell *matHeaderCellDef>DNI</th>
+          <td mat-cell *matCellDef="let element">
+            <p class="mb-0 fw-medium">{{ element.dni }}</p>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phoneNumber">
+          <th mat-header-cell *matHeaderCellDef>Celular</th>
+          <td mat-cell *matCellDef="let element">
+            <p class="mb-0 fw-medium">
+              {{ element.phoneNumber }}
+            </p>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="range">
+          <th mat-header-cell *matHeaderCellDef>Rango</th>
+          <td mat-cell *matCellDef="let element">
+            <p class="mb-0 fw-medium">{{ element.range }}</p>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="confirmation">
+          <th mat-header-cell *matHeaderCellDef>Confirmation</th>
+          <td mat-cell *matCellDef="let element">
+            <p class="mb-0 fw-medium">{{ element.confirmation }}</p>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>Dirección</th>
+          <td mat-cell *matCellDef="let element">
+            <p class="mb-0 fw-medium">{{ element.address }}</p>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Correo Electrónico</th>
+          <td mat-cell *matCellDef="let element">
+            <p class="mb-0 fw-medium">
+              {{ element.email }}
+            </p>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

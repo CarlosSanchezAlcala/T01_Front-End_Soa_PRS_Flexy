@@ -23,6 +23,9 @@ import {
   AsignationPrincipalComponent
 } from "./components/asignation/asignation-principal/asignation-principal.component";
 import {AsignationFormComponent} from "./components/asignation/asignation-form/asignation-form.component";
+import {
+  FuncionaryPrincipalComponent
+} from "./components/funcionary/funcionary-principal/funcionary-principal.component";
 
 const routes: Routes = [
   {
@@ -49,7 +52,8 @@ const routes: Routes = [
       {path:"tooltip", component:TooltipsComponent},
       {path:"button", component:ButtonsComponent},
       {path:"teen-form", component: TeenFormComponent},
-      {path:"asignation-form", component: AsignationFormComponent}
+      {path:"asignation-form", component: AsignationFormComponent},
+      {path:"funcionary", component: FuncionaryPrincipalComponent},
     ]
   },
 
