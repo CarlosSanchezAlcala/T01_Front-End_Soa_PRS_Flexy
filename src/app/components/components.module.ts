@@ -20,7 +20,11 @@ import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
 import { TeenPrincipalComponent } from './teen/teen-principal/teen-principal.component';
-import { TeenFormComponent } from './teen/teen-form/teen-form.component'
+import { TeenFormComponent } from './teen/teen-form/teen-form.component';
+import { AsignationPrincipalComponent } from './asignation/asignation-principal/asignation-principal.component';
+import { AsignationFormComponent } from './asignation/asignation-form/asignation-form.component';
+import { FuncionaryPrincipalComponent } from './funcionary/funcionary-principal/funcionary-principal.component';
+import { FuncionaryFormComponent } from './funcionary/funcionary-form/funcionary-form.component'
 
 
 @NgModule({
@@ -64,7 +68,11 @@ import { TeenFormComponent } from './teen/teen-form/teen-form.component'
   ],
   declarations: [
     TeenPrincipalComponent,
-    TeenFormComponent
+    TeenFormComponent,
+    AsignationPrincipalComponent,
+    AsignationFormComponent,
+    FuncionaryPrincipalComponent,
+    FuncionaryFormComponent
   ]
 })
 export class ComponentsModule { }

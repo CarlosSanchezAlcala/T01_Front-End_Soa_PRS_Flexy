@@ -19,6 +19,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FullComponent } from './layouts/full/full.component';
 import { TeenPrincipalComponent } from './components/teen/teen-principal/teen-principal.component';
 import {TeenFormComponent} from "./components/teen/teen-form/teen-form.component";
+import {
+  AsignationPrincipalComponent
+} from "./components/asignation/asignation-principal/asignation-principal.component";
+import {AsignationFormComponent} from "./components/asignation/asignation-form/asignation-form.component";
 
 const routes: Routes = [
   {
@@ -28,8 +32,9 @@ const routes: Routes = [
       {path:"", redirectTo:"/home", pathMatch:"full"},
       {path:"home", component:DashboardComponent},
       {path:"alerts", component:AlertsComponent},
+      {path:"asignation", component: AsignationPrincipalComponent},
       {path:"forms", component:FormsComponent},
-      {path:"teen-list", component:TeenPrincipalComponent},
+      {path:"teen", component:TeenPrincipalComponent},
       {path:"grid-list", component:GridListComponent},
       {path:"menu", component:MenuComponent},
       {path:"tabs", component:TabsComponent},
@@ -43,7 +48,8 @@ const routes: Routes = [
       {path:"slide-toggle", component:SlideToggleComponent},
       {path:"tooltip", component:TooltipsComponent},
       {path:"button", component:ButtonsComponent},
-      {path:"teen-form", component: TeenFormComponent}
+      {path:"teen-form", component: TeenFormComponent},
+      {path:"asignation-form", component: AsignationFormComponent}
     ]
   },
 

@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment.development';
 import { Asignation } from '../../models/asignation/asignation.model';
 import { transactionDataCompleteResponse } from '../../models/asignation/transactionDataComplete.model';
 import { HttpClient } from '@angular/common/http';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -77,4 +78,9 @@ export class AsignationService {
       this.urlAsignation + '/' + asignation.id_funcionaryteend
     );
   }
+
+  saveMasive(dto: any): Observable<void> {
+    return this._http.post<void>(`${this.urlAsignation}/bulk`, dto);
+  }
+
 }

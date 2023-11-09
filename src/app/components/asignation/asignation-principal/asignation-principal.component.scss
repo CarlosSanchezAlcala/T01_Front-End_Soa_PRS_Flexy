@@ -2,39 +2,37 @@
   overflow-x: auto;
 }
 
-td, th {
+/* Estilos para las celdas y encabezados de la tabla */
+.th.mat-header-cell,
+.td.mat-cell {
   text-align: center;
   vertical-align: middle;
-}
-
-td.mat-cell {
   padding: 16px;
 }
 
-th.mat-header-cell:first-of-type,
-td.mat-cell:first-of-type,
-td.mat-footer-cell:first-of-type {
+.mat-header-cell,
+.mat-cell,
+.mat-footer-cell {
   padding: 16px;
 }
 
-th.mat-header-cell {
+.th.mat-header-cell {
   padding: 16px;
-}
-
-.mat-header-cell {
   font-size: 14px;
 }
 
-#button-transfer {
-  color: white;
-  border-radius: 15px;
-}
-
 #buttonEliminar,
-#buttonModificar {
+#buttonModificar,
+.buttonRegister {
+  /* Estilo para los botones */
   margin: 2px;
   border-radius: 15px;
   width: 100px;
+}
+
+.buttonRegister {
+  color: white;
+  width: 150px;
 }
 
 .dialog-background {
@@ -65,11 +63,18 @@ th.mat-header-cell {
   margin-top: 10px;
 }
 
-.container-div-button-close{
+.container-div-button-close {
   display: flex;
   justify-content: flex-end;
 }
 
 .container-details-teen {
   margin: 30px;
+}
+
+#tableOfDataFuncionary {
+  border-radius: 10px;
+  /* Ajusta el valor según tu preferencia */
+  border-collapse: collapse;
+  /* Opcional: Fusiona los bordes de las celdas */
 }

@@ -1,0 +1,81 @@
+<div class="container-button">
+  <button
+    mat-raised-button
+    class="me-8 mb-8 buttonRegister"
+    color="primary"
+    id="buttonRegister"
+    (click)="navigateToForm()"
+  >
+    <strong>Nueva Asignación</strong>
+  </button>
+</div>
+
+<mat-card class="w-100">
+  <mat-card-content>
+    <h4 class="mb-56">Adolescentes Infractores</h4>
+
+    <div class="container">
+      <table id="tableOfDataFuncionary" mat-table [dataSource]="asignationData" class="table-responsive">
+        <ng-container matColumnDef="dataFuncionary">
+          <th mat-header-cell *matHeaderCellDef>Datos del Funcionario:</th>
+          <td mat-cell *matCellDef="let dataTransaccional">
+            {{ dataTransaccional.funcionaryResponseDto.name }}
+            {{ dataTransaccional.funcionaryResponseDto.surnameFather }}
+            {{ dataTransaccional.funcionaryResponseDto.surnameMother }}
+          </td>
+        </ng-container>
+
+        <!-- Añade las clases a las celdas y encabezados -->
+        <ng-container matColumnDef="dniFuncionary">
+          <th mat-header-cell *matHeaderCellDef class="th mat-header-cell">Número de DNI:</th>
+          <td mat-cell *matCellDef="let dataTransaccional" class="td mat-cell">
+            {{ dataTransaccional.funcionaryResponseDto.dni }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataTeen">
+          <th mat-header-cell *matHeaderCellDef class="th mat-header-cell">Datos del Adolescente:</th>
+          <td mat-cell *matCellDef="let dataTransaccional" class="td mat-cell">
+            {{ dataTransaccional.teenResponseDto.name }}
+            {{ dataTransaccional.teenResponseDto.surnameFather }}
+            {{ dataTransaccional.teenResponseDto.surnameMother }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dniTeen">
+          <th mat-header-cell *matHeaderCellDef class="th mat-header-cell">Número de DNI:</th>
+          <td mat-cell *matCellDef="let dataTransaccional" class="td mat-cell">
+            {{ dataTransaccional.teenResponseDto.dni }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descripcionAsignacion">
+          <th mat-header-cell *matHeaderCellDef class="th mat-header-cell">Detalles:</th>
+          <td mat-cell *matCellDef="let dataTransaccional" class="td mat-cell">
+            {{ dataTransaccional.transaccionalAllocation.description }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="th mat-header-cell"> Acciones</th>
+          <td mat-cell *matCellDef="let dataTransaccional" class="td mat-cell">
+            <button id="buttonEliminar" mat-flat-button color="warn"
+                    (click)="deleteDataCompleteAsignation(dataTransaccional)">
+              Eliminar
+            </button>
+            <button id="buttonModificar" mat-flat-button color="primary"
+                    (click)="updateTwoWayDataAsignation(dataTransaccional.transaccionalAllocation)">
+              Modificar
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="funcionaryColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: funcionaryColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+    </div>
+
+  </mat-card-content>
+</mat-card>

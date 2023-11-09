@@ -35,6 +35,16 @@ export class FullComponent {
       menu: "Dashboard",
     },
     {
+      link: "/teen",
+      icon: "grid",
+      menu: "Adolescentes",
+    },
+    {
+      link: "/asignation",
+      icon: "disc",
+      menu: "Asignación",
+    },
+    {
       link: "/button",
       icon: "disc",
       menu: "Buttons",
@@ -58,11 +68,6 @@ export class FullComponent {
       link: "/menu",
       icon: "menu",
       menu: "Menus",
-    },
-    {
-      link: "/teen-list",
-      icon: "grid",
-      menu: "Adolescentes",
     },
     {
       link: "/expansion",
