@@ -84,6 +84,7 @@ export class TeenPrincipalComponent implements OnInit {
   showActive() {
     this.showDataActive = true;
     this.hideInactive();
+    this.findAllDataActiveTeen();
   }
 
   hideActive() {
@@ -93,6 +94,7 @@ export class TeenPrincipalComponent implements OnInit {
   showInactive() {
     this.showDataInactive = true;
     this.hideActive();
+    this.findAllDataInactiveTeen();
   }
 
   hideInactive() {
