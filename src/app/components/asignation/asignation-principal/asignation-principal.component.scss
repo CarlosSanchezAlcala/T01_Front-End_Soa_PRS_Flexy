@@ -28,14 +28,14 @@ td, th {
 
 #buttonEliminar,
 #buttonModificar,
-.buttonRegister {
+#buttonRegister {
   /* Estilo para los botones */
   margin: 2px;
   border-radius: 15px;
   width: 100px;
 }
 
-.buttonRegister {
+#buttonRegister {
   color: white;
   width: 150px;
 }
@@ -82,4 +82,8 @@ td, th {
   /* Ajusta el valor según tu preferencia */
   border-collapse: collapse;
   /* Opcional: Fusiona los bordes de las celdas */
+}
+
+.container-active {
+  margin-top: 1.5rem;
 }

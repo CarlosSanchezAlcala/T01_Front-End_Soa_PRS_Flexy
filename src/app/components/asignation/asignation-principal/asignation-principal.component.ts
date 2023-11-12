@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { AsignationService } from '../../component-funcionality/services/asignation/asignation.service';
 import { Router } from '@angular/router';
 import { Asignation } from '../../component-funcionality/models/asignation/asignation.model';
 import { transactionDataCompleteResponse } from '../../component-funcionality/models/asignation/transactionDataComplete.model';
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-asignation-principal',
@@ -10,6 +12,8 @@ import { transactionDataCompleteResponse } from '../../component-funcionality/mo
   styleUrls: ['./asignation-principal.component.scss']
 })
 export class AsignationPrincipalComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   asignationData: any[] = [];
   withOutBodyAsignation: any[] = [];
@@ -20,6 +24,8 @@ export class AsignationPrincipalComponent implements OnInit {
       'dniTeen',
       'descripcionAsignacion',
       'actions'];
+
+  dataSource = new MatTableDataSource(this.asignationData);
 
   constructor(private asignationService: AsignationService,
               private router: Router) {
@@ -54,6 +60,8 @@ export class AsignationPrincipalComponent implements OnInit {
     this.asignationService.findAllDataActive().subscribe((dataAsignationActive: any) => {
       //console.log('Datos de la asignación en modo Activo: ', dataAsignationActive);
       this.asignationData = dataAsignationActive;
+      this.dataSource = new MatTableDataSource(this.asignationData);
+      this.dataSource.paginator = this.paginator;
     })
   }
 

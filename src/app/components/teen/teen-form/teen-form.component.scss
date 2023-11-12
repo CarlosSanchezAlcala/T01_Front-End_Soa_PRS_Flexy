@@ -27,16 +27,18 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  padding: 0px 25px 20px;
+  padding: 0 25px 20px;
   button{
     flex: 1;
   }
 }
 
-#buttonCancel {
-  margin: 0.7rem 0.7rem 0.0rem 0.7rem;
-}
-
+#buttonCancel,
 #buttonSave {
   margin: 0.7rem 0.7rem 0.0rem 0.7rem;
+  border-radius: 15px;
+}
+
+.titleWeb {
+  margin: 0 0 1.5rem 0;
 }

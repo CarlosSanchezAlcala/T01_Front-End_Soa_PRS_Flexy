@@ -17,6 +17,21 @@ td.mat-footer-cell:first-of-type {
   padding: 16px;
 }
 
+#button-register {
+  color: white;
+  border-radius: 15px;
+}
+
+.container-button-new-model {
+  display: flex;
+  margin-left: 52.5rem;
+  margin-top: -2.88rem;
+}
+
+.container-active {
+  margin-top: 1.5rem;
+}
+
 th.mat-header-cell {
   padding: 16px;
 }
@@ -26,7 +41,9 @@ th.mat-header-cell {
 }
 
 #buttonEliminar,
-#buttonModificar {
+#buttonModificar,
+#buttonDelete,
+#buttonModify {
   margin: 2px;
   border-radius: 15px;
   width: 100px;

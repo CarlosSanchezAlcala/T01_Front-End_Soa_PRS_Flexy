@@ -25,9 +25,15 @@ th.mat-header-cell {
   font-size: 14px;
 }
 
-#button-transfer {
+#button-register {
   color: white;
   border-radius: 15px;
+}
+
+.container-button-new-model {
+  display: flex;
+  margin-left: 52.5rem;
+  margin-top: -2.88rem;
 }
 
 #buttonEliminar,
@@ -67,11 +73,15 @@ th.mat-header-cell {
   margin-top: 10px;
 }
 
-.container-div-button-close{
+.container-div-button-close {
   display: flex;
   justify-content: flex-end;
 }
 
 .container-details-teen {
   margin: 30px;
+}
+
+.container-active {
+  margin-top: 1.5rem;
 }

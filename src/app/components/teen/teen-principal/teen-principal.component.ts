@@ -71,8 +71,8 @@ export class TeenPrincipalComponent implements OnInit {
     });
   }
 
-  showFuncionarioDetails(funcionario: any) {
-    this.selectedTeen = funcionario;
+  showFuncionarioDetails(teen: any) {
+    this.selectedTeen = teen;
     this.showDetails = true;
   }
 
@@ -216,4 +216,11 @@ export class TeenPrincipalComponent implements OnInit {
       this.findAllDataActiveTeen();
     });
   }
+
+  reactiveDataTeen(teen: Teen) {
+    this._teenService.reactiveLogicalDataTeen(teen).subscribe((dataTeen: any) => {
+      this.findAllDataInactiveTeen();
+    });
+  }
+
 }

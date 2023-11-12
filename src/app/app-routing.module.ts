@@ -26,6 +26,7 @@ import {AsignationFormComponent} from "./components/asignation/asignation-form/a
 import {
   FuncionaryPrincipalComponent
 } from "./components/funcionary/funcionary-principal/funcionary-principal.component";
+import { FuncionaryFormComponent } from './components/funcionary/funcionary-form/funcionary-form.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,7 @@ const routes: Routes = [
       {path:"teen-form", component: TeenFormComponent},
       {path:"asignation-form", component: AsignationFormComponent},
       {path:"funcionary", component: FuncionaryPrincipalComponent},
+      {path: "funcionary-form", component: FuncionaryFormComponent},
     ]
   },
 
