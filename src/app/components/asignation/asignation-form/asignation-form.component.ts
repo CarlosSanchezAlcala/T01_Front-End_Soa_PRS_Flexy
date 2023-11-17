@@ -68,12 +68,13 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
 
   findAllTeen() {
     this.asignationDataTeenService.findAllDataActive().subscribe((dataTeen: any) => {
-      this.teenData = dataTeen;
+      //console.log('Teen: ', dataTeen);
+      //this.teenData = dataTeen;
     })
   }
   finAllDataTeenNoRegistered() {
     this.asignationService.findDataTeenNoRegistered().subscribe((dataTeenNoRegistered: any) => {
-      //console.log('Los adolescente disponibles para el registro son: ', dataTeenNoRegistered);
+      //console.log('Teen no registered: ', dataTeenNoRegistered);
       this.teenData = dataTeenNoRegistered;
     })
   }
@@ -85,6 +86,7 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
     } else {
       // Registrar || Crear
       this.registerNewDataAsignation();
+      this.navigateToAsignationList();
     }
   }
 
@@ -118,8 +120,10 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
           console.error("Error al guardar datos: ", error);
         }
       );
+      this.navigateToAsignationList();
     } else {
       console.error("Los datos del formulario son nulos o faltantes.");
+      this.navigateToAsignationList();
     }
   }
 

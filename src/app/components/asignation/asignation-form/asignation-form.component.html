@@ -35,7 +35,7 @@
       <mat-label>Adolescente:</mat-label>
       <mat-select formControlName="id_teen" multiple>
         <mat-option *ngFor="let teen of teenData" [value]="teen.id_teen">
-          {{ teen.name }} {{ teen.surnamefather }} {{ teen.surnamemother }}
+          {{ teen.name }} {{ teen.surnameFather }} {{ teen.surnameMother }}
         </mat-option>
       </mat-select>
     </mat-form-field>

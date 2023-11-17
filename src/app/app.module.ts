@@ -14,23 +14,25 @@ import { DemoFlexyModule } from './demo-flexy-module'
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ComponentsModule } from './components/components.module';
 import { HttpClientModule } from '@angular/common/http';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
     AppComponent,
     FullComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FeatherModule.pick(allIcons),
-    DemoFlexyModule,
-    DashboardModule,
-    ComponentsModule,
-    FormsModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FeatherModule.pick(allIcons),
+        DemoFlexyModule,
+        DashboardModule,
+        ComponentsModule,
+        FormsModule,
+        HttpClientModule,
+        NgOptimizedImage
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

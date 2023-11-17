@@ -16,7 +16,7 @@ interface sidebarMenu {
 })
 export class FullComponent {
 
-  search: boolean = false;
+  showBarInfo = true;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -125,5 +125,13 @@ export class FullComponent {
       menu: "Slide Toggle",
     },
   ]
+
+  showSideBard() {
+    this.showBarInfo = true;
+  }
+
+  hideSideBard() {
+    this.showBarInfo = !this.showBarInfo;
+  }
 
 }
