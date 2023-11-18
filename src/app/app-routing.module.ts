@@ -54,6 +54,7 @@ const routes: Routes = [
       {path:"button", component:ButtonsComponent},
       {path:"teen-form", component: TeenFormComponent},
       {path:"asignation-form", component: AsignationFormComponent},
+      {path:"asignation-list", component: AsignationPrincipalComponent},
       {path:"funcionary", component: FuncionaryPrincipalComponent},
       {path: "funcionary-form", component: FuncionaryFormComponent},
     ]
