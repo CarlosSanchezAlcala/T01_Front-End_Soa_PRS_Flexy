@@ -206,6 +206,7 @@ export class TeenPrincipalComponent implements OnInit {
 
   updateDataTeen(teen: Teen) {
     this._teenService.teenSelected = teen;
+    console.log('Teen Selected: ', this._teenService.teenSelected);
     this.navigateToForm();
     this.findAllDataActiveTeen();
   }

@@ -5,5 +5,6 @@ export const environment = {
   apiUrlUbigeoAddress: 'http://localhost:8083',
   apiUrlAttorney: 'http://localhost:8084',
   apiUrlOperativeUnit: 'http://localhost:8085',
+  apiUrlTransferTeen: 'http://localhost:8086',
   token: 'token_para_desarrollo'
 };

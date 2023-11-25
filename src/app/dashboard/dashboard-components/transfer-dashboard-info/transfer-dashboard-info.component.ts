@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {TeenService} from "../../../components/component-funcionality/services/teen/teen.service";
 import {
@@ -10,6 +10,8 @@ import {map} from "rxjs/operators";
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {OperativeUnit} from "../../../components/component-funcionality/models/operativeUnit/operativeUnit.model";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {TransferTeenService} from "../../../components/component-funcionality/services/transfer/transfer-teen.service";
+import {TransferTeen} from "../../../components/component-funcionality/models/transfer/transferTeen.model";
 
 @Component({
   selector: 'app-transfer-dashboard-info',
@@ -17,6 +19,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./transfer-dashboard-info.component.scss']
 })
 export class TransferDashboardInfoComponent implements OnInit {
+
+  @Output() transferTeens: EventEmitter<any> = new EventEmitter<any>();
 
   //Opciones del autocompletado para el Adolescente (Teen)
   filteredOptionsTeen!: Observable<any[]>;
@@ -30,7 +34,14 @@ export class TransferDashboardInfoComponent implements OnInit {
   operativeUnitData: any[] = [];
   formForTransfer: FormGroup = new FormGroup({});
 
+  file: File | null = null;
+  fileName: string = '';
+  currentDate: Date = new Date();
+
+  idTeenNecesaryForRegisterTransfer: any[] = [];
+
   constructor(private _teenService: TeenService,
+              private _transferTeenService: TransferTeenService,
               private _operativeUnitService: OperativeUnitService,
               private _fb: FormBuilder,
               private snackBar: MatSnackBar
@@ -38,12 +49,39 @@ export class TransferDashboardInfoComponent implements OnInit {
     this.formForTransfer = this._fb.group({
       id_teen: [''],
       id_operativeunit: [''],
+      documentPDF: [''],
     });
   }
 
   ngOnInit(): void {
     this.findAllDataTeen();
     this.findAllDataOperativeUnit();
+    this.autoCompleteData();
+    this.notificationsTransferTeen();
+    this.dateAndHour();
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.fileName = file.name; // Guarda el nombre del archivo
+      this.formForTransfer.get('documentPDF')?.setValue(file);
+    }
+  }
+
+  onFileClick() {
+    const fileInput = document.getElementById('file');
+    // @ts-ignore
+    fileInput.click();
+  }
+
+  dateAndHour() {
+    setInterval(() => {
+      this.currentDate = new Date();
+    }, 1000);
+  }
+
+  autoCompleteData() {
     this.filteredOptionsTeen = this.searchControlTeen.valueChanges.pipe(
       startWith(''),
       map(value => typeof value === 'string' ? value : value.name),
@@ -54,6 +92,9 @@ export class TransferDashboardInfoComponent implements OnInit {
       map(value => typeof value === 'string' ? value : value.name),
       map(name => name ? this._filterOperativeUnit(name) : this.operativeUnitData.slice())
     );
+  }
+
+  notificationsTransferTeen() {
     const alertMessage = localStorage.getItem('alertMessage');
     if (alertMessage) {
       this.openSnackBar(alertMessage, 'Cerrar');
@@ -96,6 +137,8 @@ export class TransferDashboardInfoComponent implements OnInit {
   openSnackBar(message: string, action: string, callback?: () => void) {
     this.snackBar.open(message, action, {
       duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
     }).afterDismissed().subscribe(() => {
       if (callback) {
         callback();
@@ -127,15 +170,25 @@ export class TransferDashboardInfoComponent implements OnInit {
       status: selectedTeenInForm.status,
     };
 
+    const dataForTransferTeen: TransferTeen = {
+      id_teen: idTeenSelectedOfForm,
+      document_pdf_office: this.formForTransfer.get('documentPDF')?.value,
+      date_hour_register: this.formForTransfer.get('dateAndTimeRegister')?.value,
+    };
+
     this._teenService.transferDataTeen(teen).subscribe((dataTeenTransfer) => {
       //console.log('Teen Transfer: ', dataTeenTransfer);
       this.hideForm();
-    })
+    });
+
+    this._transferTeenService.saveNewTransferTeen(dataForTransferTeen).subscribe((dataTransferTeenSave) => {
+      console.log('Data Transfer: ', dataTransferTeenSave);
+    });
 
     this._teenService.saveNewTeen(teen).subscribe((dataTeenSave) => {
       //console.log('Teen Save: ', dataTeenSave);
       localStorage.setItem('alertMessage', 'Se registró correctamente');
-      window.location.reload();
+      this.transferTeens.emit(dataTeenSave);
     });
   }
 

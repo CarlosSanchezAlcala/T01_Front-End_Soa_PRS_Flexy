@@ -33,7 +33,7 @@
                 <p><strong>Número de DNI:</strong> {{ selectedTeen?.dni }}</p>
                 <p><strong>Teléfono:</strong> {{ selectedTeen?.phoneNumber }}</p>
                 <p><strong>Dirección:</strong> {{ selectedTeen?.address }}</p>
-                <p><strong>Fecha de Nacimiento:</strong> {{ selectedTeen?.birthade }}</p>
+                <p><strong>Fecha de Nacimiento:</strong> {{ selectedTeen?.birthade | date: 'dd-MM-yyyy' }}</p>
                 <p><strong>Sexo:</strong> {{ getCompleteConfirmation(selectedTeen?.gender) }}</p>
                 <p><strong>SOA:</strong> {{ getDataInformationOperativeUnit(selectedTeen?.id_operativeunit) }}</p>
                 <p><strong>Infracción Cometida:</strong> {{ selectedTeen?.crimeCommitted }}</p>

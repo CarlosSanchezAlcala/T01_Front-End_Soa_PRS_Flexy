@@ -122,7 +122,6 @@ export class TeenFormComponent implements OnInit, OnDestroy {
       this.idTeenNecesaryForRegisterAsignation = teendataRegister.id_teen;
       console.log('The last id Teen is: ', this.idTeenNecesaryForRegisterAsignation);
 
-
       this.legalGuardianAsignationFrom.patchValue({
         id_teen: this.idTeenNecesaryForRegisterAsignation,
       });

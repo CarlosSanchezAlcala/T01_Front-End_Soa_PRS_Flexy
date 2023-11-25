@@ -1,4 +1,4 @@
-<app-transfer-dashboard-info></app-transfer-dashboard-info>
+<app-transfer-dashboard-info (transferTeens)="listTeenInfo()"></app-transfer-dashboard-info>
 
 <div>
   <div class="row">
@@ -6,7 +6,7 @@
       <app-operative-unit-dashboard-info></app-operative-unit-dashboard-info>
     </div>
     <div class="col-lg-8">
-      <app-teen-dashboard-info></app-teen-dashboard-info>
+      <app-teen-dashboard-info #teenDashboardInfo></app-teen-dashboard-info>
     </div>
   </div>
 </div>
