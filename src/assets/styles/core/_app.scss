@@ -15,7 +15,7 @@
 .activity-border {
   border-left: 2px solid #bdbdbd;
   position: relative;
-  
+
   .activity-ring {
     position: absolute;
     left: -1px;
@@ -31,7 +31,7 @@
       content: "";
       background-color: white;
     }
-    
+
     .ring-success {
       border: 2px solid $success;
     }
@@ -47,7 +47,7 @@
     .ring-danger {
       border: 2px solid $danger;
     }
-    
+
     .ring {
       position: absolute;
       content: "";
@@ -63,9 +63,9 @@
   }
 }
 
-.mat-sidenav-content {
-  margin-left: 265px !important;
-}
+//.mat-sidenav-content {
+  //margin-left: 265px !important;
+//}
 
 @media (max-width: 959px) {
   .mat-sidenav-content {
