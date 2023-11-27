@@ -13,26 +13,49 @@
 
       <br>
 
-      <p class="mb-0 fw-medium" id="paso1">
-        <strong>1.- </strong>Da click en el boton
-        <strong>"Iniciar Transferencia"</strong>.
-      </p>
-      <p class="mb-0 fw-medium" id="paso2">
-        <strong>2.- </strong>Selecciona el <strong>Adolescente</strong> a
-        transferir.
-      </p>
-      <p class="mb-0 fw-medium" id="paso3">
-        <strong>3.- </strong>Selecciona el nuevo <strong>SOA</strong> para la
-        transferencia.
-      </p>
-      <p class="mb-0 fw-medium" id="paso4">
-        <strong>4.- </strong>Colocamos el respectivo
-        <strong>enlace</strong> del oficio de transferencia (subido previamente a Google Drive).
-      </p>
-      <p class="mb-0 fw-medium" id="paso5">
-        <strong>5.- </strong>Y por ultimo, dale click en
-        <strong>"Transferir Adolescente"</strong> para terminar el proceso.
-      </p>
+      <div class="container-steps">
+        <p class="mb-0 fw-medium" id="paso1">
+          <strong>1.- </strong>Da click en el boton
+          <strong>"Iniciar Transferencia"</strong>.
+        </p>
+
+        <div class="spacing"></div>
+
+        <p class="mb-0 fw-medium" id="paso2">
+          <strong>2.- </strong>Selecciona el <strong>Adolescente</strong> a
+          transferir.
+        </p>
+
+        <div class="spacing"></div>
+
+        <p class="mb-0 fw-medium" id="paso3">
+          <strong>3.- </strong>Selecciona el nuevo <strong>SOA</strong> para la
+          transferencia.
+        </p>
+
+        <div class="spacing"></div>
+
+        <p class="mb-0 fw-medium" id="paso4">
+          <strong>4.- </strong>Colocamos el respectivo
+          <strong>enlace</strong> del oficio de transferencia <strong>(subido previamente a Google Drive).</strong>
+        </p>
+
+        <div class="spacing"></div>
+
+        <p class="mb-0 fw-medium" id="paso5">
+          <strong>5.- </strong>Carpeta de Google Drive: <a href="https://drive.google.com/drive/folders/1xehsC12WCXQ4_pR7kOFlkbrmraQCtuDD?usp=drive_link" target="_blank">Documentación Oficial.</a>
+        </p>
+
+        <div class="spacing"></div>
+
+        <p class="mb-0 fw-medium" id="paso6">
+          <strong>6.- </strong>Y por ultimo, dale click en
+          <strong>"Transferir Adolescente"</strong> para terminar el proceso.
+        </p>
+
+        <div class="spacing"></div>
+
+      </div>
 
       <div class="container-button" *ngIf="!showTransferForm">
         <button
@@ -90,7 +113,8 @@
         </mat-form-field>
 
         <div class="container-functions-buttons">
-          <button mat-raised-button id="button-transfer-teen" color="primary" type="submit"><strong>Transferir adolescente</strong>
+          <button mat-raised-button id="button-transfer-teen" color="primary" type="submit"><strong>Transferir
+            adolescente</strong>
           </button>
           <button mat-raised-button id="button-cancel-teen" color="warn" (click)="hideForm()"><strong>Cancelar
             operación</strong></button>

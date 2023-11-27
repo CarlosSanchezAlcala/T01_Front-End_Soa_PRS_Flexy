@@ -8,7 +8,7 @@
 }
 
 .container-button {
-  margin: 15px 10px 10px 10px;
+  margin: 33px 10px 10px 10px;
 }
 
 #button-transfer,
@@ -26,8 +26,8 @@
 .container-form {
   width: 40%;
   display: flex;
-  margin-left: 43rem;
-  margin-top: -11rem;
+  margin-left: 45rem;
+  margin-top: -17rem;
 }
 
 .container-functions-buttons {
@@ -54,4 +54,17 @@
 #image-references {
   width: 25rem;
   border-radius: 30px;
+}
+
+.container-steps p {
+  text-align: left;
+}
+
+a {
+  text-decoration: underline;
+  color: blue;
+}
+
+.spacing {
+  margin: 5px 0 0 5px;
 }
