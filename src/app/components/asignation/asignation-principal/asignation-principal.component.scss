@@ -40,6 +40,16 @@ td, th {
   width: 150px;
 }
 
+#buttonEliminar,
+#buttonDelete {
+  background-color: #f44336;
+}
+
+#buttonModificar,
+#buttonModify {
+  background-color: #FFC93C;
+}
+
 .dialog-background {
   position: fixed;
   top: 0;

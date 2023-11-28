@@ -1,251 +1,251 @@
 <div class="container-button">
-    <button
-            mat-raised-button
-            class="me-8 mb-8"
-            color="primary"
-            id="button-register"
-            (click)="navigateToForm()"
-    >
-        <strong>Agregar Adolescente</strong>
-    </button>
-    <div class="container-button-new-model">
-        <mat-chip-listbox aria-label="Fish selection">
-            <mat-chip-option selected color="accent" (click)="showActive()">Adolescente Activos</mat-chip-option>
-            <mat-chip-option color="warn" (click)="showInactive()">Adolescente Desactivados</mat-chip-option>
-        </mat-chip-listbox>
-    </div>
+  <button
+    mat-raised-button
+    class="me-8 mb-8"
+    color="primary"
+    id="button-register"
+    (click)="navigateToForm()"
+  >
+    <strong>Agregar Adolescente</strong>
+  </button>
+  <div class="container-button-new-model">
+    <mat-chip-listbox aria-label="Fish selection">
+      <mat-chip-option selected color="accent" (click)="showActive()">Adolescente Activos</mat-chip-option>
+      <mat-chip-option color="warn" (click)="showInactive()">Adolescente Desactivados</mat-chip-option>
+    </mat-chip-listbox>
+  </div>
 </div>
 
 <div class="container-active" *ngIf="!showDataInactive">
-    <div *ngIf="showDetails" class="dialog-background">
-        <div class="dialog-content">
+  <div *ngIf="showDetails" class="dialog-background">
+    <div class="dialog-content">
 
-            <div class="container-div-button-close">
-                <button mat-icon-button color="accent" (click)="closeDetails()">
-                    <mat-icon>close</mat-icon>
-                </button>
-            </div>
+      <div class="container-div-button-close">
+        <button mat-icon-button color="accent" (click)="closeDetails()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
 
-            <h2>Detalles del Infractor</h2>
-            <div class="container-details-teen">
-                <p><strong>Nombre:</strong> {{ selectedTeen?.name }}</p>
-                <p><strong>Apellidos:</strong> {{ selectedTeen?.surnameFather }} {{selectedTeen?.surnameMother}}</p>
-                <p><strong>Número de DNI:</strong> {{ selectedTeen?.dni }}</p>
-                <p><strong>Teléfono:</strong> {{ selectedTeen?.phoneNumber }}</p>
-                <p><strong>Dirección:</strong> {{ selectedTeen?.address }}</p>
-                <p><strong>Fecha de Nacimiento:</strong> {{ selectedTeen?.birthade | date: 'dd-MM-yyyy' }}</p>
-                <p><strong>Sexo:</strong> {{ getCompleteConfirmation(selectedTeen?.gender) }}</p>
-                <p><strong>SOA:</strong> {{ getDataInformationOperativeUnit(selectedTeen?.id_operativeunit) }}</p>
-                <p><strong>Infracción Cometida:</strong> {{ selectedTeen?.crimeCommitted }}</p>
-                <p><strong>Apoderado:</strong> {{ getDataInformationAttorney(selectedTeen?.id_attorney) }}</p>
-                <p><strong>Ubicación:</strong> {{ getDataCompleteUbigeoBD(selectedTeen?.codubi) }}</p>
-                <p><strong>Correo Electrónico:</strong> {{ selectedTeen?.email }}</p>
-            </div>
-        </div>
+      <h2>Detalles del Infractor</h2>
+      <div class="container-details-teen">
+        <p><strong>Nombre:</strong> {{ selectedTeen?.name }}</p>
+        <p><strong>Apellidos:</strong> {{ selectedTeen?.surnameFather }} {{selectedTeen?.surnameMother}}</p>
+        <p><strong>Número de DNI:</strong> {{ selectedTeen?.dni }}</p>
+        <p><strong>Teléfono:</strong> {{ selectedTeen?.phoneNumber }}</p>
+        <p><strong>Dirección:</strong> {{ selectedTeen?.address }}</p>
+        <p><strong>Fecha de Nacimiento:</strong> {{ selectedTeen?.birthade | date: 'dd-MM-yyyy' }}</p>
+        <p><strong>Sexo:</strong> {{ getCompleteConfirmation(selectedTeen?.gender) }}</p>
+        <p><strong>SOA:</strong> {{ getDataInformationOperativeUnit(selectedTeen?.id_operativeunit) }}</p>
+        <p><strong>Infracción Cometida:</strong> {{ selectedTeen?.crimeCommitted }}</p>
+        <p><strong>Apoderado:</strong> {{ getDataInformationAttorney(selectedTeen?.id_attorney) }}</p>
+        <p><strong>Ubicación:</strong> {{ getDataCompleteUbigeoBD(selectedTeen?.codubi) }}</p>
+        <p><strong>Correo Electrónico:</strong> {{ selectedTeen?.email }}</p>
+      </div>
     </div>
+  </div>
 
-    <mat-card class="w-100">
-        <mat-card-content>
+  <mat-card class="w-100">
+    <mat-card-content>
 
-            <div class="table-responsive">
-                <table mat-table [dataSource]="dataSourceActive" class="text-nowrap w-100">
-                    <ng-container matColumnDef="dni">
-                        <th mat-header-cell *matHeaderCellDef>Número de DNI</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">
-                                {{ element.dni }}
-                            </p>
-                        </td>
-                    </ng-container>
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSourceActive" class="text-nowrap w-100">
+          <ng-container matColumnDef="dni">
+            <th mat-header-cell *matHeaderCellDef>Número de DNI</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">
+                {{ element.dni }}
+              </p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef>Nombres</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">{{ element.name }}</p>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombres</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ element.name }}</p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="surnames">
-                        <th mat-header-cell *matHeaderCellDef>Apellidos</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">
-                                {{ element.surnameFather }} {{ element.surnameMother }}
-                            </p>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="surnames">
+            <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">
+                {{ element.surnameFather }} {{ element.surnameMother }}
+              </p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="phoneNumber">
-                        <th mat-header-cell *matHeaderCellDef>Celular</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">
-                                {{ element.phoneNumber }}
-                            </p>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef>Celular</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">
+                {{ element.phoneNumber }}
+              </p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="operativeUnit">
-                        <th mat-header-cell *matHeaderCellDef>Soa</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">{{ getDataInformationOperativeUnit(element.id_operativeunit) }}</p>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="operativeUnit">
+            <th mat-header-cell *matHeaderCellDef>Soa</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ getDataInformationOperativeUnit(element.id_operativeunit) }}</p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="attorney">
-                        <th mat-header-cell *matHeaderCellDef>Apoderado</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">
-                                {{ getDataInformationAttorney(element.id_attorney) }}
-                            </p>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="attorney">
+            <th mat-header-cell *matHeaderCellDef>Apoderado</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">
+                {{ getDataInformationAttorney(element.id_attorney) }}
+              </p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="actions">
-                        <th mat-header-cell *matHeaderCellDef style="width: 15rem">Acciones</th>
-                        <td mat-cell *matCellDef="let element">
-                            <button id="buttonEliminar" mat-flat-button color="warn" (click)="deleteDataTeen(element)">
-                                Eliminar
-                            </button>
-                            <button id="buttonModificar" mat-flat-button color="primary"
-                                    (click)="updateDataTeen(element)">Modificar
-                            </button>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="width: 15rem">Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button id="buttonEliminar" mat-flat-button color="warn" (click)="deleteDataTeen(element)">
+                Eliminar
+              </button>
+              <button id="buttonModificar" mat-flat-button
+                      (click)="updateDataTeen(element)">Modificar
+              </button>
+            </td>
+          </ng-container>
 
-                    <div class="container1">
-                        <ng-container matColumnDef="details">
-                            <th mat-header-cell *matHeaderCellDef style="width: 0.1rem">Más información</th>
-                            <td mat-cell *matCellDef="let element">
-                                <button mat-icon-button color="primary" (click)="showFuncionarioDetails(element)">
-                                    <mat-icon>visibility</mat-icon>
-                                </button>
-                            </td>
-                        </ng-container>
-                    </div>
+          <div class="container1">
+            <ng-container matColumnDef="details">
+              <th mat-header-cell *matHeaderCellDef style="width: 0.1rem">Más información</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="showFuncionarioDetails(element)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+          </div>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-                </table>
-                <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
-            </div>
-        </mat-card-content>
-    </mat-card>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
 
 <!-- --------------------------------------------------------------------------------------------------------------- -->
 
 <div class="container-inactive" *ngIf="showDataInactive">
-    <div *ngIf="showDetails" class="dialog-background">
-        <div class="dialog-content">
+  <div *ngIf="showDetails" class="dialog-background">
+    <div class="dialog-content">
 
-            <div class="container-div-button-close">
-                <button mat-icon-button color="accent" (click)="closeDetails()">
-                    <mat-icon>close</mat-icon>
-                </button>
-            </div>
+      <div class="container-div-button-close">
+        <button mat-icon-button color="accent" (click)="closeDetails()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
 
-            <h2>Detalles del Funcionario</h2>
-            <div class="container-details-teen">
-                <p><strong>Nombre:</strong> {{ selectedTeen?.name }}</p>
-                <p><strong>Apellidos:</strong> {{ selectedTeen?.surnameFather }} {{selectedTeen?.surnameMother}}</p>
-                <p><strong>Número de DNI:</strong> {{ selectedTeen?.dni }}</p>
-                <p><strong>Teléfono:</strong> {{ selectedTeen?.phoneNumber }}</p>
-                <p><strong>Dirección:</strong> {{ selectedTeen?.address }}</p>
-                <p><strong>Fecha de Nacimiento:</strong> {{ selectedTeen?.birthade }}</p>
-                <p><strong>Sexo:</strong> {{ getCompleteConfirmation(selectedTeen?.gender) }}</p>
-                <p><strong>SOA:</strong> {{ getDataInformationOperativeUnit(selectedTeen?.id_operativeunit) }}</p>
-                <p><strong>Crimen Cometido:</strong> {{ selectedTeen?.crimeCommitted }}</p>
-                <p><strong>Apoderado:</strong> {{ getDataInformationAttorney(selectedTeen?.id_attorney) }}</p>
-                <p><strong>Ubicación:</strong> {{ getDataCompleteUbigeoBD(selectedTeen?.codubi) }}</p>
-                <p><strong>Correo Electrónico:</strong> {{ selectedTeen?.email }}</p>
-            </div>
-        </div>
+      <h2>Detalles del Funcionario</h2>
+      <div class="container-details-teen">
+        <p><strong>Nombre:</strong> {{ selectedTeen?.name }}</p>
+        <p><strong>Apellidos:</strong> {{ selectedTeen?.surnameFather }} {{selectedTeen?.surnameMother}}</p>
+        <p><strong>Número de DNI:</strong> {{ selectedTeen?.dni }}</p>
+        <p><strong>Teléfono:</strong> {{ selectedTeen?.phoneNumber }}</p>
+        <p><strong>Dirección:</strong> {{ selectedTeen?.address }}</p>
+        <p><strong>Fecha de Nacimiento:</strong> {{ selectedTeen?.birthade }}</p>
+        <p><strong>Sexo:</strong> {{ getCompleteConfirmation(selectedTeen?.gender) }}</p>
+        <p><strong>SOA:</strong> {{ getDataInformationOperativeUnit(selectedTeen?.id_operativeunit) }}</p>
+        <p><strong>Crimen Cometido:</strong> {{ selectedTeen?.crimeCommitted }}</p>
+        <p><strong>Apoderado:</strong> {{ getDataInformationAttorney(selectedTeen?.id_attorney) }}</p>
+        <p><strong>Ubicación:</strong> {{ getDataCompleteUbigeoBD(selectedTeen?.codubi) }}</p>
+        <p><strong>Correo Electrónico:</strong> {{ selectedTeen?.email }}</p>
+      </div>
     </div>
+  </div>
 
-    <mat-card class="w-100">
-        <mat-card-content>
-            <h4 class="mb-56">Adolescentes Infractores</h4>
+  <mat-card class="w-100">
+    <mat-card-content>
+      <h4 class="mb-56">Adolescentes Infractores</h4>
 
-            <div class="table-responsive">
-                <table mat-table [dataSource]="dataSourceInactive" class="text-nowrap w-100">
-                    <ng-container matColumnDef="dni">
-                        <th mat-header-cell *matHeaderCellDef>Número de DNI</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">
-                                {{ element.dni }}
-                            </p>
-                        </td>
-                    </ng-container>
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSourceInactive" class="text-nowrap w-100">
+          <ng-container matColumnDef="dni">
+            <th mat-header-cell *matHeaderCellDef>Número de DNI</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">
+                {{ element.dni }}
+              </p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef>Nombres</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">{{ element.name }}</p>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombres</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ element.name }}</p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="surnames">
-                        <th mat-header-cell *matHeaderCellDef>Apellidos</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">
-                                {{ element.surnameFather }} {{ element.surnameMother }}
-                            </p>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="surnames">
+            <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">
+                {{ element.surnameFather }} {{ element.surnameMother }}
+              </p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="phoneNumber">
-                        <th mat-header-cell *matHeaderCellDef>Celular</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">
-                                {{ element.phoneNumber }}
-                            </p>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef>Celular</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">
+                {{ element.phoneNumber }}
+              </p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="operativeUnit">
-                        <th mat-header-cell *matHeaderCellDef>Soa</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">{{ getDataInformationOperativeUnit(element.id_operativeunit) }}</p>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="operativeUnit">
+            <th mat-header-cell *matHeaderCellDef>Soa</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ getDataInformationOperativeUnit(element.id_operativeunit) }}</p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="attorney">
-                        <th mat-header-cell *matHeaderCellDef>Apoderado</th>
-                        <td mat-cell *matCellDef="let element">
-                            <p class="mb-0 fw-medium">
-                                {{ getDataInformationAttorney(element.id_attorney) }}
-                            </p>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="attorney">
+            <th mat-header-cell *matHeaderCellDef>Apoderado</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">
+                {{ getDataInformationAttorney(element.id_attorney) }}
+              </p>
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="actions">
-                        <th mat-header-cell *matHeaderCellDef style="width: 15rem">Acciones</th>
-                        <td mat-cell *matCellDef="let element">
-                            <button id="buttonDelete" mat-flat-button color="warn" (click)="reactiveDataTeen(element)">
-                                Restaurar
-                            </button>
-                            <button id="buttonModify" mat-flat-button color="primary" (click)="updateDataTeen(element)"
-                                    disabled>
-                                Modificar
-                            </button>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="width: 15rem">Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button id="buttonDelete" mat-flat-button color="warn" (click)="reactiveDataTeen(element)">
+                Restaurar
+              </button>
+              <button id="buttonModify" mat-flat-button (click)="updateDataTeen(element)"
+                      disabled>
+                Modificar
+              </button>
+            </td>
+          </ng-container>
 
-                    <div class="container1">
-                        <ng-container matColumnDef="details">
-                            <th mat-header-cell *matHeaderCellDef style="width: 0.1rem">Más información</th>
-                            <td mat-cell *matCellDef="let element">
-                                <button mat-icon-button color="primary" (click)="showFuncionarioDetails(element)">
-                                    <mat-icon>visibility</mat-icon>
-                                </button>
-                            </td>
-                        </ng-container>
-                    </div>
+          <div class="container1">
+            <ng-container matColumnDef="details">
+              <th mat-header-cell *matHeaderCellDef style="width: 0.1rem">Más información</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="showFuncionarioDetails(element)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+          </div>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-                </table>
-                <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
-            </div>
-        </mat-card-content>
-    </mat-card>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

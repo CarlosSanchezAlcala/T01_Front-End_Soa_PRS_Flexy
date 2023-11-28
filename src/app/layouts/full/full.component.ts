@@ -36,12 +36,12 @@ export class FullComponent {
     },
     {
       link: "/teen",
-      icon: "grid",
+      icon: "user",
       menu: "Adolescentes",
     },
     {
       link: "/funcionary",
-      icon: "disc",
+      icon: "users",
       menu: "Funcionarios",
     },
     {
@@ -51,7 +51,7 @@ export class FullComponent {
     },
     {
       link: "/button",
-      icon: "disc",
+      icon: "voicemail",
       menu: "Buttons",
     },
     {
@@ -89,7 +89,7 @@ export class FullComponent {
       icon: "list",
       menu: "Tabs",
     },
-    {
+    /*{
       link: "/progress",
       icon: "bar-chart-2",
       menu: "Progress Bar",
@@ -123,7 +123,7 @@ export class FullComponent {
       link: "/slide-toggle",
       icon: "layers",
       menu: "Slide Toggle",
-    },
+    },*/
   ]
 
   showSideBard() {

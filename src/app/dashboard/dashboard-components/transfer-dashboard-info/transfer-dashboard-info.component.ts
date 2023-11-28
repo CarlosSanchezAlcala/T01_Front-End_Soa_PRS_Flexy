@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {TeenService} from "../../../components/component-funcionality/services/teen/teen.service";
 import {
@@ -12,6 +12,7 @@ import {OperativeUnit} from "../../../components/component-funcionality/models/o
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TransferTeenService} from "../../../components/component-funcionality/services/transfer/transfer-teen.service";
 import {TransferTeen} from "../../../components/component-funcionality/models/transfer/transferTeen.model";
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({
   selector: 'app-transfer-dashboard-info',
@@ -44,7 +45,8 @@ export class TransferDashboardInfoComponent implements OnInit {
               private _transferTeenService: TransferTeenService,
               private _operativeUnitService: OperativeUnitService,
               private _fb: FormBuilder,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private toastService: HotToastService,
   ) {
     this.formForTransfer = this._fb.group({
       id_teen: [''],
@@ -59,6 +61,10 @@ export class TransferDashboardInfoComponent implements OnInit {
     this.autoCompleteData();
     this.notificationsTransferTeen();
     this.dateAndHour();
+  }
+
+  showToast() {
+    this.toastService.show('Hello World!')
   }
 
   onFileChange(event: any) {
@@ -187,7 +193,8 @@ export class TransferDashboardInfoComponent implements OnInit {
 
     this._teenService.saveNewTeen(teen).subscribe((dataTeenSave) => {
       //console.log('Teen Save: ', dataTeenSave);
-      localStorage.setItem('alertMessage', 'Se registró correctamente');
+      //localStorage.setItem('alertMessage', 'Se registró correctamente'); -> Sirve como notificación para el usuario (DESHABILITADO POR EL NUEVO USO DE TOAST)
+      this.toastService.success('Transferencia exitosa!')
       this.transferTeens.emit(dataTeenSave);
     });
   }
