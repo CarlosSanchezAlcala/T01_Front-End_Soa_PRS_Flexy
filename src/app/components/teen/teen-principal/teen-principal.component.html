@@ -10,8 +10,8 @@
   </button>
   <div class="container-button-new-model">
     <mat-chip-listbox aria-label="Fish selection">
-      <mat-chip-option selected class="button-teens-active" (click)="showActive()">Adolescente Activos</mat-chip-option>
-      <mat-chip-option color="warn" (click)="showInactive()">Adolescente Desactivados</mat-chip-option>
+      <mat-chip-option selected id="button-active" (click)="showActive()">Adolescentes Activos</mat-chip-option>
+      <mat-chip-option color="warn" id="button-desactive" (click)="showInactive()">Adolescentes Desactivados</mat-chip-option>
     </mat-chip-listbox>
   </div>
 </div>
@@ -105,7 +105,7 @@
               <button id="buttonEliminar" mat-flat-button color="warn" (click)="deleteDataTeen(element)">
                 Eliminar
               </button>
-              <button id="buttonModificar" mat-flat-button
+              <button id="buttonModificar" mat-flat-button color="primary"
                       (click)="updateDataTeen(element)">Modificar
               </button>
             </td>

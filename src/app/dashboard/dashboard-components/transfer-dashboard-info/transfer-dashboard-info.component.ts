@@ -1,11 +1,11 @@
-import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {TeenService} from "../../../components/component-funcionality/services/teen/teen.service";
 import {
   OperativeUnitService
 } from 'src/app/components/component-funcionality/services/operativeUnit/operative-unit.service';
 import {Teen} from "../../../components/component-funcionality/models/teen/teen.model";
-import {Observable, startWith} from "rxjs";
+import {BehaviorSubject, Observable, startWith} from "rxjs";
 import {map} from "rxjs/operators";
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {OperativeUnit} from "../../../components/component-funcionality/models/operativeUnit/operativeUnit.model";
@@ -38,6 +38,8 @@ export class TransferDashboardInfoComponent implements OnInit {
   file: File | null = null;
   fileName: string = '';
   currentDate: Date = new Date();
+
+  iframeUrl: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   idTeenNecesaryForRegisterTransfer: any[] = [];
 

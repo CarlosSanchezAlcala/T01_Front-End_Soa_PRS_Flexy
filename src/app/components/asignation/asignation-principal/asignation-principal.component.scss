@@ -28,26 +28,27 @@ td, th {
 
 #buttonEliminar,
 #buttonModificar,
-#buttonRegister {
+#button-register {
   /* Estilo para los botones */
   margin: 2px;
   border-radius: 15px;
   width: 100px;
 }
 
-#buttonRegister {
+#button-register {
   color: white;
   width: 150px;
+  background-color: #9ADE7B;
 }
 
 #buttonEliminar,
 #buttonDelete {
-  background-color: #f44336;
+  background-color: #FF8080;
 }
 
 #buttonModificar,
 #buttonModify {
-  background-color: #FFC93C;
+  background-color: #F1C93B;
 }
 
 .dialog-background {
