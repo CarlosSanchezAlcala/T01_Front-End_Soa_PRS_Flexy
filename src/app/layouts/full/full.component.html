@@ -6,13 +6,13 @@
   <mat-sidenav-container class="sidenav-container">
     <!-- Sidebar -->
     <mat-sidenav
-            #drawer
-            class="sidenav"
-            fixedInViewport
-            [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-            [mode]="(isHandset$ | async) ? 'over' : 'side'"
-            [opened]="(isHandset$ | async) === false"
-            *ngIf="showBarInfo"
+      #drawer
+      class="sidenav"
+      fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false"
+      *ngIf="showBarInfo"
     >
       <div class="p-16">
         <div class="mb-16">
@@ -20,8 +20,10 @@
             <button mat-icon-button (click)="hideSideBard()">
               <mat-icon matListItemIcon>menu</mat-icon>
             </button>
-            <img ngSrc="assets/images/favicon.png" alt height="33" width="27"/>
-            <span class="ms-16 fw-medium fs-26"> SOA </span>
+            <div class="container-logo-soa">
+              <img ngSrc="assets/images/favicon.png" alt height="33" width="27"/>
+              <span class="ms-16 fw-medium fs-26"> SOA </span>
+            </div>
           </a>
         </div>
 
@@ -29,15 +31,15 @@
           <ul>
             <li class="list-group mb-8" *ngFor="let sidenav of sidebarMenu">
               <a
-                      matRipple
-                      [matRippleColor]="'#f7f8f443'"
-                      routerLink="{{ sidenav.link }}"
-                      class="sidebar-menu fs-16 w-100 d-flex align-items-center"
-                      [routerLinkActive]="routerActive"
+                matRipple
+                [matRippleColor]="'#f7f8f443'"
+                routerLink="{{ sidenav.link }}"
+                class="sidebar-menu fs-16 w-100 d-flex align-items-center"
+                [routerLinkActive]="routerActive"
               >
                 <i-feather
-                        name="{{ sidenav.icon }}"
-                        class="feather-base me-16"
+                  name="{{ sidenav.icon }}"
+                  class="feather-base me-16"
                 ></i-feather>
                 <span class="ps-4">{{ sidenav.menu }}</span>
               </a>
@@ -57,9 +59,9 @@
                   [matMenuTriggerFor]="menu"
           >
             <div class="d-flex align-items-center">
-              <img src="assets/images/user2.webp" class="rounded-circle" alt />
+              <img src="assets/images/user2.webp" class="rounded-circle" alt/>
               <span class="fw-light ms-8 text-secondary">Hi,</span>
-              <span class="fw-bold ms-8">Julia</span>
+              <span class="fw-bold ms-8">Carlos</span>
               <i-feather name="chevron-down" class="feather-base"></i-feather>
             </div>
           </button>
@@ -71,7 +73,7 @@
               <button mat-menu-item class="fs-16">My Settings</button>
             </div>
 
-            <hr />
+            <hr/>
 
             <div class="p-16">
               <button mat-flat-button color="accent" class="w-100 text-white">

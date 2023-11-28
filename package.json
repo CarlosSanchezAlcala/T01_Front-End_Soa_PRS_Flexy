@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
+    "@ngneat/hot-toast": "^6.0.1",
+    "@ngneat/overview": "^5.1.0",
     "angular-feather": "^6.5.0",
     "apexcharts": "^3.40.0",
     "hammerjs": "^2.0.8",

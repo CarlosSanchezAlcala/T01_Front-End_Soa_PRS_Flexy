@@ -15,6 +15,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ComponentsModule } from './components/components.module';
 import { HttpClientModule } from '@angular/common/http';
 import {NgOptimizedImage} from "@angular/common";
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {NgOptimizedImage} from "@angular/common";
         ComponentsModule,
         FormsModule,
         HttpClientModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        HotToastModule.forRoot()
     ],
   providers: [],
   bootstrap: [AppComponent]
