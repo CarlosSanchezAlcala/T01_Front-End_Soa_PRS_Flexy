@@ -16,6 +16,7 @@ import {ComponentsModule} from './components/components.module';
 import {HttpClientModule} from '@angular/common/http';
 import {NgOptimizedImage} from "@angular/common";
 import {HotToastModule} from '@ngneat/hot-toast';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {HotToastModule} from '@ngneat/hot-toast';
     HttpClientModule,
     NgOptimizedImage,
     HotToastModule.forRoot(),
+    NgxDocViewerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

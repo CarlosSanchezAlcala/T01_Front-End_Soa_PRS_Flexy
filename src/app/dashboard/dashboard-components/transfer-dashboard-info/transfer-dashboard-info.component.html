@@ -1,3 +1,7 @@
+<div *ngIf="showPdfViewer">
+  <ngx-doc-viewer [url]="documentoUrl" viewer="google"></ngx-doc-viewer>
+</div>
+
 <mat-card class="container-general-transfer">
   <mat-card-content>
     <div class="container-content">
@@ -43,7 +47,9 @@
         <div class="spacing"></div>
 
         <p class="mb-0 fw-medium" id="paso5">
-          <strong>5.- </strong>Carpeta de Google Drive: <a href="https://drive.google.com/drive/folders/1xehsC12WCXQ4_pR7kOFlkbrmraQCtuDD?usp=drive_link" target="_blank"><strong>Documentación Oficial.</strong></a>
+          <strong>5.- </strong>Carpeta de Google Drive: <a
+          href="https://drive.google.com/drive/folders/1xehsC12WCXQ4_pR7kOFlkbrmraQCtuDD?usp=drive_link"
+          target="_blank"><strong>Documentación Oficial.</strong></a>
         </p>
 
         <div class="spacing"></div>
@@ -55,10 +61,6 @@
 
         <div class="spacing"></div>
 
-      </div>
-
-      <div *ngIf="iframeUrl" class="container-iframe">
-        <iframe [src]="iframeUrl" width="100%" height="600px" frameborder="0" allowfullscreen></iframe>
       </div>
 
       <div class="container-button" *ngIf="!showTransferForm">
@@ -74,7 +76,7 @@
       </div>
 
       <div *ngIf="!showTransferForm" class="container-image-dissapear">
-        <img id="image-references" src="assets/images/diagram.png">
+        <img id="image-references" src="assets/images/diagram.png" class="img-fluid">
       </div>
     </div>
 

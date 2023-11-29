@@ -39,7 +39,9 @@ export class TransferDashboardInfoComponent implements OnInit {
   fileName: string = '';
   currentDate: Date = new Date();
 
-  iframeUrl: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  documentoUrl = '';
+
+  showPdfViewer: boolean = true;
 
   idTeenNecesaryForRegisterTransfer: any[] = [];
 
@@ -55,6 +57,14 @@ export class TransferDashboardInfoComponent implements OnInit {
       id_operativeunit: [''],
       documentPDF: [''],
     });
+
+    this.formForTransfer.get('documentPDF')?.valueChanges.subscribe(value => {
+      const id = value.split('/d/')[1].split('/view')[0];
+      this.documentoUrl = `https://drive.google.com/uc?export=download&id=${id}`;
+      console.log('Id Document: ', id);
+      console.log('Url Document: ', this.documentoUrl);
+    });
+
   }
 
   ngOnInit(): void {
@@ -67,14 +77,6 @@ export class TransferDashboardInfoComponent implements OnInit {
 
   showToast() {
     this.toastService.show('Hello World!')
-  }
-
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.fileName = file.name; // Guarda el nombre del archivo
-      this.formForTransfer.get('documentPDF')?.setValue(file);
-    }
   }
 
   onFileClick() {
@@ -92,8 +94,8 @@ export class TransferDashboardInfoComponent implements OnInit {
   autoCompleteData() {
     this.filteredOptionsTeen = this.searchControlTeen.valueChanges.pipe(
       startWith(''),
-      map(value => typeof value === 'string' ? value : value.name),
-      map(name => name ? this._filter(name) : this.teenData.slice())
+      map(value => typeof value === 'string' ? value : (value && value.name) ? this._filter(value.name) : this.teenData.slice()),
+      map(name => (typeof name === 'string') ? this._filter(name) : this.teenData.slice())
     );
     this.filteredOptionsOperativeUnit = this.searchControlOperativeUnit.valueChanges.pipe(
       startWith(''),
@@ -199,6 +201,9 @@ export class TransferDashboardInfoComponent implements OnInit {
       this.toastService.success('Transferencia exitosa!')
       this.transferTeens.emit(dataTeenSave);
     });
+
+    this.showPdfViewer = false;
+
   }
 
   findAllDataTeen() {

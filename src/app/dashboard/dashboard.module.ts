@@ -8,6 +8,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { TeenDashboardInfoComponent } from './dashboard-components/teen-dashboard-info/teen-dashboard-info.component';
 import { OperativeUnitDashboardInfoComponent } from './dashboard-components/operative-unit-dashboard-info/operative-unit-dashboard-info.component';
 import { TransferDashboardInfoComponent } from './dashboard-components/transfer-dashboard-info/transfer-dashboard-info.component';
+import {NgxDocViewerModule} from "ngx-doc-viewer";
 
 @NgModule({
   declarations: [
@@ -17,13 +18,14 @@ import { TransferDashboardInfoComponent } from './dashboard-components/transfer-
     OperativeUnitDashboardInfoComponent,
     TransferDashboardInfoComponent,
   ],
-    imports: [
-        CommonModule,
-        DemoFlexyModule,
-        FormsModule,
-        NgApexchartsModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    CommonModule,
+    DemoFlexyModule,
+    FormsModule,
+    NgApexchartsModule,
+    ReactiveFormsModule,
+    NgxDocViewerModule
+  ],
   exports: [
     DashboardComponent,
   ]
