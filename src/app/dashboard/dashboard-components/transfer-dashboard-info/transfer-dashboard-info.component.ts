@@ -99,8 +99,8 @@ export class TransferDashboardInfoComponent implements OnInit {
     );
     this.filteredOptionsOperativeUnit = this.searchControlOperativeUnit.valueChanges.pipe(
       startWith(''),
-      map(value => typeof value === 'string' ? value : value.name),
-      map(name => name ? this._filterOperativeUnit(name) : this.operativeUnitData.slice())
+      map(value => typeof value === 'string' ? value : (value && value.name) ? this._filterOperativeUnit(value.name) : this.operativeUnitData.slice()),
+      map(name => (typeof name === 'string') ? this._filterOperativeUnit(name) : this.operativeUnitData.slice())
     );
   }
 
