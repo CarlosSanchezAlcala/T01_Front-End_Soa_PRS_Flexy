@@ -1,0 +1,31 @@
+<div mat-dialog-content *ngIf="showDocumentsPopup" class="popup">
+    <div *ngIf="showResults && searchTerm.length === 8">
+        <div *ngIf="filteredData.length === 0" class="text-center mt-3 no-results">
+            No se encontraron resultados.
+        </div>
+        <div *ngIf="filteredData.length > 0" class="table-responsive">
+            <table mat-table class="mat-elevation-z8" [dataSource]="filteredData">
+                <ng-container matColumnDef="correlativo">
+                    <th mat-header-cell *matHeaderCellDef>CORRELATIVO</th>
+                    <td mat-cell *matCellDef="let item">{{ item.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="documento">
+                    <th mat-header-cell *matHeaderCellDef>DOC. DEL ADOLESCENTE</th>
+                    <td mat-cell *matCellDef="let item">
+                        <a [href]="item.link" target="_blank">{{ codigoToPalabra[item.correlativo] || item.correlativo
+                            }}</a>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef>FECHA</th>
+                    <td mat-cell *matCellDef="let item">{{ item.fecha }}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['correlativo', 'documento', 'fecha']"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['correlativo', 'documento', 'fecha']"></tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,12 +1,14 @@
 <div class="container-button">
-  <button
-    mat-raised-button
-    class="me-8 mb-8"
-    id="button-register"
-    (click)="navigateToForm()"
-  >
+  <button mat-raised-button class="me-8 mb-8" id="button-register" (click)="navigateToForm()">
     <strong>Agregar Funcionario</strong>
   </button>
+
+  <button (click)="generarPDF()" mat-raised-button class="me-8 mb-8" color="primary" id="button-pdf" *ngIf="!showDataInactive"><strong>Generar
+      PDF</strong></button>
+  <div *ngIf="pdfSrc">
+    <embed [attr.src]="pdfSrc" type="application/pdf" width="100%" height="600px">
+  </div>
+
   <div class="container-button-new-model">
     <mat-chip-listbox aria-label="Fish selection">
       <mat-chip-option selected (click)="showActive()">Funcionarios Activos</mat-chip-option>
@@ -96,10 +98,10 @@
             <th mat-header-cell *matHeaderCellDef style="width: 15rem">Acciones</th>
             <td mat-cell *matCellDef="let element">
               <button id="buttonEliminar" mat-flat-button color="warn"
-                      (click)="deleteLogicalDataFuncionary(element)">Eliminar
+                (click)="deleteLogicalDataFuncionary(element)">Eliminar
               </button>
               <button id="buttonModificar" mat-flat-button color="primary"
-                      (click)="updateDataFuncionary(element)">Modificar
+                (click)="updateDataFuncionary(element)">Modificar
               </button>
             </td>
           </ng-container>
@@ -206,11 +208,10 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef style="width: 15rem">Acciones</th>
             <td mat-cell *matCellDef="let element">
-              <button id="buttonDelete" mat-flat-button color="warn"
-                      (click)="reactiveDataFuncionary(element)">Restaurar
+              <button id="buttonDelete" mat-flat-button color="warn" (click)="reactiveDataFuncionary(element)">Restaurar
               </button>
               <button id="buttonModify" mat-flat-button color="primary" disabled
-                      (click)="updateDataFuncionary(element)">Modificar
+                (click)="updateDataFuncionary(element)">Modificar
               </button>
             </td>
           </ng-container>
