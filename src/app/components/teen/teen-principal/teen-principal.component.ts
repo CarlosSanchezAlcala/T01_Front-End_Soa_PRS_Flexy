@@ -9,6 +9,7 @@ import {Teen} from "../../component-funcionality/models/teen/teen.model";
 import {Router} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";
 import { MatTableDataSource } from '@angular/material/table';
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({
   selector: 'app-teen-principal',
@@ -51,6 +52,7 @@ export class TeenPrincipalComponent implements OnInit {
     public _teenService: TeenService,
     public _funcionaryService: FuncionaryService,
     private _router: Router,
+    private toastService: HotToastService,
   ) {
   }
 
@@ -208,19 +210,20 @@ export class TeenPrincipalComponent implements OnInit {
     this._teenService.teenSelected = teen;
     console.log('Teen Selected: ', this._teenService.teenSelected);
     this.navigateToForm();
-    this.findAllDataActiveTeen();
   }
 
   deleteDataTeen(teen: Teen) {
     this._teenService.deleteLogicalDataTeen(teen).subscribe((dataDeleteTeen: any) => {
       // console.log('Data Teen Delete: ', dataDeleteTeen); --------- // Running successfully
       this.findAllDataActiveTeen();
+      this.toastService.error('Adolescente eliminado exitosamente!');
     });
   }
 
   reactiveDataTeen(teen: Teen) {
     this._teenService.reactiveLogicalDataTeen(teen).subscribe((dataTeen: any) => {
       this.findAllDataInactiveTeen();
+        this.toastService.success('Registro reactivado exitosamente!');
     });
   }
 

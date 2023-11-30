@@ -5,6 +5,7 @@ import { TeenService } from '../../component-funcionality/services/teen/teen.ser
 import { AsignationService } from '../../component-funcionality/services/asignation/asignation.service';
 import { FuncionaryService } from '../../component-funcionality/services/funcionary/funcionary.service';
 import { MatDialog } from '@angular/material/dialog';
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({
   selector: 'app-teen-form',
@@ -27,7 +28,8 @@ export class TeenFormComponent implements OnInit, OnDestroy {
               public teenServices: TeenService,
               public _asignationServices: AsignationService,
               private _asignationDataFuncionaryService: FuncionaryService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private toastService: HotToastService) {
     this.teenDataForm = this.fb.group({
       id_teen: [null],
       name: [''],
@@ -134,6 +136,7 @@ export class TeenFormComponent implements OnInit, OnDestroy {
         this.teenDataForm.reset();
         this.legalGuardianAsignationFrom.reset();
         this.navigateToTeenList();
+        this.toastService.success('Registro exitoso!');
         this.findAllDataActive();
         this.dialog.closeAll();
       });
@@ -146,6 +149,7 @@ export class TeenFormComponent implements OnInit, OnDestroy {
       console.log('Data Form for Modify | Update: ', dataUpdate);
       this.teenDataForm.reset();
       this.navigateToTeenList();
+        this.toastService.success('Registro actualizado correctamente!');
       this.dialog.closeAll();
     });
   }

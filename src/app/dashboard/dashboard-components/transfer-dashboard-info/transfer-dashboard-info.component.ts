@@ -198,11 +198,12 @@ export class TransferDashboardInfoComponent implements OnInit {
     this._teenService.saveNewTeen(teen).subscribe((dataTeenSave) => {
       //console.log('Teen Save: ', dataTeenSave);
       //localStorage.setItem('alertMessage', 'Se registró correctamente'); -> Sirve como notificación para el usuario (DESHABILITADO POR EL NUEVO USO DE TOAST)
-      this.toastService.success('Transferencia exitosa!')
+      this.toastService.success('Transferencia exitosa!');
       this.transferTeens.emit(dataTeenSave);
     });
 
     this.showPdfViewer = false;
+    this.formForTransfer.reset();
 
   }
 
