@@ -216,14 +216,14 @@ export class TeenPrincipalComponent implements OnInit {
     this._teenService.deleteLogicalDataTeen(teen).subscribe((dataDeleteTeen: any) => {
       // console.log('Data Teen Delete: ', dataDeleteTeen); --------- // Running successfully
       this.findAllDataActiveTeen();
-      this.toastService.error('Adolescente eliminado exitosamente!');
+      this.toastService.error('Eliminado exitosamente!');
     });
   }
 
   reactiveDataTeen(teen: Teen) {
     this._teenService.reactiveLogicalDataTeen(teen).subscribe((dataTeen: any) => {
       this.findAllDataInactiveTeen();
-        this.toastService.success('Registro reactivado exitosamente!');
+        this.toastService.success('Reactivado exitosamente!');
     });
   }
 
