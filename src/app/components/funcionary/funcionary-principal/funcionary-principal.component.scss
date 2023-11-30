@@ -2,7 +2,8 @@
   overflow-x: auto;
 }
 
-td, th {
+td,
+th {
   text-align: center;
   vertical-align: middle;
 }
@@ -18,6 +19,11 @@ td.mat-footer-cell:first-of-type {
 }
 
 #button-register {
+  color: white;
+  border-radius: 15px;
+}
+
+#button-pdf {
   color: white;
   border-radius: 15px;
 }
@@ -63,6 +69,10 @@ th.mat-header-cell {
   background-color: #9ADE7B;
 }
 
+#button-pdf {
+  background-color: #779469;
+}
+
 .dialog-background {
   position: fixed;
   top: 0;
@@ -91,7 +101,7 @@ th.mat-header-cell {
   margin-top: 10px;
 }
 
-.container-div-button-close{
+.container-div-button-close {
   display: flex;
   justify-content: flex-end;
 }

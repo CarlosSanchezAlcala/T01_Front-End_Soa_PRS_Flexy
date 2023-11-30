@@ -24,7 +24,8 @@ import { TeenFormComponent } from './teen/teen-form/teen-form.component';
 import { AsignationPrincipalComponent } from './asignation/asignation-principal/asignation-principal.component';
 import { AsignationFormComponent } from './asignation/asignation-form/asignation-form.component';
 import { FuncionaryPrincipalComponent } from './funcionary/funcionary-principal/funcionary-principal.component';
-import { FuncionaryFormComponent } from './funcionary/funcionary-form/funcionary-form.component'
+import { FuncionaryFormComponent } from './funcionary/funcionary-form/funcionary-form.component';
+import { ArchivosComponent } from './archivos/archivos/archivos.component'
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { FuncionaryFormComponent } from './funcionary/funcionary-form/funcionary
     AsignationPrincipalComponent,
     AsignationFormComponent,
     FuncionaryPrincipalComponent,
-    FuncionaryFormComponent
+    FuncionaryFormComponent,
+    ArchivosComponent
   ]
 })
 export class ComponentsModule { }
