@@ -1,166 +1,170 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FuncionaryService } from '../../component-funcionality/services/funcionary/funcionary.service';
-import { Router } from "@angular/router";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatTableDataSource } from "@angular/material/table";
-import { Funcionary } from "../../component-funcionality/models/funcionary/funcionary.model";
-import { SafeResourceUrl } from '@angular/platform-browser';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FuncionaryService} from '../../component-funcionality/services/funcionary/funcionary.service';
+import {Router} from "@angular/router";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
+import {Funcionary} from "../../component-funcionality/models/funcionary/funcionary.model";
+import {SafeResourceUrl} from '@angular/platform-browser';
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({
-  selector: 'app-funcionary-principal',
-  templateUrl: './funcionary-principal.component.html',
-  styleUrls: ['./funcionary-principal.component.scss']
+    selector: 'app-funcionary-principal',
+    templateUrl: './funcionary-principal.component.html',
+    styleUrls: ['./funcionary-principal.component.scss']
 })
 export class FuncionaryPrincipalComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatPaginator) paginatorInactive!: MatPaginator;
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatPaginator) paginatorInactive!: MatPaginator;
 
-  ubigeoData: any[] = [];
-  pdfSrc: SafeResourceUrl | null = null;
-  funcionaryDataActive: any[] = [];
-  funcionaryDataInactive: any[] = [];
-  showDataActive = false;
-  showDataInactive = false;
-  selectedFuncionary: any;
-  showDetails = false;
-  displayedColumns: string[] = [
-    'dni',
-    'name',
-    'surnames',
-    'phoneNumber',
-    'range',
-    'confirmation',
-    'actions',
-    'moreInformation'
-  ];
+    ubigeoData: any[] = [];
+    pdfSrc: SafeResourceUrl | null = null;
+    funcionaryDataActive: any[] = [];
+    funcionaryDataInactive: any[] = [];
+    showDataActive = false;
+    showDataInactive = false;
+    selectedFuncionary: any;
+    showDetails = false;
+    displayedColumns: string[] = [
+        'dni',
+        'name',
+        'surnames',
+        'phoneNumber',
+        'range',
+        'confirmation',
+        'actions',
+        'moreInformation'
+    ];
 
-  dataSourceActive = new MatTableDataSource(this.funcionaryDataActive);
-  dataSourceInactive = new MatTableDataSource(this.funcionaryDataInactive);
+    dataSourceActive = new MatTableDataSource(this.funcionaryDataActive);
+    dataSourceInactive = new MatTableDataSource(this.funcionaryDataInactive);
 
-  constructor(public _funcionaryService: FuncionaryService,
-    private _router: Router) {
-  }
-
-  ngOnInit(): void {
-    this.findAllDataCompleteFuncionary();
-    this.findAllDataActiveFuncionary();
-    this.findAllDataInactiveFuncionary();
-    this.findAllDataUbigeoComplete();
-  }
-
-  navigateToForm() {
-    this._router.navigate(['funcionary-form']).then(() => {
-      //console.log('Form for register.');
-    });
-  }
-
-  getConfirmationLegalGuardian(confirmationLegalGuardian: string) {
-    return confirmationLegalGuardian === 'S' ? 'Confirmado' : 'Rechazado';
-  }
-
-  findAllDataCompleteFuncionary() {
-    this._funcionaryService.findAll().subscribe((DataFuncionaryBD: any) => {
-      //console.log('Data Teen:', DataTeenBD);
-      // this.teenData = DataTeenBD;
-    });
-  }
-
-  findAllDataActiveFuncionary() {
-    this._funcionaryService
-      .findAllDataActive()
-      .subscribe((DataFuncionaryBDActive: any) => {
-        //console.log('Data funcionary Active:', DataFuncionaryBDActive);
-        this.funcionaryDataActive = DataFuncionaryBDActive;
-        this.dataSourceActive = new MatTableDataSource(this.funcionaryDataActive);
-        this.dataSourceActive.paginator = this.paginator;
-      });
-  }
-
-  findAllDataInactiveFuncionary() {
-    this._funcionaryService.findAllDataInactive().subscribe((dataFuncionaryInactive: any) => {
-      this.funcionaryDataInactive = dataFuncionaryInactive;
-      this.dataSourceInactive = new MatTableDataSource(this.funcionaryDataInactive);
-      this.dataSourceInactive.paginator = this.paginatorInactive;
-    })
-  }
-
-  findAllDataUbigeoComplete() {
-    this._funcionaryService.findAllDataUbigeoAddress().subscribe((ubigeoData: any) => {
-      this.ubigeoData = ubigeoData;
-    })
-  }
-
-  getDataCompleteUbigeoInformation(codubi: string) {
-    const ubigeo = this.ubigeoData.find((item) => item.codubi === codubi);
-    if (ubigeo) {
-      return `${ubigeo.depar} - ${ubigeo.provi} - ${ubigeo.distri}`;
-    } else {
-      return 'Ubigeo no encontrado.'
+    constructor(public _funcionaryService: FuncionaryService,
+                private _router: Router,
+                private toastServices: HotToastService) {
     }
-  }
 
-  deleteLogicalDataFuncionary(funcionary: Funcionary) {
-    this._funcionaryService.deleteLogicalDataFuncionary(funcionary).subscribe((dataFuncionary: any) => {
-      //console.log('Data Funcionary:', dataFuncionary);
-      this.findAllDataActiveFuncionary();
-    });
-  }
+    ngOnInit(): void {
+        this.findAllDataCompleteFuncionary();
+        this.findAllDataActiveFuncionary();
+        this.findAllDataInactiveFuncionary();
+        this.findAllDataUbigeoComplete();
+    }
 
-  updateDataFuncionary(funcionary: Funcionary) {
-    this._funcionaryService.funcionarySelected = funcionary;
-    this.navigateToForm();
-    this.findAllDataActiveFuncionary();
-  }
+    navigateToForm() {
+        this._router.navigate(['funcionary-form']).then(() => {
+            //console.log('Form for register.');
+        });
+    }
 
-  reactiveDataFuncionary(funcionary: Funcionary) {
-    this._funcionaryService.reactiveLogicalDataFuncionary(funcionary).subscribe((dataFuncionary: any) => {
-      this.findAllDataInactiveFuncionary();
-    });
-  }
+    getConfirmationLegalGuardian(confirmationLegalGuardian: string) {
+        return confirmationLegalGuardian === 'S' ? 'Confirmado' : 'Rechazado';
+    }
 
-  showFuncionaryDetails(funcionary: any) {
-    this.selectedFuncionary = funcionary;
-    this.showDetails = true;
-  }
+    findAllDataCompleteFuncionary() {
+        this._funcionaryService.findAll().subscribe((DataFuncionaryBD: any) => {
+            //console.log('Data Teen:', DataTeenBD);
+            // this.teenData = DataTeenBD;
+        });
+    }
 
-  closeDetails() {
-    this.selectedFuncionary = null;
-    this.showDetails = false;
-  }
+    findAllDataActiveFuncionary() {
+        this._funcionaryService
+            .findAllDataActive()
+            .subscribe((DataFuncionaryBDActive: any) => {
+                //console.log('Data funcionary Active:', DataFuncionaryBDActive);
+                this.funcionaryDataActive = DataFuncionaryBDActive;
+                this.dataSourceActive = new MatTableDataSource(this.funcionaryDataActive);
+                this.dataSourceActive.paginator = this.paginator;
+            });
+    }
 
-  showActive() {
-    this.showDataActive = true;
-    this.hideInactive();
-    this.findAllDataActiveFuncionary();
-  }
+    findAllDataInactiveFuncionary() {
+        this._funcionaryService.findAllDataInactive().subscribe((dataFuncionaryInactive: any) => {
+            this.funcionaryDataInactive = dataFuncionaryInactive;
+            this.dataSourceInactive = new MatTableDataSource(this.funcionaryDataInactive);
+            this.dataSourceInactive.paginator = this.paginatorInactive;
+        })
+    }
 
-  hideActive() {
-    this.showDataActive = false;
-  }
+    findAllDataUbigeoComplete() {
+        this._funcionaryService.findAllDataUbigeoAddress().subscribe((ubigeoData: any) => {
+            this.ubigeoData = ubigeoData;
+        })
+    }
 
-  showInactive() {
-    this.showDataInactive = true;
-    this.hideActive();
-    this.findAllDataInactiveFuncionary();
-  }
-
-  hideInactive() {
-    this.showDataInactive = false;
-  }
-
-  generarPDF(): void {
-    this._funcionaryService.generarPDF()
-      .subscribe((response: ArrayBuffer) => {
-        const file = new Blob([response], { type: 'application/pdf' });
-        const url = URL.createObjectURL(file);
-        const pdfWindow = window.open();
-        if (pdfWindow) {
-          pdfWindow.location.href = url;
+    getDataCompleteUbigeoInformation(codubi: string) {
+        const ubigeo = this.ubigeoData.find((item) => item.codubi === codubi);
+        if (ubigeo) {
+            return `${ubigeo.depar} - ${ubigeo.provi} - ${ubigeo.distri}`;
         } else {
-          alert('El navegador bloqueó la apertura de la ventana emergente. Por favor, asegúrate de desbloquear las ventanas emergentes para este sitio.');
+            return 'Ubigeo no encontrado.'
         }
-      });
-  }
+    }
+
+    deleteLogicalDataFuncionary(funcionary: Funcionary) {
+        this._funcionaryService.deleteLogicalDataFuncionary(funcionary).subscribe((dataFuncionary: any) => {
+            //console.log('Data Funcionary:', dataFuncionary);
+            this.findAllDataActiveFuncionary();
+            this.toastServices.error('Eliminado correctamente!');
+        });
+    }
+
+    updateDataFuncionary(funcionary: Funcionary) {
+        this._funcionaryService.funcionarySelected = funcionary;
+        this.navigateToForm();
+        this.findAllDataActiveFuncionary();
+    }
+
+    reactiveDataFuncionary(funcionary: Funcionary) {
+        this._funcionaryService.reactiveLogicalDataFuncionary(funcionary).subscribe((dataFuncionary: any) => {
+            this.findAllDataInactiveFuncionary();
+            this.toastServices.success('Reactivado correctamente!');
+        });
+    }
+
+    showFuncionaryDetails(funcionary: any) {
+        this.selectedFuncionary = funcionary;
+        this.showDetails = true;
+    }
+
+    closeDetails() {
+        this.selectedFuncionary = null;
+        this.showDetails = false;
+    }
+
+    showActive() {
+        this.showDataActive = true;
+        this.hideInactive();
+        this.findAllDataActiveFuncionary();
+    }
+
+    hideActive() {
+        this.showDataActive = false;
+    }
+
+    showInactive() {
+        this.showDataInactive = true;
+        this.hideActive();
+        this.findAllDataInactiveFuncionary();
+    }
+
+    hideInactive() {
+        this.showDataInactive = false;
+    }
+
+    generarPDF(): void {
+        this._funcionaryService.generarPDF()
+            .subscribe((response: ArrayBuffer) => {
+                const file = new Blob([response], {type: 'application/pdf'});
+                const url = URL.createObjectURL(file);
+                const pdfWindow = window.open();
+                if (pdfWindow) {
+                    pdfWindow.location.href = url;
+                } else {
+                    alert('El navegador bloqueó la apertura de la ventana emergente. Por favor, asegúrate de desbloquear las ventanas emergentes para este sitio.');
+                }
+            });
+    }
 
 }

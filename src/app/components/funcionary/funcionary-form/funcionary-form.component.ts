@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FuncionaryService} from "../../component-funcionality/services/funcionary/funcionary.service";
 import {Router} from "@angular/router";
 import {Funcionary} from "../../component-funcionality/models/funcionary/funcionary.model";
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({
   selector: 'app-funcionary-form',
@@ -16,7 +17,8 @@ export class FuncionaryFormComponent implements OnInit, OnDestroy {
 
   constructor(public _funcionaryService: FuncionaryService,
               private _router: Router,
-              private _fb: FormBuilder) {
+              private _fb: FormBuilder,
+              private toastService: HotToastService) {
     this.funcionaryDataForm = this._fb.group({
       id_funcionary: [null],
       name: ['', Validators.required],
@@ -67,6 +69,7 @@ export class FuncionaryFormComponent implements OnInit, OnDestroy {
     this._funcionaryService.saveNewFuncionary(this.funcionaryDataForm.value).subscribe((dataNewFuncionary: any) => {
       //console.log('New Data Funcionary: ', dataNewFuncionary)
       this.navigateToList();
+      this.toastService.success('Registro exitoso!');
     });
   }
 
@@ -76,6 +79,7 @@ export class FuncionaryFormComponent implements OnInit, OnDestroy {
       //console.log('Update Data Funcionary: ', dataUpdateFuncionary)
       this.funcionaryDataForm.reset();
       this.navigateToList();
+      this.toastService.success('Registro actualizado correctamente!');
     });
   }
 
