@@ -67,6 +67,17 @@ export class TeenFormComponent implements OnInit, OnDestroy {
         this.findAllDataOperativeUnit();
     }
 
+    /*
+    loadAsignationDataForTeen(teenId: number) {
+        this._asignationServices.findAsignationByTeenId(teenId).subscribe((asignationData: Asignation) => {
+            if (asignationData) {
+                // Si hay datos de asignación disponibles, actualiza el formulario de asignación
+                this.legalGuardianAsignationFrom.patchValue(asignationData);
+            }
+        });
+    }
+    */
+
     navigateToTeenList() {
         this.router.navigate(['teen']).then(() => {
             //console.log('Successful navigation to Teen List');
@@ -149,7 +160,7 @@ export class TeenFormComponent implements OnInit, OnDestroy {
             console.log('Data Form for Modify | Update: ', dataUpdate);
             this.teenDataForm.reset();
             this.navigateToTeenList();
-            this.toastService.success('Registro actualizado correctamente!');
+            this.toastService.success('Actualización de datos exitosa!');
             this.dialog.closeAll();
         });
     }
