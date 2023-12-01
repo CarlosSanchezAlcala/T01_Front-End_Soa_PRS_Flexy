@@ -1,4 +1,4 @@
-### Microservicio Front-End:
+<h1>Microservicio Front-End:</h1>
 
 <br>
 
@@ -7,5 +7,6 @@ Este repositorio va a contener el código concreto para la implementación y fun
 <br>
 
 ### Pagina principal | Dashboard:
-![Dashboard](src/assets/images/informationDashboard.png)
+
+![Dashboard](src/assets/images/Information.png)
 
