@@ -1,86 +1,91 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
-import { Asignation } from '../../models/asignation/asignation.model';
-import { transactionDataCompleteResponse } from '../../models/asignation/transactionDataComplete.model';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {environment} from 'src/environments/environment.development';
+import {Asignation} from '../../models/asignation/asignation.model';
+import {transactionDataCompleteResponse} from '../../models/asignation/transactionDataComplete.model';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs";
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class AsignationService {
-  private urlAsignation = `${environment.apiUrlAsignation}/api/transaccionalData`;
-  asignationSelected: Asignation | undefined = undefined;
-  transactionSelected: transactionDataCompleteResponse | undefined = undefined;
+    private urlAsignation = `${environment.apiUrlAsignation}/api/transaccionalData`;
+    asignationSelected: Asignation | undefined = undefined;
+    transactionSelected: transactionDataCompleteResponse | undefined = undefined;
 
-  constructor(private _http: HttpClient) {}
+    constructor(private _http: HttpClient) {
+    }
 
-  findAll() {
-    return this._http.get(this.urlAsignation + '/listData');
-  }
+    findAll() {
+        return this._http.get(this.urlAsignation + '/listData');
+    }
 
-  findAllDatosWithoutBody() {
-    return this._http.get(this.urlAsignation + '/listDataIdRegister');
-  }
+    findAsignationByTeenId(id_teen: number): Observable<Asignation> {
+        return this._http.get<Asignation>(`${this.urlAsignation}/listData/idTeen/${id_teen}`);
+    }
 
-  findAllDataActive() {
-    return this._http.get(this.urlAsignation + '/listData/active');
-  }
+    findAllDatosWithoutBody() {
+        return this._http.get(this.urlAsignation + '/listDataIdRegister');
+    }
 
-  findDataIdRegister() {
-    return this._http.get(this.urlAsignation + '/listDataIdRegister');
-  }
+    findAllDataActive() {
+        return this._http.get(this.urlAsignation + '/listData/active');
+    }
 
-  findDataTeenNoRegistered() {
-    return this._http.get(this.urlAsignation + '/listData/noRegisteredTeen');
-  }
+    findDataIdRegister() {
+        return this._http.get(this.urlAsignation + '/listDataIdRegister');
+    }
 
-  findAllDataInactive() {
-    return this._http.get(this.urlAsignation + '/listData/inactive');
-  }
+    findDataTeenNoRegistered() {
+        return this._http.get(this.urlAsignation + '/listData/noRegisteredTeen');
+    }
 
-  saveNewAsignation(asignation: Asignation) {
-    return this._http.post(this.urlAsignation, asignation);
-  }
+    findAllDataInactive() {
+        return this._http.get(this.urlAsignation + '/listData/inactive');
+    }
 
-  updateDataAsignation(asignation: Asignation) {
-    return this._http.put(
-      this.urlAsignation + '/' + asignation.id_funcionaryteend,
-      asignation
-    );
-  }
+    saveNewAsignation(asignation: Asignation) {
+        return this._http.post(this.urlAsignation, asignation);
+    }
 
-  updateTwoWayAsignation(twoWayAsignation: transactionDataCompleteResponse) {
-    return this._http.put(
-      this.urlAsignation +
-        '/' +
-        twoWayAsignation.transaccionalAllocation.id_funcionaryteend,
-      twoWayAsignation
-    );
-  }
+    updateDataAsignation(asignation: Asignation) {
+        return this._http.put(
+            this.urlAsignation + '/' + asignation.id_funcionaryteend,
+            asignation
+        );
+    }
 
-  deleteLogicalDataAsignation(asignation: Asignation) {
-    return this._http.patch(
-      this.urlAsignation + '/deleteLogical/' + asignation.id_funcionaryteend,
-      asignation
-    );
-  }
+    updateTwoWayAsignation(twoWayAsignation: transactionDataCompleteResponse) {
+        return this._http.put(
+            this.urlAsignation +
+            '/' +
+            twoWayAsignation.transaccionalAllocation.id_funcionaryteend,
+            twoWayAsignation
+        );
+    }
 
-  reactiveLogicalDataAsignation(asignation: Asignation) {
-    return this._http.patch(
-      this.urlAsignation + '/reactiveLogical/' + asignation.id_funcionaryteend,
-      asignation
-    );
-  }
+    deleteLogicalDataAsignation(asignation: Asignation) {
+        return this._http.patch(
+            this.urlAsignation + '/deleteLogical/' + asignation.id_funcionaryteend,
+            asignation
+        );
+    }
 
-  deleteDataAsignationComplete(asignation: Asignation) {
-    return this._http.delete(
-      this.urlAsignation + '/' + asignation.id_funcionaryteend
-    );
-  }
+    reactiveLogicalDataAsignation(asignation: Asignation) {
+        return this._http.patch(
+            this.urlAsignation + '/reactiveLogical/' + asignation.id_funcionaryteend,
+            asignation
+        );
+    }
 
-  saveMasive(dto: any): Observable<void> {
-    return this._http.post<void>(`${this.urlAsignation}/bulk`, dto);
-  }
+    deleteDataAsignationComplete(asignation: Asignation) {
+        return this._http.delete(
+            this.urlAsignation + '/' + asignation.id_funcionaryteend
+        );
+    }
+
+    saveMasive(dto: any): Observable<void> {
+        return this._http.post<void>(`${this.urlAsignation}/bulk`, dto);
+    }
 
 }

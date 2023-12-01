@@ -171,6 +171,6 @@ export class FuncionaryPrincipalComponent implements OnInit {
             alert('El navegador bloqueó la apertura de la ventana emergente. Por favor, asegúrate de desbloquear las ventanas emergentes para este sitio.');
           }
         });
-    }, 4000);
+    }, 3500);
   }
 }

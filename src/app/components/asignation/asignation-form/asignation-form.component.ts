@@ -115,6 +115,7 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
           // Éxito, hacer algo si es necesario
           this.asignationDataForm.reset();
           this.navigateToAsignationList();
+          console.error("Data in Form", dto);
         },
         error => {
           console.error("Error al guardar datos: ", error);

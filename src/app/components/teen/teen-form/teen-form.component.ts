@@ -6,6 +6,7 @@ import {AsignationService} from '../../component-funcionality/services/asignatio
 import {FuncionaryService} from '../../component-funcionality/services/funcionary/funcionary.service';
 import {MatDialog} from '@angular/material/dialog';
 import {HotToastService} from "@ngneat/hot-toast";
+import {Asignation} from "../../component-funcionality/models/asignation/asignation.model";
 
 @Component({
     selector: 'app-teen-form',
@@ -65,18 +66,32 @@ export class TeenFormComponent implements OnInit, OnDestroy {
         this.findAllDataUbigeo();
         this.findAllDataAttorney();
         this.findAllDataOperativeUnit();
+        this.loadAsignationDataForTeen();
     }
 
-    /*
-    loadAsignationDataForTeen(teenId: number) {
-        this._asignationServices.findAsignationByTeenId(teenId).subscribe((asignationData: Asignation) => {
-            if (asignationData) {
-                // Si hay datos de asignación disponibles, actualiza el formulario de asignación
-                this.legalGuardianAsignationFrom.patchValue(asignationData);
-            }
-        });
+    loadAsignationDataForTeen() {
+        if (this.teenDataForm.get('id_teen')) {
+            const id_teen = this.teenDataForm.get('id_teen')?.value;
+
+            this._asignationServices.findAsignationByTeenId(id_teen).subscribe(
+                (data: Asignation) => {
+                    // Actualiza los controles del formulario con los datos de la asignación
+                    this.legalGuardianAsignationFrom.patchValue({
+                        id_funcionaryteend: data.id_funcionaryteend,
+                        id_funcionary: data.id_funcionary,
+                        id_teen: data.id_teen,
+                        status: data.status,
+                        description: data.description,
+                    });
+
+                    console.log('Asignation data:', data);
+                },
+                (error) => {
+                    console.error('Error fetching asignation data:', error);
+                }
+            );
+        }
     }
-    */
 
     navigateToTeenList() {
         this.router.navigate(['teen']).then(() => {
@@ -158,6 +173,18 @@ export class TeenFormComponent implements OnInit, OnDestroy {
         console.log('Only Data Form: ', this.teenDataForm.value);
         this.teenServices.updateDataTeen(this.teenDataForm.value).subscribe((dataUpdate) => {
             console.log('Data Form for Modify | Update: ', dataUpdate);
+
+            // Actualiza la asignación con los nuevos datos del formulario
+            const asignationData = this.legalGuardianAsignationFrom.value;
+            this._asignationServices.updateDataAsignation(asignationData).subscribe(
+                (asignationUpdate) => {
+                    console.log('Asignation data updated:', asignationUpdate);
+                },
+                (error) => {
+                    console.error('Error updating asignation data:', error);
+                }
+            );
+
             this.teenDataForm.reset();
             this.navigateToTeenList();
             this.toastService.success('Actualización de datos exitosa!');
