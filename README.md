@@ -8,5 +8,14 @@ Este repositorio va a contener el código concreto para la implementación y fun
 
 ### Pagina principal | Dashboard:
 
+<h6>Dentro de esta primera y principal dashboard, vamos a poder realizar la transferencia de un adolescente a un distinto SOA que el de su creación.</h6>
+
 ![Dashboard](src/assets/images/Information.png)
 
+### Dashboard Teen | Información:
+
+![Dashboard](src/assets/images/TeenDashboard.png)
+
+### Dashboard Funcionary | Información:
+
+![Dashboard](src/assets/images/FuncionaryDashboard.png)
