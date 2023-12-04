@@ -119,13 +119,12 @@
               </td>
             </ng-container>
           </div>
-
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
-        <<strong>
-        <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
-      </strong>
+        <strong>
+          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+        </strong>
       </div>
     </mat-card-content>
   </mat-card>
