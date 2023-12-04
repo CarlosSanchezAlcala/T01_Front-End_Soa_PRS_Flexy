@@ -6,7 +6,8 @@
     <mat-chip-listbox aria-label="Fish selection">
       <mat-chip-option selected id="button-active" (click)="showActive()">Adolescentes Activos</mat-chip-option>
       <mat-chip-option color="warn" id="button-desactive" (click)="showInactive()">Adolescentes
-        Desactivados</mat-chip-option>
+        Desactivados
+      </mat-chip-option>
     </mat-chip-listbox>
   </div>
 </div>
@@ -122,7 +123,9 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
+        <<strong>
         <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+      </strong>
       </div>
     </mat-card-content>
   </mat-card>
@@ -239,7 +242,9 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+        <strong>
+          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+        </strong>
       </div>
     </mat-card-content>
   </mat-card>
