@@ -54,6 +54,7 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.findAllDataFuncionaryRankLegalGuardian();
     this.findAllTeen();
+    this.dateAndHour();
     //this.finAllDataTeenNoRegistered();
   }
 
@@ -62,6 +63,12 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
     this.router.navigate(['asignation-list']).then(() => {
       // console.log('Se está redirigiendo a la lista de todas las asignaciones.')
     });
+  }
+
+  dateAndHour() {
+    setInterval(() => {
+      this.currentDate = new Date();
+    }, 1000);
   }
 
   findAllFuncionary() {
