@@ -1,7 +1,10 @@
 import {Injectable} from '@angular/core';
 import {environment} from 'src/environments/environment.development';
 import {Asignation} from '../../models/asignation/asignation.model';
-import {transactionDataCompleteResponse} from '../../models/asignation/transactionDataComplete.model';
+import {
+  TransactionalAllocation,
+  transactionDataCompleteResponse
+} from '../../models/asignation/transactionDataComplete.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs";
 
@@ -11,7 +14,7 @@ import {Observable} from "rxjs";
 export class AsignationService {
     private urlAsignation = `${environment.apiUrlAsignation}/api/transaccionalData`;
     asignationSelected: Asignation | undefined = undefined;
-    transactionSelected: transactionDataCompleteResponse | undefined = undefined;
+    transactionSelected: TransactionalAllocation | undefined = undefined;
 
     constructor(private _http: HttpClient) {
     }
