@@ -37,6 +37,8 @@ export interface transactionDataCompleteResponse {
     id_funcionaryteend: number;
     description: string;
     status: string;
+    function_start : Date;
+    date_hour_register : string;
     id_teen: number;
     id_funcionary: number;
   };

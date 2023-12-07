@@ -29,6 +29,13 @@
       </mat-select>
     </mat-form-field>
 
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Inicio de actividades del Funcionario:</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="function_start">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
     <mat-checkbox (change)="selectAllOrDeselectAll()">Seleccionar todo</mat-checkbox>
 
     <mat-form-field class="formForRegister formForRegister">
@@ -38,6 +45,11 @@
           {{ teen.name }} {{ teen.surnameFather }} {{ teen.surnameMother }}
         </mat-option>
       </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Fecha y hora actuales:</mat-label>
+      <input matInput disabled>{{ currentDate | date:'dd/MM/yyyy HH:mm:ss' }}
     </mat-form-field>
 
     <div id="buttonActions">
@@ -50,4 +62,3 @@
     </div>
   </form>
 </div>
-
