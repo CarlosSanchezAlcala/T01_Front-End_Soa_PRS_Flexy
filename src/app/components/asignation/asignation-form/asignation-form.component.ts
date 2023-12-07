@@ -14,23 +14,26 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
 
   asignationDataForm: FormGroup = new FormGroup({});
   funcionaryData: any[] = [];
+  currentDate: Date = new Date();
   teenData: any[] = [];
   selectedTeenIDs: any[] = [];
 
 
   constructor(private router: Router,
-              public asignationService: AsignationService,
-              private asignationDataFuncionaryService: FuncionaryService,
-              private asignationDataTeenService: TeenService,
-              private fb: FormBuilder) {
+    public asignationService: AsignationService,
+    private asignationDataFuncionaryService: FuncionaryService,
+    private asignationDataTeenService: TeenService,
+    private fb: FormBuilder) {
 
     this.asignationDataForm = this.fb.group({
       id_funcionaryteend: [null],
       id_funcionary: [''],
       id_teen: [[]],
+      function_start: [''],
       status: ['A'],
       description: [''],
     });
+    console.log('Datos del formulario: ', this.asignationDataForm.value);
 
     if (this.asignationService.transactionSelected) {
       const teens = [];
@@ -110,27 +113,32 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
   registerNewDataAsignation() {
     const description = this.asignationDataForm.get('description')?.value;
     const idFuncionary = this.asignationDataForm.get('id_funcionary')?.value;
-
     if (description && idFuncionary) {
-      // Obtén los IDs de los adolescentes seleccionados
       let selectedTeenIDs = this.asignationDataForm.get('id_teen')?.value;
-      // Verifica si "Seleccionar todo" está seleccionado
       if (selectedTeenIDs.includes('all')) {
-        // Si "Seleccionar todo" está seleccionado, incluye todos los adolescentes
         selectedTeenIDs = this.teenData.map(teen => teen.id_teen);
       }
-      // Filtra la data original de adolescentes en base a las selecciones
       const selectedTeensData = this.teenData.filter((teen: any) => selectedTeenIDs.includes(teen.id_teen));
+
+      const functionStartRaw = this.asignationDataForm.get('function_start')?.value;
+      const functionStartFormatted = new Date(functionStartRaw);
+      const year = functionStartFormatted.getFullYear();
+      const month = (functionStartFormatted.getMonth() + 1).toString().padStart(2, '0');
+      const day = functionStartFormatted.getDate().toString().padStart(2, '0');
+      const formattedFunctionStart = `${year}-${month}-${day}`;
       const dto = {
         description: description,
         id_funcionary: idFuncionary,
+        function_start: formattedFunctionStart,
         teens: selectedTeensData
       };
+      console.log('DTO: ', dto);
       // Llama al método savebulk en tu servicio
       this.asignationService.saveMasive(dto).subscribe(
         () => {
           // Éxito, hacer algo si es necesario
           this.asignationDataForm.reset();
+          // Redirigir después de guardar exitosamente
           this.navigateToAsignationList();
           console.error("Data in Form", dto);
         },
@@ -138,12 +146,11 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
           console.error("Error al guardar datos: ", error);
         }
       );
-      this.navigateToAsignationList();
     } else {
       console.error("Los datos del formulario son nulos o faltantes.");
-      this.navigateToAsignationList();
     }
   }
+
 
   updateDataExistentAsignation() {
     console.log('Los datos a actualizar son: ', this.asignationDataForm.value);

@@ -26,6 +26,7 @@ export class AsignationPrincipalComponent implements OnInit {
       'dataTeen',
       'dniTeen',
       'descripcionAsignacion',
+      'iniciodeFunción',
       'actions'];
 
   dataSource = new MatTableDataSource(this.asignationData);
