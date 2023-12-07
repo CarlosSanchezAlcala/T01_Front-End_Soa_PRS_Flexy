@@ -42,5 +42,7 @@ export interface TransactionalAllocation {
   description: string;
   status: string;
   idTeen: number;
+  function_start : Date;
+  date_hour_register : string;
   id_funcionary: number;
 }

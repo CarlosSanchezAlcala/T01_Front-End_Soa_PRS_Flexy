@@ -45,7 +45,8 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
         status: this.asignationService.transactionSelected.status,
         description: this.asignationService.transactionSelected.description,
         id_funcionary: this.asignationService.transactionSelected.id_funcionary,
-        id_funcionaryteend: this.asignationService.transactionSelected.id_funcionaryteend
+        id_funcionaryteend: this.asignationService.transactionSelected.id_funcionaryteend,
+        function_start: this.asignationService.transactionSelected.function_start
       });
     }
   }
