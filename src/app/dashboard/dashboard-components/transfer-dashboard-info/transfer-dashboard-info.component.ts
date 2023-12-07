@@ -59,10 +59,17 @@ export class TransferDashboardInfoComponent implements OnInit {
     });
 
     this.formForTransfer.get('documentPDF')?.valueChanges.subscribe(value => {
-      const id = value.split('/d/')[1].split('/view')[0];
-      this.documentoUrl = `https://drive.google.com/uc?export=download&id=${id}`;
-      console.log('Id Document: ', id);
-      console.log('Url Document: ', this.documentoUrl);
+      // Extraer el ID del enlace de vista previa
+      const match = value.match(/\/file\/d\/(.*?)\/view/);
+
+      if (match && match[1]) {
+        const id = match[1];
+        this.documentoUrl = `https://drive.google.com/uc?export=download&id=${id}`;
+        console.log('Id Document: ', id);
+        console.log('Url Document: ', this.documentoUrl);
+      } else {
+        console.error('No se pudo extraer el ID del enlace.');
+      }
     });
 
   }
@@ -142,6 +149,8 @@ export class TransferDashboardInfoComponent implements OnInit {
     this.showTransferForm = false;
     this.searchControlTeen.reset();
     this.searchControlOperativeUnit.reset();
+    this.formForTransfer.reset();
+    this.showPdfViewer = false;
   }
 
   openSnackBar(message: string, action: string, callback?: () => void) {

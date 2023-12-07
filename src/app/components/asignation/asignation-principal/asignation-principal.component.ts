@@ -2,7 +2,10 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { AsignationService } from '../../component-funcionality/services/asignation/asignation.service';
 import { Router } from '@angular/router';
 import { Asignation } from '../../component-funcionality/models/asignation/asignation.model';
-import { transactionDataCompleteResponse } from '../../component-funcionality/models/asignation/transactionDataComplete.model';
+import {
+  TransactionalAllocation,
+  transactionDataCompleteResponse
+} from '../../component-funcionality/models/asignation/transactionDataComplete.model';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 
@@ -72,7 +75,8 @@ export class AsignationPrincipalComponent implements OnInit {
     this.findAllDataAsignation();
   }
 
-  updateTwoWayDataAsignation(twoWayAsignation: transactionDataCompleteResponse) {
+  updateTwoWayDataAsignation(twoWayAsignation: TransactionalAllocation) {
+    console.log('El dato de la asignación es: ', twoWayAsignation);
     this.asignationService.transactionSelected = twoWayAsignation;
     this.navigateToForm();
     this.findAllDataAsignation();

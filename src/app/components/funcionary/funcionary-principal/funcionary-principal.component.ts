@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FuncionaryService } from '../../component-funcionality/services/funcionary/funcionary.service';
-import { Router } from "@angular/router";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatTableDataSource } from "@angular/material/table";
-import { Funcionary } from "../../component-funcionality/models/funcionary/funcionary.model";
-import { SafeResourceUrl } from '@angular/platform-browser';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FuncionaryService} from '../../component-funcionality/services/funcionary/funcionary.service';
+import {Router} from "@angular/router";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
+import {Funcionary} from "../../component-funcionality/models/funcionary/funcionary.model";
+import {SafeResourceUrl} from '@angular/platform-browser';
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Component({
   selector: 'app-funcionary-principal',
@@ -39,7 +40,8 @@ export class FuncionaryPrincipalComponent implements OnInit {
   dataSourceInactive = new MatTableDataSource(this.funcionaryDataInactive);
 
   constructor(public _funcionaryService: FuncionaryService,
-    private _router: Router) {
+              private _router: Router,
+              private toastServices: HotToastService) {
   }
 
   ngOnInit(): void {
@@ -104,6 +106,7 @@ export class FuncionaryPrincipalComponent implements OnInit {
     this._funcionaryService.deleteLogicalDataFuncionary(funcionary).subscribe((dataFuncionary: any) => {
       //console.log('Data Funcionary:', dataFuncionary);
       this.findAllDataActiveFuncionary();
+      this.toastServices.error('Eliminado correctamente!');
     });
   }
 
@@ -116,6 +119,7 @@ export class FuncionaryPrincipalComponent implements OnInit {
   reactiveDataFuncionary(funcionary: Funcionary) {
     this._funcionaryService.reactiveLogicalDataFuncionary(funcionary).subscribe((dataFuncionary: any) => {
       this.findAllDataInactiveFuncionary();
+      this.toastServices.success('Reactivado correctamente!');
     });
   }
 
@@ -150,17 +154,23 @@ export class FuncionaryPrincipalComponent implements OnInit {
   }
 
   generarPDF(): void {
-    this._funcionaryService.generarPDF()
-      .subscribe((response: ArrayBuffer) => {
-        const file = new Blob([response], { type: 'application/pdf' });
-        const url = URL.createObjectURL(file);
-        const pdfWindow = window.open();
-        if (pdfWindow) {
-          pdfWindow.location.href = url;
-        } else {
-          alert('El navegador bloqueó la apertura de la ventana emergente. Por favor, asegúrate de desbloquear las ventanas emergentes para este sitio.');
-        }
-      });
-  }
 
+    this.toastServices.success('Generando PDF...', {
+      duration: 3000,
+    });
+
+    setTimeout(() => {
+      this._funcionaryService.generarPDF()
+        .subscribe((response: ArrayBuffer) => {
+          const file = new Blob([response], {type: 'application/pdf'});
+          const url = URL.createObjectURL(file);
+          const pdfWindow = window.open();
+          if (pdfWindow) {
+            pdfWindow.location.href = url;
+          } else {
+            alert('El navegador bloqueó la apertura de la ventana emergente. Por favor, asegúrate de desbloquear las ventanas emergentes para este sitio.');
+          }
+        });
+    }, 3500);
+  }
 }

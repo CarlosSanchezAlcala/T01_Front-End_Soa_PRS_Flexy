@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.0.1",
-    "@angular/cli": "~16.0.1",
+    "@angular/cli": "^16.2.10",
     "@angular/compiler-cli": "^16.0.0",
     "@babel/traverse": "^7.23.2",
     "@types/jasmine": "~4.3.0",
@@ -46,6 +46,6 @@
     "node-sass": "^8.0.0",
     "postcss": "^8.4.31",
     "typescript": "~5.0.4",
-    "vite": "^4.5.0"
+    "vite": "^4.3.9"
   }
 }

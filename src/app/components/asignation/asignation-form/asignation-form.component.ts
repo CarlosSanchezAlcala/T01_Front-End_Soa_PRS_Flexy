@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AsignationService } from '../../component-funcionality/services/asignation/asignation.service';
-import { FuncionaryService } from '../../component-funcionality/services/funcionary/funcionary.service';
-import { TeenService } from '../../component-funcionality/services/teen/teen.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AsignationService} from '../../component-funcionality/services/asignation/asignation.service';
+import {FuncionaryService} from '../../component-funcionality/services/funcionary/funcionary.service';
+import {TeenService} from '../../component-funcionality/services/teen/teen.service';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-asignation-form',
@@ -28,7 +28,7 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
     this.asignationDataForm = this.fb.group({
       id_funcionaryteend: [null],
       id_funcionary: [''],
-      id_teen: new FormControl([]),
+      id_teen: [[]],
       function_start: [''],
       status: ['A'],
       description: [''],
@@ -36,17 +36,25 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
     console.log('Datos del formulario: ', this.asignationDataForm.value);
 
     if (this.asignationService.transactionSelected) {
-      this.asignationDataForm.patchValue(this.asignationService.transactionSelected);
+      const teens = [];
+      teens.push(this.asignationService.transactionSelected.idTeen);
+      console.log('Data', teens);
+      //this.asignationDataForm.patchValue(this.asignationService.transactionSelected);
+      this.asignationDataForm.patchValue({
+        id_teen: teens,
+        status: this.asignationService.transactionSelected.status,
+        description: this.asignationService.transactionSelected.description,
+        id_funcionary: this.asignationService.transactionSelected.id_funcionary,
+        id_funcionaryteend: this.asignationService.transactionSelected.id_funcionaryteend
+      });
     }
   }
 
   ngOnInit(): void {
     this.findAllDataFuncionaryRankLegalGuardian();
     this.findAllTeen();
-    this.finAllDataTeenNoRegistered();
+    //this.finAllDataTeenNoRegistered();
   }
-
-
 
 
   navigateToAsignationList() {
@@ -71,15 +79,24 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
 
   findAllTeen() {
     this.asignationDataTeenService.findAllDataActive().subscribe((dataTeen: any) => {
-      //console.log('Teen: ', dataTeen);
-      //this.teenData = dataTeen;
+      console.log('Teen: ', dataTeen);
+      this.teenData = dataTeen;
     })
   }
+
+  /*
   finAllDataTeenNoRegistered() {
     this.asignationService.findDataTeenNoRegistered().subscribe((dataTeenNoRegistered: any) => {
-      //console.log('Teen no registered: ', dataTeenNoRegistered);
+      console.log('Teen no registered: ', dataTeenNoRegistered);
       this.teenData = dataTeenNoRegistered;
     })
+  }
+*/
+
+  isRegisteredTeen(id_teen: number) : boolean {
+    const teens: number [] = this.asignationDataForm.controls['id_teen'].value;
+    teens.find((teen: number) => teen === id_teen);
+    return teens.length <= 0;
   }
 
   saveAsignation() {
@@ -123,6 +140,7 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
           this.asignationDataForm.reset();
           // Redirigir después de guardar exitosamente
           this.navigateToAsignationList();
+          console.error("Data in Form", dto);
         },
         error => {
           console.error("Error al guardar datos: ", error);

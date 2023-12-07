@@ -33,13 +33,14 @@ export interface transactionDataCompleteResponse {
     status: string;
   };
 
-  transaccionalAllocation: {
-    id_funcionaryteend: number;
-    description: string;
-    status: string;
-    function_start : Date;
-    date_hour_register : string;
-    id_teen: number;
-    id_funcionary: number;
-  };
+  transaccionalAllocation: TransactionalAllocation;
+
+}
+
+export interface TransactionalAllocation {
+  id_funcionaryteend: number;
+  description: string;
+  status: string;
+  idTeen: number;
+  id_funcionary: number;
 }

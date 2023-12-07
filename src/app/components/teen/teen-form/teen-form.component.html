@@ -3,7 +3,7 @@
   <div class="titleWeb" align="center">
     <figure>
       <p style="font-size: 45px" class="lead">
-        {{teenServices.teenSelected && _asignationServices.transactionSelected ? 'Editar datos del Adolescente' : 'Nuevo Adolescente'}}
+        {{teenServices.teenSelected ? 'Editar datos del Adolescente' : 'Nuevo Adolescente'}}
       </p>
       <figcaption class="blockquote-footer">
         Por favor colocar toda la información que se pide a continuación,
@@ -75,7 +75,7 @@
   </mat-form-field>
 
   <mat-form-field class="formForRegister formForRegister">
-    <mat-label>Crimen cometido:</mat-label>
+    <mat-label>Infracción cometida:</mat-label>
     <input matInput formControlName="crimeCommitted">
   </mat-form-field>
 
@@ -120,7 +120,7 @@
       Cancelar
     </button>
     <button type="submit" id="buttonSave" mat-flat-button color="primary" [disabled]="teenDataForm.invalid">
-      {{teenServices.teenSelected && _asignationServices.transactionSelected ? 'Modificar' : 'Registrar'}}
+      {{teenServices.teenSelected ? 'Modificar' : 'Registrar'}}
     </button>
   </div>
 </form>
