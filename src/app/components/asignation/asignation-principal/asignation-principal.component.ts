@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { AsignationService } from '../../component-funcionality/services/asignation/asignation.service';
-import { Router } from '@angular/router';
-import { Asignation } from '../../component-funcionality/models/asignation/asignation.model';
+import {AsignationService} from '../../component-funcionality/services/asignation/asignation.service';
+import {Router} from '@angular/router';
+import {Asignation} from '../../component-funcionality/models/asignation/asignation.model';
 import {
   TransactionalAllocation,
   transactionDataCompleteResponse
@@ -18,6 +18,7 @@ export class AsignationPrincipalComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  showFirstLastButtons: boolean = true;
   asignationData: any[] = [];
   withOutBodyAsignation: any[] = [];
   funcionaryColumns: string[] =
@@ -82,12 +83,12 @@ export class AsignationPrincipalComponent implements OnInit {
     this.findAllDataAsignation();
   }
 
-  deleteLogical(asignation: Asignation) {
+  /*deleteLogical(asignation: Asignation) {
     this.asignationService.deleteLogicalDataAsignation(asignation).subscribe((dataDeleteLogical) => {
       console.log('Se esta eliminando el dato de: ', dataDeleteLogical);
       this.findAllDataActive();
     })
-  }
+  }*/
 
   deleteDataCompleteAsignation(asignation: Asignation) {
     this.asignationService.deleteDataAsignationComplete(asignation).subscribe((dataDeleteCompleteAsignation) => {

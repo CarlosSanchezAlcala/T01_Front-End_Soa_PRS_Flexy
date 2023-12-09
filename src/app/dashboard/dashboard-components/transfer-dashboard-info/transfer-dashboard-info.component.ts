@@ -13,6 +13,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {TransferTeenService} from "../../../components/component-funcionality/services/transfer/transfer-teen.service";
 import {TransferTeen} from "../../../components/component-funcionality/models/transfer/transferTeen.model";
 import {HotToastService} from "@ngneat/hot-toast";
+import {AsignationService} from "../../../components/component-funcionality/services/asignation/asignation.service";
+import {Asignation} from "../../../components/component-funcionality/models/asignation/asignation.model";
 
 @Component({
   selector: 'app-transfer-dashboard-info',
@@ -34,6 +36,7 @@ export class TransferDashboardInfoComponent implements OnInit {
   teenData: any[] = [];
   operativeUnitData: any[] = [];
   formForTransfer: FormGroup = new FormGroup({});
+  uuidTeenNecesaryForUpdate: any[] = [];
 
   file: File | null = null;
   fileName: string = '';
@@ -51,6 +54,7 @@ export class TransferDashboardInfoComponent implements OnInit {
               private _fb: FormBuilder,
               private snackBar: MatSnackBar,
               private toastService: HotToastService,
+              private _asignationService: AsignationService
   ) {
     this.formForTransfer = this._fb.group({
       id_teen: [''],
@@ -59,16 +63,19 @@ export class TransferDashboardInfoComponent implements OnInit {
     });
 
     this.formForTransfer.get('documentPDF')?.valueChanges.subscribe(value => {
-      // Extraer el ID del enlace de vista previa
-      const match = value.match(/\/file\/d\/(.*?)\/view/);
+      // Asegúrate de que 'value' no sea nulo antes de intentar hacer match
+      if (value) {
+        // Extraer el ID del enlace de vista previa
+        const match = value.match(/\/file\/d\/(.*?)\/view/);
 
-      if (match && match[1]) {
-        const id = match[1];
-        this.documentoUrl = `https://drive.google.com/uc?export=download&id=${id}`;
-        console.log('Id Document: ', id);
-        console.log('Url Document: ', this.documentoUrl);
-      } else {
-        console.error('No se pudo extraer el ID del enlace.');
+        if (match && match[1]) {
+          const id = match[1];
+          this.documentoUrl = `https://drive.google.com/uc?export=download&id=${id}`;
+          console.log('Id Document: ', id);
+          console.log('Url Document: ', this.documentoUrl);
+        } else {
+          console.error('No se pudo extraer el ID del enlace.');
+        }
       }
     });
 
@@ -168,11 +175,15 @@ export class TransferDashboardInfoComponent implements OnInit {
   onSubmitForm() {
     const idTeenSelectedOfForm = this.formForTransfer.get('id_teen')?.value;
     const idOperativeUnitSelectedOfForm = this.formForTransfer.get('id_operativeunit')?.value;
+    const infoTeenDateAndTimeRegister = this.formForTransfer.get('dateAndTimeRegister')?.value;
+
+    console.log('Id Teen: ', idTeenSelectedOfForm);
 
     const selectedTeenInForm = this.teenData.find((item) => item.id_teen === idTeenSelectedOfForm);
 
     const teen: Teen = {
       id_teen: idTeenSelectedOfForm,
+      identifier: '',
       name: selectedTeenInForm.name,
       surnameFather: selectedTeenInForm.surnameFather,
       surnameMother: selectedTeenInForm.surnameMother,
@@ -186,8 +197,13 @@ export class TransferDashboardInfoComponent implements OnInit {
       crimeCommitted: selectedTeenInForm.crimeCommitted,
       id_attorney: selectedTeenInForm.id_attorney,
       codubi: selectedTeenInForm.codubi,
+      date_hour_register: infoTeenDateAndTimeRegister,
       status: selectedTeenInForm.status,
     };
+
+    const asignation: Asignation = {
+      id_teen: idTeenSelectedOfForm,
+    }
 
     const dataForTransferTeen: TransferTeen = {
       id_teen: idTeenSelectedOfForm,
@@ -198,6 +214,11 @@ export class TransferDashboardInfoComponent implements OnInit {
     this._teenService.transferDataTeen(teen).subscribe((dataTeenTransfer) => {
       //console.log('Teen Transfer: ', dataTeenTransfer);
       this.hideForm();
+
+      this._asignationService.deleteLogicalDataAsignation(idTeenSelectedOfForm).subscribe((dataInactiveAsignation: any) => {
+        console.log('Asignación Eliminada: ', dataInactiveAsignation);
+      });
+
     });
 
     this._transferTeenService.saveNewTransferTeen(dataForTransferTeen).subscribe((dataTransferTeenSave) => {
@@ -205,7 +226,8 @@ export class TransferDashboardInfoComponent implements OnInit {
     });
 
     this._teenService.saveNewTeen(teen).subscribe((dataTeenSave) => {
-      //console.log('Teen Save: ', dataTeenSave);
+      //this.uuidTeenNecesaryForUpdate = dataTeenSave;
+      console.log('Teen Save: ', dataTeenSave);
       //localStorage.setItem('alertMessage', 'Se registró correctamente'); -> Sirve como notificación para el usuario (DESHABILITADO POR EL NUEVO USO DE TOAST)
       this.toastService.success('Transferencia exitosa!');
       this.transferTeens.emit(dataTeenSave);

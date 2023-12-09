@@ -6,6 +6,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Funcionary} from "../../component-funcionality/models/funcionary/funcionary.model";
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {HotToastService} from "@ngneat/hot-toast";
+import {OperativeUnitService} from "../../component-funcionality/services/operativeUnit/operative-unit.service";
 
 @Component({
   selector: 'app-funcionary-principal',
@@ -17,7 +18,10 @@ export class FuncionaryPrincipalComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatPaginator) paginatorInactive!: MatPaginator;
 
+  showFirstLastButtons: boolean = true;
+  isDisabled: boolean = true;
   ubigeoData: any[] = [];
+  operativeData: any[] = [];
   pdfSrc: SafeResourceUrl | null = null;
   funcionaryDataActive: any[] = [];
   funcionaryDataInactive: any[] = [];
@@ -41,7 +45,8 @@ export class FuncionaryPrincipalComponent implements OnInit {
 
   constructor(public _funcionaryService: FuncionaryService,
               private _router: Router,
-              private toastServices: HotToastService) {
+              private toastServices: HotToastService,
+              private _operativeUnit: OperativeUnitService) {
   }
 
   ngOnInit(): void {
@@ -49,6 +54,7 @@ export class FuncionaryPrincipalComponent implements OnInit {
     this.findAllDataActiveFuncionary();
     this.findAllDataInactiveFuncionary();
     this.findAllDataUbigeoComplete();
+    this.findAllDataOperativeUnit();
   }
 
   navigateToForm() {
@@ -87,6 +93,12 @@ export class FuncionaryPrincipalComponent implements OnInit {
     })
   }
 
+  findAllDataOperativeUnit() {
+    this._operativeUnit.findAllDataOperativeUnit().subscribe((dataOperativeUnit: any) => {
+      this.operativeData = dataOperativeUnit;
+    });
+  }
+
   findAllDataUbigeoComplete() {
     this._funcionaryService.findAllDataUbigeoAddress().subscribe((ubigeoData: any) => {
       this.ubigeoData = ubigeoData;
@@ -99,6 +111,15 @@ export class FuncionaryPrincipalComponent implements OnInit {
       return `${ubigeo.depar} - ${ubigeo.provi} - ${ubigeo.distri}`;
     } else {
       return 'Ubigeo no encontrado.'
+    }
+  }
+
+  getDataCompleteOperativeUnit(id_operativeunit: number) {
+    const soa = this.operativeData.find((item) => item.id_operativeunit === id_operativeunit);
+    if (soa) {
+      return `${soa.name}`;
+    } else {
+      return 'Unidad Operativa no encontrada.'
     }
   }
 

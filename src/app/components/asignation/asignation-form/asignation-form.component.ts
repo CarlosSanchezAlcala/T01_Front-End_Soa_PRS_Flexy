@@ -157,6 +157,9 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
     } else {
       console.error("Los datos del formulario son nulos o faltantes.");
     }
+
+    this.navigateToAsignationList();
+
   }
 
 
