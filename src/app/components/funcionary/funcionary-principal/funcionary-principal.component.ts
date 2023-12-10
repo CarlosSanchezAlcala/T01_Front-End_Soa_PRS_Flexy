@@ -1,22 +1,21 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {FuncionaryService} from '../../component-funcionality/services/funcionary/funcionary.service';
-import {Router} from "@angular/router";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import {Funcionary} from "../../component-funcionality/models/funcionary/funcionary.model";
-import {SafeResourceUrl} from '@angular/platform-browser';
-import {HotToastService} from "@ngneat/hot-toast";
-import {OperativeUnitService} from "../../component-funcionality/services/operativeUnit/operative-unit.service";
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FuncionaryService } from '../../component-funcionality/services/funcionary/funcionary.service';
+import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Funcionary } from '../../component-funcionality/models/funcionary/funcionary.model';
+import { SafeResourceUrl } from '@angular/platform-browser';
+import { HotToastService } from '@ngneat/hot-toast';
+import { OperativeUnitService } from '../../component-funcionality/services/operativeUnit/operative-unit.service';
 
 @Component({
   selector: 'app-funcionary-principal',
   templateUrl: './funcionary-principal.component.html',
-  styleUrls: ['./funcionary-principal.component.scss']
+  styleUrls: ['./funcionary-principal.component.scss'],
 })
 export class FuncionaryPrincipalComponent implements OnInit, AfterViewInit {
-
-  @ViewChild("paginatorActive") paginator!: MatPaginator;
-  @ViewChild("paginatorInactive") paginatorInactive!: MatPaginator;
+  @ViewChild('paginatorActive') paginator!: MatPaginator;
+  @ViewChild('paginatorInactive') paginatorInactive!: MatPaginator;
 
   showFirstLastButtons: boolean = true;
   isDisabled: boolean = true;
@@ -37,17 +36,18 @@ export class FuncionaryPrincipalComponent implements OnInit, AfterViewInit {
     'range',
     'confirmation',
     'actions',
-    'moreInformation'
+    'moreInformation',
   ];
 
   dataSourceActive = new MatTableDataSource(this.funcionaryDataActive);
   dataSourceInactive = new MatTableDataSource(this.funcionaryDataInactive);
 
-  constructor(public _funcionaryService: FuncionaryService,
-              private _router: Router,
-              private toastServices: HotToastService,
-              private _operativeUnit: OperativeUnitService) {
-  }
+  constructor(
+    public _funcionaryService: FuncionaryService,
+    private _router: Router,
+    private toastServices: HotToastService,
+    private _operativeUnit: OperativeUnitService
+  ) {}
 
   ngAfterViewInit(): void {
     //this.dataSourceActive.paginator = this.paginator;
@@ -84,29 +84,40 @@ export class FuncionaryPrincipalComponent implements OnInit, AfterViewInit {
       .subscribe((DataFuncionaryBDActive: any) => {
         //console.log('Data funcionary Active:', DataFuncionaryBDActive);
         this.funcionaryDataActive = DataFuncionaryBDActive;
-        this.dataSourceActive = new MatTableDataSource(this.funcionaryDataActive);
+        this.dataSourceActive = new MatTableDataSource(
+          this.funcionaryDataActive
+        );
         this.dataSourceActive.paginator = this.paginator;
       });
   }
 
   findAllDataInactiveFuncionary() {
-    this._funcionaryService.findAllDataInactive().subscribe((dataFuncionaryInactive: any) => {
-      this.funcionaryDataInactive = dataFuncionaryInactive;
-      this.dataSourceInactive = new MatTableDataSource(this.funcionaryDataInactive);
-      this.dataSourceInactive.paginator = this.paginatorInactive;
-    })
+    this._funcionaryService
+      .findAllDataInactive()
+      .subscribe((dataFuncionaryInactive: any) => {
+        this.funcionaryDataInactive = dataFuncionaryInactive;
+        this.dataSourceInactive = new MatTableDataSource(
+          this.funcionaryDataInactive
+        );
+        this.dataSourceInactive.paginator = this.paginatorInactive;
+      });
   }
 
   findAllDataOperativeUnit() {
-    this._operativeUnit.findAllDataOperativeUnit().subscribe((dataOperativeUnit: any) => {
-      this.operativeData = dataOperativeUnit;
-    });
+    this._operativeUnit
+      .findAllDataOperativeUnit()
+      .subscribe((dataOperativeUnit: any) => {
+        //console.log('Data Operative Unit:', dataOperativeUnit);
+        this.operativeData = dataOperativeUnit;
+      });
   }
 
   findAllDataUbigeoComplete() {
-    this._funcionaryService.findAllDataUbigeoAddress().subscribe((ubigeoData: any) => {
-      this.ubigeoData = ubigeoData;
-    })
+    this._funcionaryService
+      .findAllDataUbigeoAddress()
+      .subscribe((ubigeoData: any) => {
+        this.ubigeoData = ubigeoData;
+      });
   }
 
   getDataCompleteUbigeoInformation(codubi: string) {
@@ -114,25 +125,29 @@ export class FuncionaryPrincipalComponent implements OnInit, AfterViewInit {
     if (ubigeo) {
       return `${ubigeo.depar} - ${ubigeo.provi} - ${ubigeo.distri}`;
     } else {
-      return 'Ubigeo no encontrado.'
+      return 'Ubigeo no encontrado.';
     }
   }
 
-  getDataCompleteOperativeUnit(id_operativeunit: number) {
-    const soa = this.operativeData.find((item) => item.id_operativeunit === id_operativeunit);
+  getDataCompleteOperativeUnit(idOperativeUnit: number) {
+    const soa = this.operativeData.find(
+      (item) => item.id_operativeunit === idOperativeUnit
+    );
     if (soa) {
       return `${soa.name}`;
     } else {
-      return 'Unidad Operativa no encontrada.'
+      return 'Unidad Operativa no encontrada.';
     }
   }
 
   deleteLogicalDataFuncionary(funcionary: Funcionary) {
-    this._funcionaryService.deleteLogicalDataFuncionary(funcionary).subscribe((dataFuncionary: any) => {
-      //console.log('Data Funcionary:', dataFuncionary);
-      this.findAllDataActiveFuncionary();
-      this.toastServices.error('Eliminado correctamente!');
-    });
+    this._funcionaryService
+      .deleteLogicalDataFuncionary(funcionary)
+      .subscribe((dataFuncionary: any) => {
+        //console.log('Data Funcionary:', dataFuncionary);
+        this.findAllDataActiveFuncionary();
+        this.toastServices.error('Eliminado correctamente!');
+      });
   }
 
   updateDataFuncionary(funcionary: Funcionary) {
@@ -142,10 +157,12 @@ export class FuncionaryPrincipalComponent implements OnInit, AfterViewInit {
   }
 
   reactiveDataFuncionary(funcionary: Funcionary) {
-    this._funcionaryService.reactiveLogicalDataFuncionary(funcionary).subscribe((dataFuncionary: any) => {
-      this.findAllDataInactiveFuncionary();
-      this.toastServices.success('Reactivado correctamente!');
-    });
+    this._funcionaryService
+      .reactiveLogicalDataFuncionary(funcionary)
+      .subscribe((dataFuncionary: any) => {
+        this.findAllDataInactiveFuncionary();
+        this.toastServices.success('Reactivado correctamente!');
+      });
   }
 
   showFuncionaryDetails(funcionary: any) {
@@ -179,21 +196,23 @@ export class FuncionaryPrincipalComponent implements OnInit, AfterViewInit {
   }
 
   generarPDF(): void {
-
     this.toastServices.success('Generando PDF...', {
       duration: 3000,
     });
 
     setTimeout(() => {
-      this._funcionaryService.generarPDF()
+      this._funcionaryService
+        .generarPDF()
         .subscribe((response: ArrayBuffer) => {
-          const file = new Blob([response], {type: 'application/pdf'});
+          const file = new Blob([response], { type: 'application/pdf' });
           const url = URL.createObjectURL(file);
           const pdfWindow = window.open();
           if (pdfWindow) {
             pdfWindow.location.href = url;
           } else {
-            alert('El navegador bloqueó la apertura de la ventana emergente. Por favor, asegúrate de desbloquear las ventanas emergentes para este sitio.');
+            alert(
+              'El navegador bloqueó la apertura de la ventana emergente. Por favor, asegúrate de desbloquear las ventanas emergentes para este sitio.'
+            );
           }
         });
     }, 3500);

@@ -107,6 +107,15 @@
             </mat-select>
         </mat-form-field>
 
+        <mat-form-field class="formForRegister formForRegister">
+            <mat-label>SOA:</mat-label>
+            <mat-select matInput formControlName="idOperativeUnit">
+                <mat-option *ngFor="let dOperativeUnit of operativeUnitDataComplete" [value]="dOperativeUnit.id_operativeunit">
+                    {{ dOperativeUnit.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
         <div id="buttonActions">
             <button type="button" id="buttonCancel" mat-flat-button (click)="navigateToList()">
                 Cancelar

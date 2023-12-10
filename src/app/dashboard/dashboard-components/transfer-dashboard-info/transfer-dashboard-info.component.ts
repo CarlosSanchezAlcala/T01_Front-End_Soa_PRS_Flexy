@@ -225,7 +225,7 @@ export class TransferDashboardInfoComponent implements OnInit {
     };
 
     const asignation: Asignation = {
-      id_teen: idTeenSelectedOfForm,
+      idTeen: idTeenSelectedOfForm,
     }
 
     const dataForTransferTeen: TransferTeen = {

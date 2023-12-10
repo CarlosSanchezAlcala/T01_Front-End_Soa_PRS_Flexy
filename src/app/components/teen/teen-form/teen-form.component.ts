@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TeenService} from '../../component-funcionality/services/teen/teen.service';
 import {AsignationService} from '../../component-funcionality/services/asignation/asignation.service';
@@ -34,28 +34,28 @@ export class TeenFormComponent implements OnInit, OnDestroy {
     this.teenDataForm = this.fb.group({
       id_teen: [null],
       identifier: [''],
-      name: [''],
-      surnameFather: [''],
-      surnameMother: [''],
-      dni: [''],
-      phoneNumber: [''],
-      address: [''],
-      email: [''],
-      birthade: [''],
-      gender: [''],
-      id_operativeunit: [''],
-      crimeCommitted: [''],
-      id_attorney: [''],
-      codubi: [''],
+      name: ['', Validators.required],
+      surnameFather: ['', Validators.required],
+      surnameMother: ['', Validators.required],
+      dni: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      address: ['', Validators.required],
+      email: ['', Validators.required],
+      birthade: ['', Validators.required],
+      gender: ['', Validators.required],
+      id_operativeunit: ['', Validators.required],
+      crimeCommitted: ['', Validators.required],
+      id_attorney: ['', Validators.required],
+      codubi: ['', Validators.required],
       date_hour_register: [''],
       status: ['A'],
     });
     this.legalGuardianAsignationFrom = this.fb.group({
       id_funcionaryteend: [null],
-      id_funcionary: [''],
-      id_teen: [''],
+      id_funcionary: ['', Validators.required],
+      idTeen: [''],
       status: ['A'],
-      description: [''],
+      description: ['', Validators.required],
     })
     if (this.teenServices.teenSelected) {
       this.teenDataForm.patchValue(this.teenServices.teenSelected);
@@ -83,7 +83,7 @@ export class TeenFormComponent implements OnInit, OnDestroy {
           this.legalGuardianAsignationFrom.patchValue({
             id_funcionaryteend: data.id_funcionaryteend,
             id_funcionary: data.id_funcionary,
-            id_teen: data.id_teen,
+            idTeen: data.idTeen,
             status: data.status,
             description: data.description,
           });
@@ -152,13 +152,13 @@ export class TeenFormComponent implements OnInit, OnDestroy {
     this.teenServices.saveNewTeen(this.teenDataForm.value).subscribe((teendataRegister: any) => {
       //console.log('Los datos ingresados dentro del formulario para registrar || crear son: ', teendataRegister);
       this.idTeenNecesaryForRegisterAsignation = teendataRegister.id_teen;
-      //console.log('The last id Teen is: ', this.idTeenNecesaryForRegisterAsignation);
+      console.log('The last id Teen is: ', this.idTeenNecesaryForRegisterAsignation);
 
       this.legalGuardianAsignationFrom.patchValue({
-        id_teen: this.idTeenNecesaryForRegisterAsignation,
+        idTeen: this.idTeenNecesaryForRegisterAsignation,
       });
 
-      console.log('Data in Form for Asignation is: ', this.legalGuardianAsignationFrom.value);
+      console.log('Data for table Asignation: ', this.legalGuardianAsignationFrom.value);
 
       this._asignationServices.saveNewAsignation(this.legalGuardianAsignationFrom.value).subscribe((dataAsignationForFormTeen: any) => {
         console.log('Data for register in Transactional is: ', dataAsignationForFormTeen);
