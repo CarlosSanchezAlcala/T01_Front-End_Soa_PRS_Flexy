@@ -55,6 +55,7 @@ export class TeenFormComponent implements OnInit, OnDestroy {
       id_funcionary: ['', Validators.required],
       idTeen: [''],
       status: ['A'],
+      functionStart: ['', Validators.required],
       description: ['', Validators.required],
     })
     if (this.teenServices.teenSelected) {
@@ -85,6 +86,7 @@ export class TeenFormComponent implements OnInit, OnDestroy {
             id_funcionary: data.id_funcionary,
             idTeen: data.idTeen,
             status: data.status,
+            functionStart: data.function_start,
             description: data.description,
           });
 
