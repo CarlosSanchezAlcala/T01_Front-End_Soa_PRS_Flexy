@@ -25,7 +25,7 @@
       <h2>Detalles del Infractor</h2>
       <div class="container-details-teen">
         <p><strong>Nombre:</strong> {{ selectedTeen?.name }}</p>
-        <p><strong>Apellidos:</strong> {{ selectedTeen?.surnameFather }} {{selectedTeen?.surnameMother}}</p>
+        <p><strong>Apellidos:</strong> {{ selectedTeen?.surnameFather }} {{ selectedTeen?.surnameMother }}</p>
         <p><strong>Número de DNI:</strong> {{ selectedTeen?.dni }}</p>
         <p><strong>Teléfono:</strong> {{ selectedTeen?.phoneNumber }}</p>
         <p><strong>Dirección:</strong> {{ selectedTeen?.address }}</p>
@@ -123,7 +123,8 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
         <strong>
-          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" #paginatorActive
+                         [showFirstLastButtons]="showFirstLastButtons"></mat-paginator>
         </strong>
       </div>
     </mat-card-content>
@@ -145,7 +146,7 @@
       <h2>Detalles del Funcionario</h2>
       <div class="container-details-teen">
         <p><strong>Nombre:</strong> {{ selectedTeen?.name }}</p>
-        <p><strong>Apellidos:</strong> {{ selectedTeen?.surnameFather }} {{selectedTeen?.surnameMother}}</p>
+        <p><strong>Apellidos:</strong> {{ selectedTeen?.surnameFather }} {{ selectedTeen?.surnameMother }}</p>
         <p><strong>Número de DNI:</strong> {{ selectedTeen?.dni }}</p>
         <p><strong>Teléfono:</strong> {{ selectedTeen?.phoneNumber }}</p>
         <p><strong>Dirección:</strong> {{ selectedTeen?.address }}</p>
@@ -221,7 +222,7 @@
               <button id="buttonDelete" mat-flat-button color="warn" (click)="reactiveDataTeen(element)">
                 Restaurar
               </button>
-              <button id="buttonModify" mat-flat-button (click)="updateDataTeen(element)" disabled>
+              <button id="buttonModify" mat-flat-button (click)="updateDataTeen(element)" [disabled]="isDisabled">
                 Modificar
               </button>
             </td>
@@ -242,7 +243,8 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
         <strong>
-          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" #paginatorInactive
+                         [showFirstLastButtons]="showFirstLastButtons"></mat-paginator>
         </strong>
       </div>
     </mat-card-content>

@@ -10,6 +10,6 @@ export interface Funcionary {
   address: string;
   email: string;
   codubi: string;
-  id_operativeunit: number;
-  estado: string;
+  idOperativeUnit: number;
+  status: string;
 }

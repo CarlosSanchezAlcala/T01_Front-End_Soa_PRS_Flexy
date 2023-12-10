@@ -1,16 +1,13 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TeenService} from '../../component-funcionality/services/teen/teen.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
 import {FuncionaryService} from '../../component-funcionality/services/funcionary/funcionary.service';
-import {Asignation} from '../../component-funcionality/models/asignation/asignation.model';
-import {AsignationService} from '../../component-funcionality/services/asignation/asignation.service';
 import {MatDialog} from '@angular/material/dialog';
 import {Teen} from "../../component-funcionality/models/teen/teen.model";
 import {Router} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";
-import { MatTableDataSource } from '@angular/material/table';
+import {MatTableDataSource} from '@angular/material/table';
 import {HotToastService} from "@ngneat/hot-toast";
-import { ArchivosComponent } from '../../archivos/archivos/archivos.component';
+import {ArchivosComponent} from '../../archivos/archivos/archivos.component';
 
 @Component({
   selector: 'app-teen-principal',
@@ -19,8 +16,11 @@ import { ArchivosComponent } from '../../archivos/archivos/archivos.component';
 })
 export class TeenPrincipalComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatPaginator) paginatorInactive!: MatPaginator;
+  @ViewChild("paginatorActive") paginator!: MatPaginator;
+  @ViewChild("paginatorInactive") paginatorInactive!: MatPaginator;
+
+  showFirstLastButtons: boolean = true;
+  isDisabled: boolean = true;
 
   //Almacenamiento de los datos de "Adolescente (Activos | Habilitados)"
   teenData: any[] = [];
@@ -54,8 +54,7 @@ export class TeenPrincipalComponent implements OnInit {
     public _funcionaryService: FuncionaryService,
     private _router: Router,
     private toastService: HotToastService,
-    public _dialog: MatDialog
-  ) {
+    public _dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -225,13 +224,13 @@ export class TeenPrincipalComponent implements OnInit {
   reactiveDataTeen(teen: Teen) {
     this._teenService.reactiveLogicalDataTeen(teen).subscribe((dataTeen: any) => {
       this.findAllDataInactiveTeen();
-        this.toastService.success('Reactivado exitosamente!');
+      this.toastService.success('Reactivado exitosamente!');
     });
   }
 
   openArchivosDialog(dni: string) {
     const dialogRef = this._dialog.open(ArchivosComponent, {
-      data: { dni: dni },
+      data: {dni: dni},
       width: '50%', // Personaliza el ancho según tus necesidades
     });
 

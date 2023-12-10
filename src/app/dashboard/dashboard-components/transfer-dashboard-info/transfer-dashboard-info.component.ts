@@ -15,6 +15,7 @@ import {TransferTeen} from "../../../components/component-funcionality/models/tr
 import {HotToastService} from "@ngneat/hot-toast";
 import {AsignationService} from "../../../components/component-funcionality/services/asignation/asignation.service";
 import {Asignation} from "../../../components/component-funcionality/models/asignation/asignation.model";
+import {FuncionaryService} from "../../../components/component-funcionality/services/funcionary/funcionary.service";
 
 @Component({
   selector: 'app-transfer-dashboard-info',
@@ -42,6 +43,12 @@ export class TransferDashboardInfoComponent implements OnInit {
   fileName: string = '';
   currentDate: Date = new Date();
 
+  selectedSoa: any[] = [];
+  selectedFuncionary: any[] = [];
+  funcionaryDataFilter: any[] = [];
+
+  funcionaryDataComplete: any[] = [];
+
   documentoUrl = '';
 
   showPdfViewer: boolean = true;
@@ -51,6 +58,7 @@ export class TransferDashboardInfoComponent implements OnInit {
   constructor(private _teenService: TeenService,
               private _transferTeenService: TransferTeenService,
               private _operativeUnitService: OperativeUnitService,
+              private _funcionaryService: FuncionaryService,
               private _fb: FormBuilder,
               private snackBar: MatSnackBar,
               private toastService: HotToastService,
@@ -87,6 +95,21 @@ export class TransferDashboardInfoComponent implements OnInit {
     this.autoCompleteData();
     this.notificationsTransferTeen();
     this.dateAndHour();
+    this.findAllDataCompleteOfFuncionary();
+  }
+
+  findAllDataCompleteOfFuncionary() {
+    this._funcionaryService.findAllDataActive().subscribe((dataComplete: any) => {
+      console.log('Data Complete of Funcionary: ', dataComplete)
+      this.funcionaryDataComplete = dataComplete;
+    });
+  }
+
+  onSoaChange(idOperativeUnit: number) {
+    // Aquí llamas a tu servicio para obtener los funcionarios basados en el SOA seleccionado
+    this._funcionaryService.findDataFuncionaryByIdSoa(idOperativeUnit).subscribe((data: any) => {
+      this.funcionaryDataFilter = data;
+    });
   }
 
   showToast() {

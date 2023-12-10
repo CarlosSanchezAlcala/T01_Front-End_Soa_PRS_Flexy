@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FuncionaryService} from '../../component-funcionality/services/funcionary/funcionary.service';
 import {Router} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";
@@ -13,10 +13,10 @@ import {OperativeUnitService} from "../../component-funcionality/services/operat
   templateUrl: './funcionary-principal.component.html',
   styleUrls: ['./funcionary-principal.component.scss']
 })
-export class FuncionaryPrincipalComponent implements OnInit {
+export class FuncionaryPrincipalComponent implements OnInit, AfterViewInit {
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatPaginator) paginatorInactive!: MatPaginator;
+  @ViewChild("paginatorActive") paginator!: MatPaginator;
+  @ViewChild("paginatorInactive") paginatorInactive!: MatPaginator;
 
   showFirstLastButtons: boolean = true;
   isDisabled: boolean = true;
@@ -47,6 +47,10 @@ export class FuncionaryPrincipalComponent implements OnInit {
               private _router: Router,
               private toastServices: HotToastService,
               private _operativeUnit: OperativeUnitService) {
+  }
+
+  ngAfterViewInit(): void {
+    //this.dataSourceActive.paginator = this.paginator;
   }
 
   ngOnInit(): void {

@@ -122,7 +122,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
         <strong>
-          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10"
+          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" #paginatorActive
                          [showFirstLastButtons]="showFirstLastButtons"></mat-paginator>
         </strong>
       </div>
@@ -236,7 +236,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
         <strong>
-          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10"
+          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" #paginatorInactive
                          [showFirstLastButtons]="showFirstLastButtons"></mat-paginator>
         </strong>
       </div>
