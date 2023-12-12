@@ -1,20 +1,19 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {TeenService} from '../../component-funcionality/services/teen/teen.service';
-import {AsignationService} from '../../component-funcionality/services/asignation/asignation.service';
-import {FuncionaryService} from '../../component-funcionality/services/funcionary/funcionary.service';
-import {MatDialog} from '@angular/material/dialog';
-import {HotToastService} from "@ngneat/hot-toast";
-import {Asignation} from "../../component-funcionality/models/asignation/asignation.model";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TeenService } from '../../component-funcionality/services/teen/teen.service';
+import { AsignationService } from '../../component-funcionality/services/asignation/asignation.service';
+import { FuncionaryService } from '../../component-funcionality/services/funcionary/funcionary.service';
+import { MatDialog } from '@angular/material/dialog';
+import { HotToastService } from '@ngneat/hot-toast';
+import { Asignation } from '../../component-funcionality/models/asignation/asignation.model';
 
 @Component({
   selector: 'app-teen-form',
   templateUrl: './teen-form.component.html',
-  styleUrls: ['./teen-form.component.scss']
+  styleUrls: ['./teen-form.component.scss'],
 })
 export class TeenFormComponent implements OnInit, OnDestroy {
-
   teenDataForm: FormGroup = new FormGroup({});
   legalGuardianAsignationFrom: FormGroup = new FormGroup({});
   funcionaryData: any[] = [];
@@ -24,13 +23,15 @@ export class TeenFormComponent implements OnInit, OnDestroy {
   ubigeoData: any[] = [];
   idTeenNecesaryForRegisterAsignation: any[] = [];
 
-  constructor(private router: Router,
-              private fb: FormBuilder,
-              public teenServices: TeenService,
-              public _asignationServices: AsignationService,
-              private _asignationDataFuncionaryService: FuncionaryService,
-              public dialog: MatDialog,
-              private toastService: HotToastService) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    public teenServices: TeenService,
+    public _asignationServices: AsignationService,
+    private _asignationDataFuncionaryService: FuncionaryService,
+    public dialog: MatDialog,
+    private toastService: HotToastService
+  ) {
     this.teenDataForm = this.fb.group({
       id_teen: [null],
       identifier: [''],
@@ -52,12 +53,12 @@ export class TeenFormComponent implements OnInit, OnDestroy {
     });
     this.legalGuardianAsignationFrom = this.fb.group({
       id_funcionaryteend: [null],
-      id_funcionary: ['', Validators.required],
+      id_funcionary: [''],
       idTeen: [''],
       status: ['A'],
-      functionStart: ['', Validators.required],
-      description: ['', Validators.required],
-    })
+      function_start: [''],
+      description: [''],
+    });
     if (this.teenServices.teenSelected) {
       this.teenDataForm.patchValue(this.teenServices.teenSelected);
     }
@@ -86,7 +87,7 @@ export class TeenFormComponent implements OnInit, OnDestroy {
             id_funcionary: data.id_funcionary,
             idTeen: data.idTeen,
             status: data.status,
-            functionStart: data.function_start,
+            function_start: data.function_start,
             description: data.description,
           });
 
@@ -106,37 +107,45 @@ export class TeenFormComponent implements OnInit, OnDestroy {
   }
 
   findAllDataFuncionaryRankLegalGuardian() {
-    this._asignationDataFuncionaryService.findDataRankLegalGuardian().subscribe((dataLegalGuardianRank: any) => {
-      // console.log('Funcionarios con rank de Tutor Legal: ', dataLegalGuardianRank); --------- // Running successfully
-      this.funcionaryData = dataLegalGuardianRank;
-    })
+    this._asignationDataFuncionaryService
+      .findDataRankLegalGuardian()
+      .subscribe((dataLegalGuardianRank: any) => {
+        // console.log('Funcionarios con rank de Tutor Legal: ', dataLegalGuardianRank); --------- // Running successfully
+        this.funcionaryData = dataLegalGuardianRank;
+      });
   }
 
   findAllDataAttorney() {
-    this.teenServices.findAllDataAttorney().subscribe((dataFindAttorney: any) => {
-      // console.log('Data Attorney: ', dataFindAttorney); //--------- // Running successfully
-      this.attorneyData = dataFindAttorney;
-    })
+    this.teenServices
+      .findAllDataAttorney()
+      .subscribe((dataFindAttorney: any) => {
+        // console.log('Data Attorney: ', dataFindAttorney); //--------- // Running successfully
+        this.attorneyData = dataFindAttorney;
+      });
   }
 
   findAllDataOperativeUnit() {
-    this.teenServices.findAllDataOperativeUnit().subscribe((dataOperativeUnit: any) => {
-      this.operativeUnitData = dataOperativeUnit;
-    })
+    this.teenServices
+      .findAllDataOperativeUnit()
+      .subscribe((dataOperativeUnit: any) => {
+        this.operativeUnitData = dataOperativeUnit;
+      });
   }
 
   findAllDataUbigeo() {
-    this.teenServices.findAllDataUbigeoAddress().subscribe((dataUbigeo: any) => {
-      // console.log('Ubigeo Data: ', dataUbigeo); --------- // Running successfully
-      this.ubigeoData = dataUbigeo;
-    })
+    this.teenServices
+      .findAllDataUbigeoAddress()
+      .subscribe((dataUbigeo: any) => {
+        // console.log('Ubigeo Data: ', dataUbigeo); --------- // Running successfully
+        this.ubigeoData = dataUbigeo;
+      });
   }
 
   findAllDataActive() {
     this.teenServices.findAllDataActive().subscribe((dataTeenActive: any) => {
       // console.log('Estos son los datos en modo activos que se están recibiendo de la Base de Datos: ', dataTeenActive); --------- // Running successfully
       this.teenData = dataTeenActive;
-    })
+    });
   }
 
   saveTeen() {
@@ -151,51 +160,67 @@ export class TeenFormComponent implements OnInit, OnDestroy {
 
   registerNewDataTeenAndAsignation() {
     //console.log('Datos ingresados en el formulario: ', this.teenDataForm.value);
-    this.teenServices.saveNewTeen(this.teenDataForm.value).subscribe((teendataRegister: any) => {
-      //console.log('Los datos ingresados dentro del formulario para registrar || crear son: ', teendataRegister);
-      this.idTeenNecesaryForRegisterAsignation = teendataRegister.id_teen;
-      console.log('The last id Teen is: ', this.idTeenNecesaryForRegisterAsignation);
+    this.teenServices
+      .saveNewTeen(this.teenDataForm.value)
+      .subscribe((teendataRegister: any) => {
+        //console.log('Los datos ingresados dentro del formulario para registrar || crear son: ', teendataRegister);
+        this.idTeenNecesaryForRegisterAsignation = teendataRegister.id_teen;
+        console.log(
+          'The last id Teen is: ',
+          this.idTeenNecesaryForRegisterAsignation
+        );
 
-      this.legalGuardianAsignationFrom.patchValue({
-        idTeen: this.idTeenNecesaryForRegisterAsignation,
+        this.legalGuardianAsignationFrom.patchValue({
+          idTeen: this.idTeenNecesaryForRegisterAsignation,
+        });
+
+        console.log(
+          'Data for table Asignation: ',
+          this.legalGuardianAsignationFrom.value
+        );
+
+        this._asignationServices
+          .saveNewAsignation(this.legalGuardianAsignationFrom.value)
+          .subscribe((dataAsignationForFormTeen: any) => {
+            console.log(
+              'Data for register in Transactional is: ',
+              dataAsignationForFormTeen
+            );
+
+            this.teenDataForm.reset();
+            this.legalGuardianAsignationFrom.reset();
+
+            this.navigateToTeenList();
+            this.toastService.success('Registro exitoso!');
+            this.findAllDataActive();
+            this.dialog.closeAll();
+          });
       });
-
-      console.log('Data for table Asignation: ', this.legalGuardianAsignationFrom.value);
-
-      this._asignationServices.saveNewAsignation(this.legalGuardianAsignationFrom.value).subscribe((dataAsignationForFormTeen: any) => {
-        console.log('Data for register in Transactional is: ', dataAsignationForFormTeen);
-
-        this.teenDataForm.reset();
-        this.legalGuardianAsignationFrom.reset();
-        this.navigateToTeenList();
-        this.toastService.success('Registro exitoso!');
-        this.findAllDataActive();
-        this.dialog.closeAll();
-      });
-    });
   }
 
   updateDataTeen() {
     console.log('Only Data Form: ', this.teenDataForm.value);
-    this.teenServices.updateDataTeen(this.teenDataForm.value).subscribe((dataUpdate) => {
-      console.log('Data Form for Modify | Update: ', dataUpdate);
+    this.teenServices
+      .updateDataTeen(this.teenDataForm.value)
+      .subscribe((dataUpdate) => {
+        console.log('Data Form for Modify | Update: ', dataUpdate);
 
-      // Actualiza la asignación con los nuevos datos del formulario
-      const asignationData = this.legalGuardianAsignationFrom.value;
-      this._asignationServices.updateDataAsignation(asignationData).subscribe(
-        (asignationUpdate) => {
-          console.log('Asignation data updated:', asignationUpdate);
-        },
-        (error) => {
-          console.error('Error updating asignation data:', error);
-        }
-      );
+        // Actualiza la asignación con los nuevos datos del formulario
+        const asignationData = this.legalGuardianAsignationFrom.value;
+        this._asignationServices.updateDataAsignation(asignationData).subscribe(
+          (asignationUpdate) => {
+            console.log('Asignation data updated:', asignationUpdate);
+          },
+          (error) => {
+            console.error('Error updating asignation data:', error);
+          }
+        );
 
-      this.teenDataForm.reset();
-      this.navigateToTeenList();
-      this.toastService.success('Actualización de datos exitosa!');
-      this.dialog.closeAll();
-    });
+        this.teenDataForm.reset();
+        this.navigateToTeenList();
+        this.toastService.success('Actualización de datos exitosa!');
+        this.dialog.closeAll();
+      });
   }
 
   ngOnDestroy() {

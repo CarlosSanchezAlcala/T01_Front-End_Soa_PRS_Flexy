@@ -1,29 +1,27 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {TeenService} from "../../../components/component-funcionality/services/teen/teen.service";
-import {
-  OperativeUnitService
-} from 'src/app/components/component-funcionality/services/operativeUnit/operative-unit.service';
-import {Teen} from "../../../components/component-funcionality/models/teen/teen.model";
-import {BehaviorSubject, Observable, startWith} from "rxjs";
-import {map} from "rxjs/operators";
-import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
-import {OperativeUnit} from "../../../components/component-funcionality/models/operativeUnit/operativeUnit.model";
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {TransferTeenService} from "../../../components/component-funcionality/services/transfer/transfer-teen.service";
-import {TransferTeen} from "../../../components/component-funcionality/models/transfer/transferTeen.model";
-import {HotToastService} from "@ngneat/hot-toast";
-import {AsignationService} from "../../../components/component-funcionality/services/asignation/asignation.service";
-import {Asignation} from "../../../components/component-funcionality/models/asignation/asignation.model";
-import {FuncionaryService} from "../../../components/component-funcionality/services/funcionary/funcionary.service";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { TeenService } from '../../../components/component-funcionality/services/teen/teen.service';
+import { OperativeUnitService } from 'src/app/components/component-funcionality/services/operativeUnit/operative-unit.service';
+import { Teen } from '../../../components/component-funcionality/models/teen/teen.model';
+import { BehaviorSubject, Observable, startWith } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { OperativeUnit } from '../../../components/component-funcionality/models/operativeUnit/operativeUnit.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TransferTeenService } from '../../../components/component-funcionality/services/transfer/transfer-teen.service';
+import { TransferTeen } from '../../../components/component-funcionality/models/transfer/transferTeen.model';
+import { HotToastService } from '@ngneat/hot-toast';
+import { AsignationService } from '../../../components/component-funcionality/services/asignation/asignation.service';
+import { Asignation } from '../../../components/component-funcionality/models/asignation/asignation.model';
+import { FuncionaryService } from '../../../components/component-funcionality/services/funcionary/funcionary.service';
+import { Funcionary } from 'src/app/components/component-funcionality/models/funcionary/funcionary.model';
 
 @Component({
   selector: 'app-transfer-dashboard-info',
   templateUrl: './transfer-dashboard-info.component.html',
-  styleUrls: ['./transfer-dashboard-info.component.scss']
+  styleUrls: ['./transfer-dashboard-info.component.scss'],
 })
 export class TransferDashboardInfoComponent implements OnInit {
-
   @Output() transferTeens: EventEmitter<any> = new EventEmitter<any>();
 
   //Opciones del autocompletado para el Adolescente (Teen)
@@ -36,7 +34,12 @@ export class TransferDashboardInfoComponent implements OnInit {
   showTransferForm = false;
   teenData: any[] = [];
   operativeUnitData: any[] = [];
+
+  //Formularios (Transfer | Asignation)
   formForTransfer: FormGroup = new FormGroup({});
+  asignationFormInTransfer: FormGroup = new FormGroup({});
+  funcionaryFormData: FormGroup = new FormGroup({});
+
   uuidTeenNecesaryForUpdate: any[] = [];
 
   file: File | null = null;
@@ -55,22 +58,46 @@ export class TransferDashboardInfoComponent implements OnInit {
 
   idTeenNecesaryForRegisterTransfer: any[] = [];
 
-  constructor(private _teenService: TeenService,
-              private _transferTeenService: TransferTeenService,
-              private _operativeUnitService: OperativeUnitService,
-              private _funcionaryService: FuncionaryService,
-              private _fb: FormBuilder,
-              private snackBar: MatSnackBar,
-              private toastService: HotToastService,
-              private _asignationService: AsignationService
+  constructor(
+    private _teenService: TeenService,
+    private _transferTeenService: TransferTeenService,
+    private _operativeUnitService: OperativeUnitService,
+    private _funcionaryService: FuncionaryService,
+    private _fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private toastService: HotToastService,
+    private _asignationService: AsignationService
   ) {
     this.formForTransfer = this._fb.group({
       id_teen: [''],
       id_operativeunit: [''],
       documentPDF: [''],
     });
+    this.asignationFormInTransfer = this._fb.group({
+      id_funcionaryteend: [null],
+      id_funcionary: [''],
+      idTeen: [''],
+      status: ['A'],
+      function_start: [''],
+      description: [''],
+    });
+    this.funcionaryFormData = this._fb.group({
+      id_funcionary: [null],
+      name: [''],
+      surnameFather: [''],
+      surnameMother: [''],
+      dni: [''],
+      phoneNumber: [''],
+      range: [''],
+      confirmation: ['N'],
+      address: [''],
+      email: [''],
+      codubi: [''],
+      idOperativeUnit: [''],
+      status: ['A'],
+    });
 
-    this.formForTransfer.get('documentPDF')?.valueChanges.subscribe(value => {
+    this.formForTransfer.get('documentPDF')?.valueChanges.subscribe((value) => {
       // Asegúrate de que 'value' no sea nulo antes de intentar hacer match
       if (value) {
         // Extraer el ID del enlace de vista previa
@@ -86,7 +113,6 @@ export class TransferDashboardInfoComponent implements OnInit {
         }
       }
     });
-
   }
 
   ngOnInit(): void {
@@ -96,24 +122,65 @@ export class TransferDashboardInfoComponent implements OnInit {
     this.notificationsTransferTeen();
     this.dateAndHour();
     this.findAllDataCompleteOfFuncionary();
+    this.loadFuncionaryDataForTransfer();
+  }
+
+  loadFuncionaryDataForTransfer() {
+    if (this.formForTransfer.get('id_operativeunit')) {
+      const id_operativeunit =
+        this.formForTransfer.get('id_operativeunit')?.value;
+
+      console.log('Identifier principal of SOA: ', id_operativeunit);
+
+      this._funcionaryService
+        .findDataFuncionaryByIdSoa(id_operativeunit)
+        .subscribe(
+          (dataFuncionary: Funcionary) => {
+            this.funcionaryFormData.patchValue({
+              id_funcionary: dataFuncionary.id_funcionary,
+              name: dataFuncionary.name,
+              surnameFather: dataFuncionary.surnameFather,
+              surnameMother: dataFuncionary.surnameMother,
+              dni: dataFuncionary.dni,
+              phoneNumber: dataFuncionary.phoneNumber,
+              range: dataFuncionary.range,
+              confirmation: dataFuncionary.confirmation,
+              address: dataFuncionary.address,
+              email: dataFuncionary.email,
+              codubi: dataFuncionary.codubi,
+              idOperativeUnit: dataFuncionary.idOperativeUnit,
+              status: dataFuncionary.status,
+            });
+
+            console.log('Asignation data:', dataFuncionary);
+          },
+          (error) => {
+            console.error('Error fetching asignation data: ', error);
+          }
+        );
+    }
   }
 
   findAllDataCompleteOfFuncionary() {
-    this._funcionaryService.findAllDataActive().subscribe((dataComplete: any) => {
-      console.log('Data Complete of Funcionary: ', dataComplete)
-      this.funcionaryDataComplete = dataComplete;
-    });
+    this._funcionaryService
+      .findAllDataActive()
+      .subscribe((dataComplete: any) => {
+        console.log('Data Complete of Funcionary: ', dataComplete);
+        this.funcionaryDataComplete = dataComplete;
+      });
   }
 
   onSoaChange(idOperativeUnit: number) {
     // Aquí llamas a tu servicio para obtener los funcionarios basados en el SOA seleccionado
-    this._funcionaryService.findDataFuncionaryByIdSoa(idOperativeUnit).subscribe((data: any) => {
-      this.funcionaryDataFilter = data;
-    });
+    this._funcionaryService
+      .findDataFuncionaryByIdSoa(idOperativeUnit)
+      .subscribe((data: any) => {
+        this.funcionaryDataFilter = data;
+      });
   }
 
   showToast() {
-    this.toastService.show('Hello World!')
+    this.toastService.show('Hello World!');
   }
 
   onFileClick() {
@@ -131,14 +198,33 @@ export class TransferDashboardInfoComponent implements OnInit {
   autoCompleteData() {
     this.filteredOptionsTeen = this.searchControlTeen.valueChanges.pipe(
       startWith(''),
-      map(value => typeof value === 'string' ? value : (value && value.name) ? this._filter(value.name) : this.teenData.slice()),
-      map(name => (typeof name === 'string') ? this._filter(name) : this.teenData.slice())
+      map((value) =>
+        typeof value === 'string'
+          ? value
+          : value && value.name
+          ? this._filter(value.name)
+          : this.teenData.slice()
+      ),
+      map((name) =>
+        typeof name === 'string' ? this._filter(name) : this.teenData.slice()
+      )
     );
-    this.filteredOptionsOperativeUnit = this.searchControlOperativeUnit.valueChanges.pipe(
-      startWith(''),
-      map(value => typeof value === 'string' ? value : (value && value.name) ? this._filterOperativeUnit(value.name) : this.operativeUnitData.slice()),
-      map(name => (typeof name === 'string') ? this._filterOperativeUnit(name) : this.operativeUnitData.slice())
-    );
+    this.filteredOptionsOperativeUnit =
+      this.searchControlOperativeUnit.valueChanges.pipe(
+        startWith(''),
+        map((value) =>
+          typeof value === 'string'
+            ? value
+            : value && value.name
+            ? this._filterOperativeUnit(value.name)
+            : this.operativeUnitData.slice()
+        ),
+        map((name) =>
+          typeof name === 'string'
+            ? this._filterOperativeUnit(name)
+            : this.operativeUnitData.slice()
+        )
+      );
   }
 
   notificationsTransferTeen() {
@@ -151,24 +237,33 @@ export class TransferDashboardInfoComponent implements OnInit {
 
   onOptionSelected(event: MatAutocompleteSelectedEvent) {
     const dTeen = event.option.value;
-    this.searchControlTeen.setValue(dTeen.name + ' ' + dTeen.surnameFather + ' ' + dTeen.surnameMother);
+    this.searchControlTeen.setValue(
+      dTeen.name + ' ' + dTeen.surnameFather + ' ' + dTeen.surnameMother
+    );
     this.formForTransfer.get('id_teen')?.setValue(dTeen.id_teen);
   }
 
   onOptionSelectedOperativeUnit(event: MatAutocompleteSelectedEvent) {
     const dOperativeUnit = event.option.value;
     this.searchControlOperativeUnit.setValue(dOperativeUnit.name);
-    this.formForTransfer.get('id_operativeunit')?.setValue(dOperativeUnit.id_operativeunit);
+    this.formForTransfer
+      .get('id_operativeunit')
+      ?.setValue(dOperativeUnit.id_operativeunit);
   }
 
   private _filter(name: string): Teen[] {
     const filterValue = name.toLowerCase();
-    return this.teenData.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.teenData.filter(
+      (option) => option.name.toLowerCase().indexOf(filterValue) === 0
+    );
   }
 
   private _filterOperativeUnit(name: string): OperativeUnit[] {
     const filterValueOperativeUnit = name.toLowerCase();
-    return this.operativeUnitData.filter(option => option.name.toLowerCase().indexOf(filterValueOperativeUnit) === 0);
+    return this.operativeUnitData.filter(
+      (option) =>
+        option.name.toLowerCase().indexOf(filterValueOperativeUnit) === 0
+    );
   }
 
   showForm() {
@@ -184,25 +279,33 @@ export class TransferDashboardInfoComponent implements OnInit {
   }
 
   openSnackBar(message: string, action: string, callback?: () => void) {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-      verticalPosition: 'top',
-      horizontalPosition: 'right',
-    }).afterDismissed().subscribe(() => {
-      if (callback) {
-        callback();
-      }
-    });
+    this.snackBar
+      .open(message, action, {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+      })
+      .afterDismissed()
+      .subscribe(() => {
+        if (callback) {
+          callback();
+        }
+      });
   }
 
   onSubmitForm() {
     const idTeenSelectedOfForm = this.formForTransfer.get('id_teen')?.value;
-    const idOperativeUnitSelectedOfForm = this.formForTransfer.get('id_operativeunit')?.value;
-    const infoTeenDateAndTimeRegister = this.formForTransfer.get('dateAndTimeRegister')?.value;
+    const idOperativeUnitSelectedOfForm =
+      this.formForTransfer.get('id_operativeunit')?.value;
+    const infoTeenDateAndTimeRegister = this.formForTransfer.get(
+      'dateAndTimeRegister'
+    )?.value;
 
     console.log('Id Teen: ', idTeenSelectedOfForm);
 
-    const selectedTeenInForm = this.teenData.find((item) => item.id_teen === idTeenSelectedOfForm);
+    const selectedTeenInForm = this.teenData.find(
+      (item) => item.id_teen === idTeenSelectedOfForm
+    );
 
     const teen: Teen = {
       id_teen: idTeenSelectedOfForm,
@@ -226,27 +329,31 @@ export class TransferDashboardInfoComponent implements OnInit {
 
     const asignation: Asignation = {
       idTeen: idTeenSelectedOfForm,
-    }
+    };
 
     const dataForTransferTeen: TransferTeen = {
       id_teen: idTeenSelectedOfForm,
       document_pdf_office: this.formForTransfer.get('documentPDF')?.value,
-      date_hour_register: this.formForTransfer.get('dateAndTimeRegister')?.value,
+      date_hour_register: this.formForTransfer.get('dateAndTimeRegister')
+        ?.value,
     };
 
     this._teenService.transferDataTeen(teen).subscribe((dataTeenTransfer) => {
       //console.log('Teen Transfer: ', dataTeenTransfer);
       this.hideForm();
 
-      this._asignationService.deleteLogicalDataAsignation(idTeenSelectedOfForm).subscribe((dataInactiveAsignation: any) => {
-        console.log('Asignación Eliminada: ', dataInactiveAsignation);
+      this._asignationService
+        .deleteLogicalDataAsignation(idTeenSelectedOfForm)
+        .subscribe((dataInactiveAsignation: any) => {
+          console.log('Asignación Eliminada: ', dataInactiveAsignation);
+        });
+    });
+
+    this._transferTeenService
+      .saveNewTransferTeen(dataForTransferTeen)
+      .subscribe((dataTransferTeenSave) => {
+        console.log('Data Transfer: ', dataTransferTeenSave);
       });
-
-    });
-
-    this._transferTeenService.saveNewTransferTeen(dataForTransferTeen).subscribe((dataTransferTeenSave) => {
-      console.log('Data Transfer: ', dataTransferTeenSave);
-    });
 
     this._teenService.saveNewTeen(teen).subscribe((dataTeenSave) => {
       //this.uuidTeenNecesaryForUpdate = dataTeenSave;
@@ -258,16 +365,13 @@ export class TransferDashboardInfoComponent implements OnInit {
 
     this.showPdfViewer = false;
     this.formForTransfer.reset();
-
   }
 
   findAllDataTeen() {
-    this._teenService
-      .findAllDataActive()
-      .subscribe((dataReceivedTeen: any) => {
-        console.log('Data teen: ', dataReceivedTeen);
-        this.teenData = dataReceivedTeen;
-      });
+    this._teenService.findAllDataActive().subscribe((dataReceivedTeen: any) => {
+      console.log('Data teen: ', dataReceivedTeen);
+      this.teenData = dataReceivedTeen;
+    });
   }
 
   findAllDataOperativeUnit() {
@@ -278,5 +382,4 @@ export class TransferDashboardInfoComponent implements OnInit {
         this.operativeUnitData = dataReceivedOperativeUnit;
       });
   }
-
 }
