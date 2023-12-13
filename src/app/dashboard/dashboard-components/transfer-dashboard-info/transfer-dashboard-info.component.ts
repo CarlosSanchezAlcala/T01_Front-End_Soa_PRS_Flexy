@@ -27,12 +27,15 @@ export class TransferDashboardInfoComponent implements OnInit {
   //Opciones del autocompletado para el Adolescente (Teen)
   filteredOptionsTeen!: Observable<any[]>;
   searchControlTeen = new FormControl();
+
   //Opciones del autocompletado para las Unidades Operativas (Operative Unit)
   filteredOptionsOperativeUnit!: Observable<any[]>;
   searchControlOperativeUnit = new FormControl();
+
   //Otras opciones (Recolección de Datos)
   showTransferForm = false;
   teenData: any[] = [];
+  funcionaryData: Funcionary[] = [];
   operativeUnitData: any[] = [];
 
   //Formularios (Transfer | Asignation)
@@ -50,6 +53,7 @@ export class TransferDashboardInfoComponent implements OnInit {
   selectedFuncionary: any[] = [];
   funcionaryDataFilter: any[] = [];
 
+  //Data complete of Funcionary in Data Base
   funcionaryDataComplete: any[] = [];
 
   documentoUrl = '';
@@ -122,20 +126,16 @@ export class TransferDashboardInfoComponent implements OnInit {
     this.notificationsTransferTeen();
     this.dateAndHour();
     this.findAllDataCompleteOfFuncionary();
-    this.loadFuncionaryDataForTransfer();
   }
 
-  loadFuncionaryDataForTransfer() {
+  loadFuncionaryDataForTransfer(idOperativeUnit: number) {
     if (this.formForTransfer.get('id_operativeunit')) {
-      const id_operativeunit =
-        this.formForTransfer.get('id_operativeunit')?.value;
-
-      console.log('Identifier principal of SOA: ', id_operativeunit);
+      console.log('Id Operative Unit: ', idOperativeUnit);
 
       this._funcionaryService
-        .findDataFuncionaryByIdSoa(id_operativeunit)
+        .findDataFuncionaryByIdSoa(idOperativeUnit)
         .subscribe(
-          (dataFuncionary: Funcionary) => {
+          (dataFuncionary: any) => {
             this.funcionaryFormData.patchValue({
               id_funcionary: dataFuncionary.id_funcionary,
               name: dataFuncionary.name,
@@ -152,14 +152,21 @@ export class TransferDashboardInfoComponent implements OnInit {
               status: dataFuncionary.status,
             });
 
-            console.log('Asignation data:', dataFuncionary);
+            console.log('Funcionary Data: ', dataFuncionary);
           },
+
           (error) => {
-            console.error('Error fetching asignation data: ', error);
+            console.log('Error fetching funcionary data:', error);
           }
         );
     }
   }
+
+  /*
+  changeFuncionaryByIdSoa() {
+    console.log('SOA Data: ', this.formForTransfer.value);
+  }
+  */
 
   findAllDataCompleteOfFuncionary() {
     this._funcionaryService
@@ -170,13 +177,24 @@ export class TransferDashboardInfoComponent implements OnInit {
       });
   }
 
-  onSoaChange(idOperativeUnit: number) {
-    // Aquí llamas a tu servicio para obtener los funcionarios basados en el SOA seleccionado
+  onSoaChange(): void {
+
+    const idOperativeUnitSelectedOfForm =
+    this.formForTransfer.get('id_operativeunit')?.value;
+
+    console.log('Id Operative Unit: ', idOperativeUnitSelectedOfForm);
+
     this._funcionaryService
-      .findDataFuncionaryByIdSoa(idOperativeUnit)
-      .subscribe((data: any) => {
-        this.funcionaryDataFilter = data;
-      });
+        .findDataFuncionaryByIdSoa(idOperativeUnitSelectedOfForm)
+        .subscribe(
+          (dataFuncionary: any) => {
+            console.log('Funcionary Data: ', dataFuncionary);
+            this.funcionaryDataFilter = dataFuncionary;
+          },
+        );
+
+    //this.formForTransfer.get('id_operativeunit')?.setValue(idOperativeUnit);
+    //this.loadFuncionaryDataForTransfer(idOperativeUnit);
   }
 
   showToast() {

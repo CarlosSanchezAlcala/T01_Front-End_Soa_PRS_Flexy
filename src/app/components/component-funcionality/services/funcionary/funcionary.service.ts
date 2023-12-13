@@ -18,8 +18,8 @@ export class FuncionaryService {
     return this._http.get(`${this.urlFuncionary}/listData`);
   }
 
-  findDataFuncionaryByIdSoa(idOperativeUnit: number): Observable<Funcionary> {
-    return this._http.get<Funcionary>(
+  findDataFuncionaryByIdSoa(idOperativeUnit: number): Observable<Funcionary[]> {
+    return this._http.get<Funcionary[]>(
       `${this.urlFuncionary}/bySoaInfo/${idOperativeUnit}`
     );
   }
