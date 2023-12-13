@@ -134,6 +134,13 @@
             <input matInput formControlName="description">
           </mat-form-field>
 
+          <mat-form-field class="formForRegister formForRegister">
+            <mat-label>Inicio de actividades del Funcionario:</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="function_start">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
         </form>
 
         <div class="container-functions-buttons">
