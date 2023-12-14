@@ -30,6 +30,11 @@ th.mat-header-cell {
   border-radius: 15px;
 }
 
+#button-pdf {
+  color: white;
+  border-radius: 15px;
+}
+
 .container-button-new-model {
   display: flex;
   margin-left: 51.5rem;
@@ -56,6 +61,10 @@ th.mat-header-cell {
 
 #button-register {
   background-color: #9ADE7B;
+}
+
+#button-pdf {
+  background-color: #E9B384;
 }
 
 .dialog-background {

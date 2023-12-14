@@ -8,6 +8,8 @@ import {
 } from '../../component-funcionality/models/asignation/transactionDataComplete.model';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
+import { SafeResourceUrl } from '@angular/platform-browser';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-asignation-principal',
@@ -20,6 +22,8 @@ export class AsignationPrincipalComponent implements OnInit {
 
   showFirstLastButtons: boolean = true;
   asignationData: any[] = [];
+  showDataInactive = false;
+  pdfSrc: SafeResourceUrl | null = null;
   withOutBodyAsignation: any[] = [];
   funcionaryColumns: string[] =
     ['dataFuncionary',
@@ -33,7 +37,7 @@ export class AsignationPrincipalComponent implements OnInit {
   dataSource = new MatTableDataSource(this.asignationData);
 
   constructor(private asignationService: AsignationService,
-              private router: Router) {
+              private router: Router, private toastServices: HotToastService,) {
   }
 
   ngOnInit(): void {
@@ -95,6 +99,29 @@ export class AsignationPrincipalComponent implements OnInit {
       console.log('El dato eliminado es: ', dataDeleteCompleteAsignation);
       this.findAllDataActive();
     })
+  }
+
+  generarPDF(): void {
+    this.toastServices.success('Generando PDF...', {
+      duration: 3000,
+    });
+
+    setTimeout(() => {
+      this.asignationService
+        .generarPDF()
+        .subscribe((response: ArrayBuffer) => {
+          const file = new Blob([response], { type: 'application/pdf' });
+          const url = URL.createObjectURL(file);
+          const pdfWindow = window.open();
+          if (pdfWindow) {
+            pdfWindow.location.href = url;
+          } else {
+            alert(
+              'El navegador bloqueó la apertura de la ventana emergente. Por favor, asegúrate de desbloquear las ventanas emergentes para este sitio.'
+            );
+          }
+        });
+    }, 3500);
   }
 
 }

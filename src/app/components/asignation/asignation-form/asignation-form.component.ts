@@ -30,6 +30,7 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
       id_funcionary: [''],
       id_teen: [[]],
       function_start: [''],
+      date_hour_register: [''],
       status: ['A'],
       description: [''],
     });
@@ -46,7 +47,8 @@ export class AsignationFormComponent implements OnInit, OnDestroy {
         description: this.asignationService.transactionSelected.description,
         id_funcionary: this.asignationService.transactionSelected.id_funcionary,
         id_funcionaryteend: this.asignationService.transactionSelected.id_funcionaryteend,
-        function_start: this.asignationService.transactionSelected.function_start
+        function_start: this.asignationService.transactionSelected.function_start,
+        date_hour_register: this.asignationService.transactionSelected.date_hour_register,
       });
     }
   }

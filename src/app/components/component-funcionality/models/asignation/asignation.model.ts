@@ -4,6 +4,6 @@ export interface Asignation {
   idTeen? : number;
   status? : string;
   function_start? : Date;
-  date_hour_register? : string;
+  date_hour_register? : Date;
   description? : string;
 }

@@ -91,4 +91,9 @@ export class AsignationService {
     return this._http.post<void>(`${this.urlAsignation}/bulk`, dto);
   }
 
+  generarPDF(): Observable<ArrayBuffer> {
+    const url = `${this.urlAsignation}/report`;
+    return this._http.get(url, {responseType: 'arraybuffer'});
+  }
+
 }

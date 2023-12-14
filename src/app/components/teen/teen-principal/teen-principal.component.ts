@@ -8,6 +8,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from '@angular/material/table';
 import {HotToastService} from "@ngneat/hot-toast";
 import {ArchivosComponent} from '../../archivos/archivos/archivos.component';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-teen-principal',
@@ -28,6 +29,7 @@ export class TeenPrincipalComponent implements OnInit {
   teenDataInactive: any[] = [];
   showDataInactive = false;
   showDataActive = false;
+  pdfSrc: SafeResourceUrl | null = null;
   attorneyData: any[] = [];
   operativeUnitData: any[] = [];
   funcionaryData: any[] = [];
@@ -239,5 +241,26 @@ export class TeenPrincipalComponent implements OnInit {
     });
   }
 
+  generarPDF(): void {
+    this.toastService.success('Generando PDF...', {
+      duration: 3000,
+    });
 
+    setTimeout(() => {
+      this._teenService
+        .generarPDF()
+        .subscribe((response: ArrayBuffer) => {
+          const file = new Blob([response], { type: 'application/pdf' });
+          const url = URL.createObjectURL(file);
+          const pdfWindow = window.open();
+          if (pdfWindow) {
+            pdfWindow.location.href = url;
+          } else {
+            alert(
+              'El navegador bloqueó la apertura de la ventana emergente. Por favor, asegúrate de desbloquear las ventanas emergentes para este sitio.'
+            );
+          }
+        });
+    }, 3500);
+  }
 }
