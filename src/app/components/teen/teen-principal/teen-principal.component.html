@@ -2,6 +2,11 @@
   <button mat-raised-button class="me-8 mb-8" color="primary" id="button-register" (click)="navigateToForm()">
     <strong>Agregar Adolescente</strong>
   </button>
+  <button (click)="generarPDF()" mat-raised-button class="me-8 mb-8" id="button-pdf" *ngIf="!showDataInactive"><strong>Generar
+    PDF</strong></button>
+  <div *ngIf="pdfSrc">
+    <embed [attr.src]="pdfSrc" type="application/pdf" width="100%" height="600px">
+  </div>
   <div class="container-button-new-model">
     <mat-chip-listbox aria-label="Fish selection">
       <mat-chip-option selected id="button-active" (click)="showActive()">Adolescentes Activos</mat-chip-option>

@@ -81,5 +81,10 @@ export class TeenService {
   getData(): Observable<any> {
     return this._http.get(this.urldataarchivos);
   }
+
+  generarPDF(): Observable<ArrayBuffer> {
+    const url = `${this.urlTeen}/export-pdf`;
+    return this._http.get(url, {responseType: 'arraybuffer'});
+  }
   
 }
