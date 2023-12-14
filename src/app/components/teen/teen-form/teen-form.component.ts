@@ -160,32 +160,23 @@ export class TeenFormComponent implements OnInit, OnDestroy {
 
   registerNewDataTeenAndAsignation() {
     //console.log('Datos ingresados en el formulario: ', this.teenDataForm.value);
-    this.teenServices
-      .saveNewTeen(this.teenDataForm.value)
-      .subscribe((teendataRegister: any) => {
-        //console.log('Los datos ingresados dentro del formulario para registrar || crear son: ', teendataRegister);
+    this.teenServices.saveNewTeen(this.teenDataForm.value).subscribe((teendataRegister: any) => {
+        
+      //console.log('Los datos ingresados dentro del formulario para registrar || crear son: ', teendataRegister);
         this.idTeenNecesaryForRegisterAsignation = teendataRegister.id_teen;
-        console.log(
-          'The last id Teen is: ',
-          this.idTeenNecesaryForRegisterAsignation
-        );
+        
+        console.log('The last id Teen is: ',this.idTeenNecesaryForRegisterAsignation);
 
         this.legalGuardianAsignationFrom.patchValue({
           idTeen: this.idTeenNecesaryForRegisterAsignation,
         });
 
-        console.log(
-          'Data for table Asignation: ',
-          this.legalGuardianAsignationFrom.value
-        );
+        console.log('Data for table Asignation: ',this.legalGuardianAsignationFrom.value);
 
-        this._asignationServices
-          .saveNewAsignation(this.legalGuardianAsignationFrom.value)
-          .subscribe((dataAsignationForFormTeen: any) => {
-            console.log(
-              'Data for register in Transactional is: ',
-              dataAsignationForFormTeen
-            );
+        // Register in Transactional
+        this._asignationServices.saveNewAsignation(this.legalGuardianAsignationFrom.value).subscribe((dataAsignationForFormTeen: any) => {
+            
+          console.log('Data for register in Transactional is: ',dataAsignationForFormTeen);
 
             this.teenDataForm.reset();
             this.legalGuardianAsignationFrom.reset();

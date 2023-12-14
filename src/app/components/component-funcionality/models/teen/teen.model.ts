@@ -1,6 +1,6 @@
 export interface Teen {
-  id_teen: number;
-  identifier: string;
+  id_teen?: number;
+  identifier?: string;
   name: string;
   surnameFather: string;
   surnameMother: string;
