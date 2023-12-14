@@ -182,18 +182,18 @@ export class TransferDashboardInfoComponent implements OnInit {
   onSoaChange(): void {
 
     const idOperativeUnitSelectedOfForm =
-    this.formForTransfer.get('id_operativeunit')?.value;
+      this.formForTransfer.get('id_operativeunit')?.value;
 
     console.log('Id Operative Unit: ', idOperativeUnitSelectedOfForm);
 
     this._funcionaryService
-        .findDataFuncionaryByIdSoa(idOperativeUnitSelectedOfForm)
-        .subscribe(
-          (dataFuncionary: any) => {
-            console.log('Funcionary Data: ', dataFuncionary);
-            this.funcionaryDataFilter = dataFuncionary;
-          },
-        );
+      .findDataFuncionaryByIdSoa(idOperativeUnitSelectedOfForm)
+      .subscribe(
+        (dataFuncionary: any) => {
+          console.log('Funcionary Data: ', dataFuncionary);
+          this.funcionaryDataFilter = dataFuncionary;
+        },
+      );
 
     //this.formForTransfer.get('id_operativeunit')?.setValue(idOperativeUnit);
     //this.loadFuncionaryDataForTransfer(idOperativeUnit);
@@ -222,8 +222,8 @@ export class TransferDashboardInfoComponent implements OnInit {
         typeof value === 'string'
           ? value
           : value && value.name
-          ? this._filter(value.name)
-          : this.teenData.slice()
+            ? this._filter(value.name)
+            : this.teenData.slice()
       ),
       map((name) =>
         typeof name === 'string' ? this._filter(name) : this.teenData.slice()
@@ -236,8 +236,8 @@ export class TransferDashboardInfoComponent implements OnInit {
           typeof value === 'string'
             ? value
             : value && value.name
-            ? this._filterOperativeUnit(value.name)
-            : this.operativeUnitData.slice()
+              ? this._filterOperativeUnit(value.name)
+              : this.operativeUnitData.slice()
         ),
         map((name) =>
           typeof name === 'string'
@@ -315,10 +315,10 @@ export class TransferDashboardInfoComponent implements OnInit {
 
   onSubmitForm() {
 
-    const idTeenSelectedOfForm          = this.formForTransfer.get('id_teen')?.value;
+    const idTeenSelectedOfForm = this.formForTransfer.get('id_teen')?.value;
     const idOperativeUnitSelectedOfForm = this.formForTransfer.get('id_operativeunit')?.value;
-    const infoTeenDateAndTimeRegister   = this.formForTransfer.get('dateAndTimeRegister')?.value;
-    const idFuncionarySelectedOfForm    = this.formForTransfer.get('id_funcionary')?.value;
+    const infoTeenDateAndTimeRegister = this.formForTransfer.get('dateAndTimeRegister')?.value;
+    const idFuncionarySelectedOfForm = this.formForTransfer.get('id_funcionary')?.value;
 
     console.log('Id Teen: ', idTeenSelectedOfForm);
     console.log('Id Funcionary: ', idFuncionarySelectedOfForm);
@@ -373,13 +373,13 @@ export class TransferDashboardInfoComponent implements OnInit {
       this.hideForm();
 
       this._asignationService.deleteLogicalDataAsignation(idTeenSelectedOfForm).subscribe((dataInactiveAsignation: any) => {
-          console.log('Asignación Eliminada: ', dataInactiveAsignation);
-        });
+        console.log('Asignación Eliminada: ', dataInactiveAsignation);
+      });
     });
 
     this._transferTeenService.saveNewTransferTeen(dataForTransferTeen).subscribe((dataTransferTeenSave) => {
-        console.log('Data Transfer: ', dataTransferTeenSave);
-      });
+      console.log('Data Transfer: ', dataTransferTeenSave);
+    });
 
     this._teenService.saveNewTeen(teenRegister).subscribe((dataTeenSave: any) => {
       //this.uuidTeenNecesaryForUpdate = dataTeenSave;
@@ -402,7 +402,7 @@ export class TransferDashboardInfoComponent implements OnInit {
       });
 
       //localStorage.setItem('alertMessage', 'Se registró correctamente'); -> Sirve como notificación para el usuario (DESHABILITADO POR EL NUEVO USO DE TOAST)
-      
+
       this.toastService.success('Transferencia exitosa!');
       this.transferTeens.emit(dataTeenSave);
     });
