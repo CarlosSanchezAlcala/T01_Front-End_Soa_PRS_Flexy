@@ -76,7 +76,9 @@ export class TransferDashboardInfoComponent implements OnInit {
       id_teen: ['', Validators.required],
       id_operativeunit: ['', Validators.required],
       documentPDF: ['', Validators.required],
+      id_funcionary: [''],
     });
+    // Form Asignation - Not used
     this.asignationFormInTransfer = this._fb.group({
       id_funcionaryteend: [''],
       id_funcionary: [''],
@@ -316,14 +318,12 @@ export class TransferDashboardInfoComponent implements OnInit {
     const idTeenSelectedOfForm          = this.formForTransfer.get('id_teen')?.value;
     const idOperativeUnitSelectedOfForm = this.formForTransfer.get('id_operativeunit')?.value;
     const infoTeenDateAndTimeRegister   = this.formForTransfer.get('dateAndTimeRegister')?.value;
-    const idFuncionarySelectedOfForm    = this.funcionaryFormData.get('id_funcionary')?.value;
+    const idFuncionarySelectedOfForm    = this.formForTransfer.get('id_funcionary')?.value;
 
     console.log('Id Teen: ', idTeenSelectedOfForm);
     console.log('Id Funcionary: ', idFuncionarySelectedOfForm);
 
-    const selectedTeenInForm = this.teenData.find(
-      (item) => item.id_teen === idTeenSelectedOfForm
-    );
+    const selectedTeenInForm = this.teenData.find((item) => item.id_teen === idTeenSelectedOfForm);
 
     const teen: Teen = {
       id_teen: idTeenSelectedOfForm,
@@ -363,17 +363,9 @@ export class TransferDashboardInfoComponent implements OnInit {
       status: selectedTeenInForm.status,
     };
 
-    const asignation: Asignation = {
-      id_funcionary: idFuncionarySelectedOfForm,
-      idTeen: idTeenSelectedOfForm,
-      function_start: this.asignationFormInTransfer.get('function_start')?.value,
-      description: this.asignationFormInTransfer.get('description')?.value,
-    };
-
     const dataForTransferTeen: TransferTeen = {
       id_teen: idTeenSelectedOfForm,
       document_pdf_office: this.formForTransfer.get('documentPDF')?.value,
-      date_hour_register: this.formForTransfer.get('dateAndTimeRegister')?.value,
     };
 
     this._teenService.transferDataTeen(teen).subscribe((dataTeenTransfer) => {
@@ -395,16 +387,24 @@ export class TransferDashboardInfoComponent implements OnInit {
       console.log('Id Teen: ', dataTeenSave.id_teen);
       const idOfNewTeen = dataTeenSave.id_teen;
       console.log('Id Teen: ', idOfNewTeen);
+
+      const asignation: Asignation = {
+        id_funcionary: idFuncionarySelectedOfForm,
+        idTeen: idOfNewTeen,
+        function_start: this.asignationFormInTransfer.get('function_start')?.value,
+        description: this.asignationFormInTransfer.get('description')?.value,
+      };
+
+      console.log('Asignation: ', asignation);
+
+      this._asignationService.saveNewAsignation(asignation).subscribe((dataAsignationSave) => {
+        console.log('Data of new Asignation: ', dataAsignationSave);
+      });
+
       //localStorage.setItem('alertMessage', 'Se registró correctamente'); -> Sirve como notificación para el usuario (DESHABILITADO POR EL NUEVO USO DE TOAST)
       this.toastService.success('Transferencia exitosa!');
       this.transferTeens.emit(dataTeenSave);
     });
-
-    /*
-    this._asignationService.saveNewAsignation(asignation).subscribe((dataAsignationSave) => {
-      console.log('Data of new Asignation: ', dataAsignationSave);
-    });
-    */
 
     this.showPdfViewer = false;
     this.formForTransfer.reset();

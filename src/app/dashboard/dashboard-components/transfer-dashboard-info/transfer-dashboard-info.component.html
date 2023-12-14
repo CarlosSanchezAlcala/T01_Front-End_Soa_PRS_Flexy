@@ -118,22 +118,22 @@
           <input matInput disabled>{{ currentDate | date:'dd/MM/yyyy HH:mm:ss' }}
         </mat-form-field>
 
+        <mat-form-field class="formForRegister formForRegister">
+          <mat-label>Funcionario:</mat-label>
+          <mat-select formControlName="id_funcionary">
+            <mat-option *ngFor="let dFunc of funcionaryDataFilter" [value]="dFunc.id_funcionary">
+              {{ dFunc.name }} {{ dFunc.surnameFather }} {{ dFunc.surnameMother }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <form id="formColumnAsignationData" [formGroup]="asignationFormInTransfer" (ngSubmit)="onSubmitForm()">
 
-          <mat-form-field class="formForRegister formForRegister">
-            <mat-label>Funcionario:</mat-label>
-            <mat-select formControlName="id_funcionary">
-              <mat-option *ngFor="let dFunc of funcionaryDataFilter" [value]="dFunc.id_funcionary">
-                {{ dFunc.name }} {{ dFunc.surnameFather }} {{ dFunc.surnameMother }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-      
           <mat-form-field class="formForRegister formForRegister">
             <mat-label>Descripción:</mat-label>
             <input matInput formControlName="description">
           </mat-form-field>
-
+  
           <mat-form-field class="formForRegister formForRegister">
             <mat-label>Inicio de actividades del Funcionario:</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="function_start">
