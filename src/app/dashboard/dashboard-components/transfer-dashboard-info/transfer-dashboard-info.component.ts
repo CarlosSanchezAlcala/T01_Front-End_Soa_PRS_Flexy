@@ -402,6 +402,7 @@ export class TransferDashboardInfoComponent implements OnInit {
       });
 
       //localStorage.setItem('alertMessage', 'Se registró correctamente'); -> Sirve como notificación para el usuario (DESHABILITADO POR EL NUEVO USO DE TOAST)
+      
       this.toastService.success('Transferencia exitosa!');
       this.transferTeens.emit(dataTeenSave);
     });
