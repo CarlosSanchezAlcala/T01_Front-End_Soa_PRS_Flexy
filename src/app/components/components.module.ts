@@ -25,7 +25,8 @@ import { AsignationPrincipalComponent } from './asignation/asignation-principal/
 import { AsignationFormComponent } from './asignation/asignation-form/asignation-form.component';
 import { FuncionaryPrincipalComponent } from './funcionary/funcionary-principal/funcionary-principal.component';
 import { FuncionaryFormComponent } from './funcionary/funcionary-form/funcionary-form.component';
-import { ArchivosComponent } from './archivos/archivos/archivos.component'
+import { ArchivosComponent } from './archivos/archivos/archivos.component';
+import { WelcomePrincipalComponent } from './welcome/welcome-principal/welcome-principal.component'
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { ArchivosComponent } from './archivos/archivos/archivos.component'
     AsignationFormComponent,
     FuncionaryPrincipalComponent,
     FuncionaryFormComponent,
-    ArchivosComponent
+    ArchivosComponent,
+    WelcomePrincipalComponent
   ]
 })
 export class ComponentsModule { }

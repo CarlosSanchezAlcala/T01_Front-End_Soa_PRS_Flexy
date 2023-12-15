@@ -28,14 +28,15 @@ import {
 } from "./components/funcionary/funcionary-principal/funcionary-principal.component";
 import { FuncionaryFormComponent } from './components/funcionary/funcionary-form/funcionary-form.component';
 import { permissionsGuard } from './components/component-funcionality/guards/permissions.guard';
+import {WelcomePrincipalComponent} from "./components/welcome/welcome-principal/welcome-principal.component";
 
 const routes: Routes = [
   {
     path: "",
     component: FullComponent,
     children: [
-      { path: "", redirectTo: "home", pathMatch: "full" },
-      { path: "home", component: DashboardComponent },
+      { path: "", redirectTo: "welcome", pathMatch: "full" },
+      { path: "home", canActivate: [permissionsGuard], component: DashboardComponent },
       { path: "alerts", component: AlertsComponent },
       { path: "asignation", canActivate: [permissionsGuard], component: AsignationPrincipalComponent },
       { path: "forms", component: FormsComponent },
@@ -58,6 +59,7 @@ const routes: Routes = [
       { path: "asignation-list", component: AsignationPrincipalComponent },
       { path: "funcionary", canActivate: [permissionsGuard], component: FuncionaryPrincipalComponent },
       { path: "funcionary-form", canActivate: [permissionsGuard], component: FuncionaryFormComponent },
+      { path: "welcome", component: WelcomePrincipalComponent}
     ]
   },
 ];

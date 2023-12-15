@@ -12,7 +12,7 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false"
-      *ngIf="showBarInfo"
+      *ngIf="showBarInfo && isLogged"
     >
       <div class="p-16">
         <div class="mb-16">
@@ -52,7 +52,7 @@
     <mat-sidenav-content class="content-container">
       <!-- Header -->
       <mat-toolbar class="header ps-24 pe-24">
-        <div class="ms-auto">
+        <div class="ms-auto" *ngIf="isLogged">
           <button id="button-julia-profile"
                   mat-button
                   class="fs-16 pt-4 pb-4 ps-8 pe-8 text-light-muted d-flex align-items-center"
@@ -76,10 +76,10 @@
             <hr/>
 
             <div class="p-16">
-              <button mat-flat-button color="accent" id="button-session" class="w-100 text-white" (click)="login()">
+              <button mat-flat-button color="accent" id="button-session" class="w-100 text-white" (click)="login()" *ngIf="!isLogged">
                 Iniciar Sesion
               </button>
-              <button mat-flat-button color="accent" id="button-logout" class="w-100 text-white" (click)="logout()">
+              <button mat-flat-button color="accent" id="button-logout" class="w-100 text-white" (click)="logout()" *ngIf="isLogged">
                 Logout
               </button>
             </div>
