@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { LoginService } from 'src/app/components/component-funcionality/services/login/login.service';
 
 interface sidebarMenu {
   link: string;
@@ -24,7 +25,8 @@ export class FullComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(private breakpointObserver: BreakpointObserver,
+    private loginService: LoginService) { }
 
   routerActive: string = "activelink";
 
@@ -49,7 +51,7 @@ export class FullComponent {
       icon: "disc",
       menu: "Asignación",
     },
-    {
+    /*{
       link: "/button",
       icon: "voicemail",
       menu: "Buttons",
@@ -89,7 +91,7 @@ export class FullComponent {
       icon: "list",
       menu: "Tabs",
     },
-    /*{
+    {
       link: "/progress",
       icon: "bar-chart-2",
       menu: "Progress Bar",
@@ -132,6 +134,14 @@ export class FullComponent {
 
   hideSideBard() {
     this.showBarInfo = !this.showBarInfo;
+  }
+
+  login(){
+    this.loginService.login();
+  }
+
+  logout(){
+    this.loginService.logout();
   }
 
 }

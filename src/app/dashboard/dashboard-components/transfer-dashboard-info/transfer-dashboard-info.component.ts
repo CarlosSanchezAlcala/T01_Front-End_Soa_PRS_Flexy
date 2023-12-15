@@ -114,6 +114,7 @@ export class TransferDashboardInfoComponent implements OnInit {
           this.documentoUrl = `https://drive.google.com/uc?export=download&id=${id}`;
           console.log('Id Document: ', id);
           console.log('Url Document: ', this.documentoUrl);
+
         } else {
           console.error('No se pudo extraer el ID del enlace.');
         }

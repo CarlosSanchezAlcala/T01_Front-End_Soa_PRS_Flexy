@@ -17,6 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgOptimizedImage} from "@angular/common";
 import {HotToastModule} from '@ngneat/hot-toast';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,14 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
     NgOptimizedImage,
     HotToastModule.forRoot(),
     NgxDocViewerModule,
+    OAuthModule.forRoot(
+      {
+        resourceServer: {
+          allowedUrls: ['http://localhost:8082'],
+          sendAccessToken: true
+        }
+      }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

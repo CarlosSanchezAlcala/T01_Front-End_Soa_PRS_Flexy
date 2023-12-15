@@ -76,7 +76,10 @@
             <hr/>
 
             <div class="p-16">
-              <button mat-flat-button color="accent" class="w-100 text-white">
+              <button mat-flat-button color="accent" id="button-session" class="w-100 text-white" (click)="login()">
+                Iniciar Sesion
+              </button>
+              <button mat-flat-button color="accent" id="button-logout" class="w-100 text-white" (click)="logout()">
                 Logout
               </button>
             </div>
