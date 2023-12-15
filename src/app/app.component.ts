@@ -10,8 +10,9 @@ import { LoginService } from './components/component-funcionality/services/login
 })
 export class AppComponent {
 
+  title = 'Soa';
+
   isAdmin!: boolean;
-  title = 'frontend';
 
   constructor(
     private oauthService: OAuthService,
@@ -39,7 +40,7 @@ export class AppComponent {
         if (this.oauthService.hasValidIdToken()) {
           this.isAdmin = this.loginService.getIsAdmin();
           const username = this.oauthService.getIdentityClaims()['preferred_username']
-          this.messageService.sendMessage(username, this.loginService.getIsLoggerd());
+          this.messageService.sendMessage(username, this.loginService.getIsLoggerd(), this.isAdmin);
         }
       });
 

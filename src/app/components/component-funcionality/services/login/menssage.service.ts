@@ -11,8 +11,8 @@ export class MenssageService {
     constructor() { }
 
 
-    public sendMessage(message: string, logget: boolean) {
-        this.subject.next({ text: message, isLogged: logget });
+    public sendMessage(message: string, logget: boolean, admin: boolean): void {
+        this.subject.next({ text: message, isLogged: logget, idAdmin: admin });
     }
 
     public getMessage(): Observable<any> {

@@ -7,5 +7,5 @@ export const environment = {
   apiUrlOperativeUnit: 'http://localhost:8085',
   apiUrlTransferTeen: 'http://localhost:8086',
   apiarchivos: 'http://localhost:8087',
-  token: 'token_para_desarrollo'
+  token: sessionStorage.getItem('access_token'),
 };

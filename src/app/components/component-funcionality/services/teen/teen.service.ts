@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Teen } from '../../models/teen/teen.model';
@@ -8,6 +8,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TeenService {
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${environment.token}`
+    })};
+
   private urlTeen = `${environment.apiUrlTeen}/api/teenData`;
   private urlUbigeoAddress = `${environment.apiUrlUbigeoAddress}/api/address`;
   private urlOperativeUnit = `${environment.apiUrlOperativeUnit}/api/operativeUnit`;
@@ -20,27 +27,27 @@ export class TeenService {
   constructor(private _http: HttpClient) { }
 
   findAll() {
-    return this._http.get(`${this.urlTeen}/listData`);
+    return this._http.get(`${this.urlTeen}/listData`, this.httpOptions);
   }
 
   findAllDataActive() {
-    return this._http.get(this.urlTeen + '/listData/active');
+    return this._http.get(this.urlTeen + '/listData/active', this.httpOptions);
   }
 
   findAllDataInactive() {
-    return this._http.get(this.urlTeen + '/listData/inactive');
+    return this._http.get(this.urlTeen + '/listData/inactive', this.httpOptions);
   }
 
   findAllDataUbigeoAddress() {
-    return this._http.get(this.urlUbigeoAddress + '/listData');
+    return this._http.get(this.urlUbigeoAddress + '/listData', this.httpOptions);
   }
 
   findAllDataOperativeUnit() {
-    return this._http.get(this.urlOperativeUnit + '/listData');
+    return this._http.get(this.urlOperativeUnit + '/listData', this.httpOptions);
   }
 
   findAllDataAttorney() {
-    return this._http.get(this.urlAttorney + '/listData');
+    return this._http.get(this.urlAttorney + '/listData', this.httpOptions);
   }
 
   saveNewTeen(teen: Teen) {
@@ -86,5 +93,5 @@ export class TeenService {
     const url = `${this.urlTeen}/export-pdf`;
     return this._http.get(url, {responseType: 'arraybuffer'});
   }
-  
+
 }
