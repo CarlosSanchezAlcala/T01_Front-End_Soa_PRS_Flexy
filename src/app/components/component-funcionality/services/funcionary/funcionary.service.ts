@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class FuncionaryService {
-  private urlFuncionary = `${environment.apiUrl}/api/funcionaryData`;
+  private urlFuncionary = `${environment.apiUrlFuncionary}/api/funcionaryData`;
   private urlUbigeoAddress = `${environment.apiUrlUbigeoAddress}/api/address`;
   funcionarySelected: Funcionary | undefined = undefined;
 
