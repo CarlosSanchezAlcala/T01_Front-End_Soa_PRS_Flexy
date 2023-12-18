@@ -15,12 +15,12 @@ export class TeenService {
       'Authorization': `Bearer ${environment.token}`
     })};
 
-  private urlTeen = `${environment.apiUrlTeen}/api/teenData`;
-  private urlUbigeoAddress = `${environment.apiUrlUbigeoAddress}/api/address`;
-  private urlOperativeUnit = `${environment.apiUrlOperativeUnit}/api/operativeUnit`;
-  private urlAttorney = `${environment.apiUrlAttorney}/api/attorneyData`;
-  private urlarchivos = `${environment.apiarchivos}`;
-  private urldataarchivos = `${environment.apiarchivos}/getData`;
+  private urlTeen = `${environment.apiUrlApiGateWay}/api/teenData`;
+  private urlUbigeoAddress = `${environment.apiUrlApiGateWay}/api/address`;
+  private urlOperativeUnit = `${environment.apiUrlApiGateWay}/api/operativeUnit`;
+  private urlAttorney = `${environment.apiUrlApiGateWay}/api/attorneyData`;
+  private urlarchivos = `${environment.apiUrlApiGateWay}`;
+  private urldataarchivos = `${environment.apiUrlApiGateWay}/getData`;
 
   teenSelected: Teen | undefined = undefined;
 
@@ -51,31 +51,31 @@ export class TeenService {
   }
 
   saveNewTeen(teen: Teen) {
-    return this._http.post(this.urlTeen, teen);
+    return this._http.post(this.urlTeen, teen, this.httpOptions);
   }
 
   updateDataTeen(teen: Teen) {
-    return this._http.put(this.urlTeen + '/' + teen.id_teen, teen);
+    return this._http.put(this.urlTeen + '/' + teen.id_teen, teen, this.httpOptions);
   }
 
   transferDataTeen(teen: Teen) {
     return this._http.patch(
       this.urlTeen + '/transferTeen/' + teen.id_teen,
-      teen
+      teen, this.httpOptions
     );
   }
 
   deleteLogicalDataTeen(teen: Teen) {
     return this._http.patch(
       this.urlTeen + '/deleteLogical/' + teen.id_teen,
-      teen
+      teen, this.httpOptions
     );
   }
 
   reactiveLogicalDataTeen(teen: Teen) {
     return this._http.patch(
       this.urlTeen + '/reactiveLogical/' + teen.id_teen,
-      teen
+      teen, this.httpOptions
     );
   }
 
@@ -86,12 +86,12 @@ export class TeenService {
   }
 
   getData(): Observable<any> {
-    return this._http.get(this.urldataarchivos);
+    return this._http.get(this.urldataarchivos, this.httpOptions);
   }
 
   generarPDF(): Observable<ArrayBuffer> {
     const url = `${this.urlTeen}/export-pdf`;
-    return this._http.get(url, {responseType: 'arraybuffer'});
+    return this._http.get(url, { responseType: 'arraybuffer', headers: this.httpOptions.headers });
   }
 
 }

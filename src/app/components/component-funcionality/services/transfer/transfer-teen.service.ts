@@ -8,7 +8,7 @@ import {TransferTeen} from "../../models/transfer/transferTeen.model";
 })
 export class TransferTeenService {
 
-  private urlTransferTeen = `${environment.apiUrlTransferTeen}/api/transferTeen`;
+  private urlTransferTeen = `${environment.apiUrlApiGateWay}/api/transferTeen`;
 
   constructor(private _http: HttpClient) { }
 

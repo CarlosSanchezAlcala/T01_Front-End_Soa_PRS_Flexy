@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {environment} from "../../../../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root',
 })
 export class OperativeUnitService {
-  private urlOperativeUnit = `http://localhost:8085/api/operativeUnit`;
-  private urlFuncionary = `http://localhost:8081/api/funcionaryData`;
+  private urlOperativeUnit = `${environment.apiUrlApiGateWay}/api/operativeUnit`;
+  private urlFuncionary = `${environment.apiUrlApiGateWay}/api/funcionaryData`;
 
   constructor(private _http: HttpClient) {}
 
