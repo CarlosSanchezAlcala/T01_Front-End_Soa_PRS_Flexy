@@ -29,6 +29,10 @@ import {
 import { FuncionaryFormComponent } from './components/funcionary/funcionary-form/funcionary-form.component';
 import { permissionsGuard } from './components/component-funcionality/guards/permissions.guard';
 import {WelcomePrincipalComponent} from "./components/welcome/welcome-principal/welcome-principal.component";
+import {
+  ActivitiesPrincipalComponent
+} from "./components/activities/activities-principal/activities-principal.component";
+import {HistorialPrincipalComponent} from "./components/historial/historial-principal/historial-principal.component";
 
 const routes: Routes = [
   {
@@ -59,7 +63,9 @@ const routes: Routes = [
       { path: "asignation-list", component: AsignationPrincipalComponent },
       { path: "funcionary", canActivate: [permissionsGuard], component: FuncionaryPrincipalComponent },
       { path: "funcionary-form", canActivate: [permissionsGuard], component: FuncionaryFormComponent },
-      { path: "welcome", component: WelcomePrincipalComponent}
+      { path: "welcome", component: WelcomePrincipalComponent},
+      { path: "activities", canActivate: [permissionsGuard], component: ActivitiesPrincipalComponent },
+      { path: "historial", canActivate: [permissionsGuard], component: HistorialPrincipalComponent}
     ]
   },
 ];

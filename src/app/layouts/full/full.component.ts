@@ -70,16 +70,17 @@ export class FullComponent implements OnInit {
       icon: "disc",
       menu: "Asignación",
     },
-    /*{
-      link: "/button",
-      icon: "voicemail",
-      menu: "Buttons",
+    {
+      link: "/activities",
+      icon: "book",
+      menu: "Actividades",
     },
     {
-      link: "/forms",
-      icon: "layout",
-      menu: "Forms",
+      link: "/historial",
+      icon: "info",
+      menu: "Historial",
     },
+    /*
     {
       link: "/alerts",
       icon: "info",

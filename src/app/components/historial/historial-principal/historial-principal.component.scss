@@ -1,0 +1,19 @@
+.table-responsive {
+  overflow-x: auto;
+}
+
+td,
+th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+td.mat-cell {
+  padding: 16px;
+}
+
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding: 16px;
+}

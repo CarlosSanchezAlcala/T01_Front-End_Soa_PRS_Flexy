@@ -1,0 +1,223 @@
+<div class="container-button">
+  <button
+    mat-raised-button
+    class="me-8 mb-8"
+    id="button-register"
+    (click)="navigateToForm()"
+  >
+    <strong>Agregar Actividad</strong>
+  </button>
+  <div class="container-button-new-model">
+    <mat-chip-listbox aria-label="Fish selection">
+      <mat-chip-option selected color="warn" (click)="showActive()">Actividades Activos</mat-chip-option>
+      <mat-chip-option color="warn" (click)="showInactive()">Actividades Desactivados</mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+</div>
+
+<div class="container-active" *ngIf="!showDataInactive">
+  <div *ngIf="showDetails" class="dialog-background">
+    <div class="dialog-content">
+
+      <div class="container-div-button-close">
+        <button mat-icon-button color="accent" (click)="closeDetails()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <h2>Detalles de la Actividad</h2>
+      <div class="container-details-teen">
+        <p><strong>Nombre:</strong> {{ selectedActivies?.name }}</p>
+        <p>
+          <strong>Descripcion:</strong> {{ selectedActivies?.description}}
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <mat-card class="w-100">
+    <mat-card-content>
+
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSourceActive" class="text-nowrap w-100">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ element.name }}</p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef>Duración</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ element.duration }}</p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="place">
+            <th mat-header-cell *matHeaderCellDef>Lugar</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ element.location}}</p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Tipo</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">
+                {{ element.type_pronacej }}
+              </p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="soa">
+            <th mat-header-cell *matHeaderCellDef>Soa</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ element.type_soa }}</p>
+            </td>
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="width: 15rem">Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button id="buttonEliminar" mat-flat-button color="warn"
+                      (click)="deleteLogicalDataFuncionary(element)">Eliminar
+              </button>
+              <button id="buttonModificar" mat-flat-button
+                      (click)="updateDataFuncionary()">Modificar
+              </button>
+            </td>
+          </ng-container>
+
+          <div class="container1">
+            <ng-container matColumnDef="moreInformation">
+              <th mat-header-cell *matHeaderCellDef style="width: 0.1rem">Más información</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="showFuncionaryDetails(element)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+          </div>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <strong>
+          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" #activeActivities [showFirstLastButtons]="showFirstLastButtons"></mat-paginator>
+        </strong>
+
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- --------------------------------------------------------------------------------------------------------------- -->
+
+<div class="container-active" *ngIf="showDataInactive">
+  <div *ngIf="showDetails" class="dialog-background">
+    <div class="dialog-content">
+
+      <div class="container-div-button-close">
+        <button mat-icon-button color="accent" (click)="closeDetails()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <h2>Detalles de la Actividad</h2>
+      <div class="container-details-teen">
+        <p><strong>Nombre:</strong> {{ selectedActivies?.name }}</p>
+        <p>
+          <strong>Descripcion:</strong> {{ selectedActivies?.description}}
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <mat-card class="w-100">
+    <mat-card-content>
+      <h4 class="mb-56">Actividades</h4>
+
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSourceInactive" class="text-nowrap w-100">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ element.name }}</p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef>Duración</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ element.duration }}</p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="place">
+            <th mat-header-cell *matHeaderCellDef>Lugar</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ element.location}}</p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Tipo</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">
+                {{ element.type_pronacej }}
+              </p>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="soa">
+            <th mat-header-cell *matHeaderCellDef>Soa</th>
+            <td mat-cell *matCellDef="let element">
+              <p class="mb-0 fw-medium">{{ element.type_soa }}</p>
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="width: 15rem">Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button id="buttonDelete" mat-flat-button color="warn" (click)="reactiveLogicalDataFuncionary(element)"
+              >Restaurar
+              </button>
+              <button id="buttonModify" mat-flat-button color="primary" [disabled]="isDisabled"
+              >Modificar
+              </button>
+            </td>
+          </ng-container>
+
+          <div class="container1">
+            <ng-container matColumnDef="moreInformation">
+              <th mat-header-cell *matHeaderCellDef style="width: 0.1rem">Más información</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="showFuncionaryDetails(element)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+          </div>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <strong>
+          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" #inactiveActivities [showFirstLastButtons]="showFirstLastButtons"></mat-paginator>
+        </strong>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

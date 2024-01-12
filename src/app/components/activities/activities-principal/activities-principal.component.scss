@@ -1,0 +1,113 @@
+.table-responsive {
+  overflow-x: auto;
+}
+
+td, th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+td.mat-cell {
+  padding: 16px;
+}
+
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding: 16px;
+}
+
+th.mat-header-cell {
+  padding: 16px;
+}
+
+.mat-header-cell {
+  font-size: 14px;
+}
+
+#button-register {
+  color: white;
+  border-radius: 15px;
+}
+
+#button-pdf {
+  color: white;
+  border-radius: 15px;
+}
+
+.container-button-new-model {
+  display: flex;
+  margin-left: 51.5rem;
+  margin-top: -2.88rem;
+}
+
+#buttonEliminar,
+#buttonModificar,
+#buttonDelete,
+#buttonModify {
+  margin: 2px;
+  border-radius: 15px;
+  width: 100px;
+}
+
+#buttonEliminar,
+#buttonDelete {
+  background-color: #FF8080;
+}
+
+#buttonModificar {
+  background-color: #F1C93B;
+}
+
+#button-register {
+  background-color: #9ADE7B;
+}
+
+#button-pdf {
+  background-color: #E9B384;
+}
+
+.dialog-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  text-align: center;
+}
+
+.dialog-content {
+  background: #fff;
+  padding: 52px;
+  border-radius: 60px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 600px;
+}
+
+.dialog-content button {
+  display: block;
+  margin-top: 10px;
+}
+
+.container-div-button-close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container-details-teen {
+  margin: 30px;
+}
+
+.container-active {
+  margin-top: 1.5rem;
+}
+
+.container-inactive {
+  margin-top: 1.5rem;
+}
