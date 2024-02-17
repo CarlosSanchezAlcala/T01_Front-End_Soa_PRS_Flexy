@@ -71,81 +71,76 @@ export class FullComponent implements OnInit {
       menu: "Asignación",
     },
     {
+      link: "/entities",
+      icon: "layers",
+      menu: "Entidades Cooperantes",
+    },
+    {
+      link: "/asignationProgram",
+      icon: "book",
+      menu: "Asig. Programa a actividad",
+    },
+    {
+      link: "/notifications",
+      icon: "layers",
+      menu: "Notificación de informes",
+    },
+    {
       link: "/activities",
       icon: "book",
       menu: "Actividades",
     },
     {
-      link: "/historial",
-      icon: "info",
+      link: "/record",
+      icon: "book-open",
       menu: "Historial",
     },
-    /*
+
     {
-      link: "/alerts",
-      icon: "info",
-      menu: "Alerts",
+      link: "/asignationActTeen",
+      icon: "briefcase",
+      menu: "Asignacion de Actividad",
     },
     {
-      link: "/grid-list",
-      icon: "file-text",
-      menu: "Grid List",
+      link: "/operativeUnit",
+      icon: "grid",
+      menu: "Unidades Operativas",
     },
     {
-      link: "/menu",
-      icon: "menu",
-      menu: "Menus",
+      link: "/programsAsist",
+      icon: "grid",
+      menu: "Programas",
     },
     {
-      link: "/expansion",
+      link: "/unitOperativeProgram",
+      icon: "grid",
+      menu: "Asig. Programas a Unidad Operativa",
+    },
+    {
+      link: "/digitalExpedient",
+      icon: "disc",
+      menu: "Expediente Digital",
+    },
+    {
+      link: "/programs",
+      icon: "disc",
+      menu: "Listado de Programas",
+    },
+    {
+      link: "/bulk-Allocation",
       icon: "divide-circle",
-      menu: "Expansion Panel",
+      menu: "Asignación Masiva",
     },
     {
-      link: "/chips",
+      link: "/attendance",
       icon: "award",
-      menu: "Chips",
+      menu: "Asistencia",
     },
     {
-      link: "/tabs",
-      icon: "list",
-      menu: "Tabs",
+      link: "/view-attendance",
+      icon: "menu",
+      menu: "Vista de Asistencia",
     },
-    {
-      link: "/progress",
-      icon: "bar-chart-2",
-      menu: "Progress Bar",
-    },
-    {
-      link: "/toolbar",
-      icon: "voicemail",
-      menu: "Toolbar",
-    },
-    {
-      link: "/progress-snipper",
-      icon: "loader",
-      menu: "Progress Snipper",
-    },
-    {
-      link: "/tooltip",
-      icon: "bell",
-      menu: "Tooltip",
-    },
-    {
-      link: "/snackbar",
-      icon: "slack",
-      menu: "Snackbar",
-    },
-    {
-      link: "/slider",
-      icon: "sliders",
-      menu: "Slider",
-    },
-    {
-      link: "/slide-toggle",
-      icon: "layers",
-      menu: "Slide Toggle",
-    },*/
   ]
 
   showSideBard() {

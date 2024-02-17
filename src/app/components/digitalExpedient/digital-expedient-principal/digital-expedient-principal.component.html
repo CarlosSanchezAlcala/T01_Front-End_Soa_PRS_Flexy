@@ -1,0 +1,214 @@
+<head>
+  <script src="https://kit.fontawesome.com/71ac1890e3.js" crossorigin="anonymous"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<br>
+
+
+<body>
+<div class="container mt-4">
+  <div class=" justify-content-center">
+    <div class="col-md-8">
+      <div class="search-bar">
+        <div class="input-group mb-3">
+          <h1 class="custom-title custom-main-title"><i class="fa fa-users" style="margin-right: 5px;"></i>EXPEDIENTE
+            DIGITAL DEL ADOLESCENTE<i style="margin-left: 5px;" class="fa fa-users"></i></h1>
+          <input style="background-color: #dcdcdc; margin-bottom: 5px;" type="text" class="form-control search-input"
+                 [(ngModel)]="searchTerm" placeholder="Ingresa un DNI" [maxLength]="8" [disabled]="showNewSearchButton"
+                 (keyup.enter)="busquedaNueva()">
+          <div class="input-group-append">
+            <button style="background-color: #9ADE7B;border-radius: 15px;font-weight: bold;" class="custom-button btn-primary" type="button"
+                    (click)="busquedaNueva()">
+              <i class="fa fa-search" ></i> BUSCAR
+            </button>
+            <button *ngIf="showNewSearchButton" style="font-weight: bold;background-color: #FF8080; border-radius: 15px; margin-left: 15px;"
+                    class="custom-button custom-button-new-search" type="button" (click)="nuevaBusqueda()">
+              <i class="fa fa-check" ></i>NUEVA BÚSQUEDA
+            </button>
+          </div>
+
+
+        </div>
+      </div>
+
+
+
+      <!-- INFORMACION DEL ADOLESCENTE -->
+
+      <div *ngIf="showResults && searchTerm.length === 8" class="separation-container">
+
+        <div *ngIf="dataExp && dataExp.length === 0"
+             style="display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 15px;"
+             class="text-center mt-3 no-results">
+          <mat-icon style="margin-right: 5px;">error_outline</mat-icon> DNI no encontrado. Verifica e intenta con otro
+          válido.
+          <mat-icon style="margin-left: 5px;">error_outline</mat-icon>
+        </div>
+
+        <div *ngIf="dataExp && dataExp.length > 0">
+          <h1 class="custom-title custom-main-title" style="font-size: 22px; margin-top: 20px;">
+            INFORMACION DEL ADOLESCENTE
+          </h1>
+          <!-- <div>
+            <table class="table table-bordered table-hover mt-3">
+              <tr *ngIf="dataBD && dataBD.length > 0">
+                <th style="width: 300px;">DNI APODERADO</th>
+                <td>{{ dataBD[0].dni_tl }}</td>
+                <th style="width: 300px;">NOMBRE APODERADO</th>
+                <td>{{ dataBD[0].nombre_tl }}</td>
+              </tr>
+              <tr *ngIf="dataBD && dataBD.length === 0">
+                <th style="width: 300px;">DNI APODERADO</th>
+                <td style="color: red; font-weight: bold;"> -- sin resultados --</td>
+                <th style="width: 300px;">NOMBRE APODERADO</th>
+                <td style="color: red; font-weight: bold;">-- sin resultados --</td>
+              </tr>
+            </table>
+          </div> -->
+
+          <div class="adolescente-info mt-3">
+            <table class="table table-bordered table-hover mt-3">
+              <tr>
+                <th style="width: 300px;">NOMBRES Y APELLIDOS</th>
+                <td>{{ dataExp[0].nom_ape}}</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- <div>
+            <table class="table table-bordered table-hover mt-3">
+              <tr *ngIf="dataExp && dataExp.length > 0">
+                <th style="width: 300px;">FECHA - LUGAR DE NACIMIENTO</th>
+                <td>{{ dataBD[0].fec_nac }}</td>
+                <th style="width: 70px;">EDAD</th>
+                <td>{{ dataBD[0].edad }}</td>
+                <th style="width: 90px;">RIESGO</th>
+                <td style="font-weight: bold;" [ngStyle]="{'background-color': getColorForRiesgo(dataBD[0].riesgo)}">
+                  {{ dataBD[0].riesgo }}
+                </td>
+              </tr>
+              <tr *ngIf="dataBD && dataBD.length === 0">
+                <th style="width: 300px;">LUGAR - FECHA DE NACIMIENTO</th>
+                <td style="color: red; font-weight: bold;"> -- sin resultados --</td>
+                <th style="width: 70px;">EDAD</th>
+                <td style="color: red; font-weight: bold;">-- sin resultados --</td>
+                <th style="width: 90px;">RIESGO</th>
+                <td style="color: red; font-weight: bold;">-- sin resultados --</td>
+              </tr>
+            </table>
+          </div> -->
+
+          <div>
+            <table class="table table-bordered table-hover mt-3">
+              <tr>
+                <th style="width: 300px;">DOMICILIO</th>
+                <td>{{ dataExp[0].domicilio }}</td>
+              </tr>
+            </table>
+          </div>
+
+
+          <div style="margin-bottom: 30px;">
+            <table class="table table-bordered table-hover mt-3">
+              <tr>
+                <th style="width: 300px;">FECHA DE NACIMIENTO</th>
+                <td>{{ dataExp[0].fec_nac }}</td>
+                <th style="width: 300px;">EDAD</th>
+                <td>{{ dataExp[0].edad }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOCUMENTOS DEL ADOLESCENTE -->
+
+      <div *ngIf="dataExp && dataExp.length > 0" class="separation-container">
+
+        <div>
+          <h1 class="custom-title custom-main-title" style="font-size: 22px;">
+            DOCUMENTOS DEL ADOLESCENTE
+          </h1>
+
+          <div>
+
+            <!-- <div *ngIf="showFilter" class="filter-container">
+              <label style="display: flex; align-items: center;font-weight: bold; margin-bottom: 15px;"
+                class="filter-label" for="filterBy"><mat-icon>filter_list</mat-icon>FILTRAR POR:</label>
+              <select class="filter-select" id="filterBy" [(ngModel)]="filterFlag" (change)="cambiarFiltro()">
+                <option value="A">Activos</option>
+                <option value="I">Inactivos</option>
+              </select>
+            </div> -->
+
+            <!-- Tabla de resultados -->
+            <div>
+              <div class="filter-container">
+                <label style="display: flex; align-items: center;font-weight: bold;" class="filter-label"
+                       for="filterBy">LISTAR DOCUMENTOS:</label>
+                <select style="background-color: #dcdcdc; margin-bottom: 10px;" class="filter-select" id="filterBy"
+                        [(ngModel)]="filterFlag" (change)="seleccionarExpediente()">
+                  <option value="A">ACTIVOS</option>
+                  <option value="I">INACTIVOS</option>
+                </select>
+
+                <label style="display: flex; align-items: center;font-weight: bold" class="filter-label"
+                       for="filterBy">
+                  EXPEDIENTES ENCONTRADOS:
+                </label>
+                <select style="margin-right: 5px; background-color: #dcdcdc;" class="filter-select" id="filterBy"
+                        [(ngModel)]="selectedExpediente">
+                  <option value="">Seleccione un N° de Expediente</option>
+                  <option *ngFor="let exp of dataExp" [value]="exp.num_exp">{{ exp.num_exp }}</option>
+                </select>
+                <button style="font-weight: bold;" *ngIf="selectedExpediente" class="custom-button btn-primary"
+                        type="button" (click)="seleccionarExpediente()">
+                  SELECCIONAR EXPEDIENTE
+                </button>
+              </div>
+
+              <div *ngFor="let item of dataBD">
+                <div *ngIf="item.tipo === 'INFII' && item.flag === 'A'"
+                     style="display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 15px;"
+                     class="text-center mt-3 no-results">
+                  <mat-icon style="margin-right: 5px;">error_outline</mat-icon> El adolescente no se apersonó
+                  <mat-icon style="margin-left: 5px;">error_outline</mat-icon>
+                </div>
+              </div>
+
+              <table class="table table-bordered table-hover table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col">N° DOC.</th>
+                  <th scope="col" style="width:650px;">DOC. DEL ADOLESCENTE</th>
+                  <th scope="col">FECHA</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of dataBD" class="table-row"
+                    (contextmenu)="contextMenu($event, item.id, item.tipo)">
+                  <td>{{ item.id }}</td>
+                  <td style="text-align: start;">
+                    <a style="color: #0056b3;" [href]="item.url" target="_blank">{{ codigoToPalabra[item.tipo] ||
+                    item.tipo }}</a>
+                  </td>
+                  <td>{{ item.fecha }}</td>
+                </tr>
+                </tbody>
+                <tfoot *ngIf="dataExp && dataExp.length > 0">
+                <tr>
+                  <td style="font-weight: bold;" colspan="3" class="text-center">
+                    SE ENCONTRARON {{ dataBD?.length || 0 }} DOCUMENTOS
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>

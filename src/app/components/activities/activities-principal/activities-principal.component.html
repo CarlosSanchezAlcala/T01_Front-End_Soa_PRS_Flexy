@@ -1,15 +1,11 @@
 <div class="container-button">
-  <button
-    mat-raised-button
-    class="me-8 mb-8"
-    id="button-register"
-    (click)="navigateToForm()"
-  >
+  <button mat-raised-button class="me-8 mb-8" id="button-register" (click)="navigateToForm()">
+    <mat-icon aria-hidden="false" aria-label="add_circle_outline" fontIcon="add_circle_outline"></mat-icon>
     <strong>Agregar Actividad</strong>
   </button>
   <div class="container-button-new-model">
     <mat-chip-listbox aria-label="Fish selection">
-      <mat-chip-option selected color="warn" (click)="showActive()">Actividades Activos</mat-chip-option>
+      <mat-chip-option selected (click)="showActive()">Actividades Activos</mat-chip-option>
       <mat-chip-option color="warn" (click)="showInactive()">Actividades Desactivados</mat-chip-option>
     </mat-chip-listbox>
   </div>

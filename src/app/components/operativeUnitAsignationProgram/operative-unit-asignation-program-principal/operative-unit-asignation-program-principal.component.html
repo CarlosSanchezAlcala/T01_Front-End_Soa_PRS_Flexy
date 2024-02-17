@@ -1,0 +1,80 @@
+<div class="container-button">
+  <button mat-raised-button class="me-8 mb-8 buttonRegister" color="primary" id="buttonRegister" (click)="navigateToForm()">
+    <mat-icon aria-hidden="false" aria-label="add_circle_outline" fontIcon="add_circle_outline"></mat-icon>
+    <strong>Nueva Asignación</strong>
+  </button>
+
+  <button (click)="generarPDF()" mat-raised-button class="me-8 mb-8" id="button-pdf"
+  ><strong>Generar
+    PDF</strong>
+  </button>
+  <div *ngIf="pdfSrc">
+    <embed [attr.src]="pdfSrc" type="application/pdf" width="100%" height="600px">
+  </div>
+
+
+  <div class="container-active">
+    <mat-card class="w-100">
+      <mat-card-content>
+
+        <div class="container">
+          <table id="tableOfDataFuncionary" mat-table [dataSource]="asignationData" class="table-responsive">
+            <ng-container matColumnDef="dataFuncionary">
+              <th mat-header-cell *matHeaderCellDef>Datos del Funcionario:</th>
+              <td mat-cell *matCellDef="let dataTransaccional">
+                {{ dataTransaccional.operationalUnitResponseDto.name }}
+                {{ dataTransaccional.operationalUnitResponseDto.director }}
+              </td>
+            </ng-container>
+
+            <!-- Añade las clases a las celdas y encabezados -->
+            <ng-container matColumnDef="dniFuncionary">
+              <th mat-header-cell *matHeaderCellDef class="th mat-header-cell">Número de DNI:</th>
+              <td mat-cell *matCellDef="let dataTransaccional" class="td mat-cell">
+                {{ dataTransaccional.operationalUnitResponseDto.address }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dataTeen">
+              <th mat-header-cell *matHeaderCellDef class="th mat-header-cell">Datos del Adolescente:</th>
+              <td mat-cell *matCellDef="let dataTransaccional" class="td mat-cell">
+                {{ dataTransaccional.teenResponseDto.name }}
+                {{ dataTransaccional.teenResponseDto.description }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dniTeen">
+              <th mat-header-cell *matHeaderCellDef class="th mat-header-cell">Número de DNI:</th>
+              <td mat-cell *matCellDef="let dataTransaccional" class="td mat-cell">
+                {{ dataTransaccional.teenResponseDto.duration }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="descripcionAsignacion">
+              <th mat-header-cell *matHeaderCellDef class="th mat-header-cell">Detalles:</th>
+              <td mat-cell *matCellDef="let dataTransaccional" class="td mat-cell">
+                {{ dataTransaccional.transaccionalAllocation.description }}
+              </td>
+            </ng-container>
+
+            <ng-container class="container-buttoms" matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="th mat-header-cell" style="width: 15rem"> Acciones</th>
+              <td mat-cell *matCellDef="let dataTransaccional" class="td mat-cell">
+                <button id="buttonEliminar" mat-flat-button color="warn">
+                  Eliminar
+                </button>
+                <button id="buttonModificar" mat-flat-button color="primary">
+                  Modificar
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="funcionaryColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: funcionaryColumns;"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

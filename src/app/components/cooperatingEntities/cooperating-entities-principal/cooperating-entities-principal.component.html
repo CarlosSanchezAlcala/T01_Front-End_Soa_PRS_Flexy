@@ -1,0 +1,93 @@
+<div class="cabecera">
+  <h1 class="titulo"></h1>
+</div>
+
+<div id="filtroEstadoContainer" style="display: flex; justify-content: space-between; align-items: center;">
+
+  <!-- Botón "Nueva Entidad" a la izquierda -->
+  <div class="buton">
+    <button (click)="openDialog()" mat-raised-button style="background-color: #9ADE7B; color: #ffffff;border-radius: 15px;
+      margin: 2px;" id="inicio">
+      <mat-icon aria-hidden="false" aria-label="add_circle_outline" fontIcon="add_circle_outline"></mat-icon>
+      <strong>Nueva Entidad</strong>
+    </button>
+  </div>
+
+  <!-- Contenedor para elementos a la derecha -->
+  <div style="display: flex; align-items: center;">
+
+    <!-- Botón "Generar PDF" -->
+    <button (click)="generarPDF()" mat-raised-button class="me-8 mb-8" id="button-pdf" *ngIf="!showDataInactive" style="background-color: #E9B384; color: #ffffff;border-radius: 15px;
+    margin: 2px;
+    width: 150px;">
+      <mat-icon>description</mat-icon><strong>Generar PDF</strong>
+    </button>
+
+    <!-- Selector de estado -->
+    <label for="filtroEstado">Filtrar por estado:</label>
+    <select id="filtroEstado" [(ngModel)]="estadoFiltrado" (change)="listar()">
+      <option value="Todos">Todos</option>
+      <option value="A">Activo</option>
+      <option value="I">Inactivo</option>
+    </select>
+
+  </div>
+</div>
+
+<br>
+<br>
+
+<mat-card class="w-100">
+  <mat-card-content>
+    <table class="table centered-table">
+      <thead>
+      <tr>
+        <th scope="col" class="table-cell">NOMBRE</th>
+        <th scope="col" class="table-cell">RUC</th>
+        <th scope="col" class="table-cell">DIRECCIÓN</th>
+        <th scope="col" class="table-cell">CONTACTO</th>
+        <th scope="col" class="table-cell">ACCIÓN</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngIf="dataSource.length; else noData">
+        <tr *ngFor="let entidad of dataSource; let odd = odd" [ngClass]="{ 'bg-gray-100': odd, 'bg-gray-200': !odd }">
+          <td class="table-cell">{{entidad.nombre}}</td>
+          <td class="table-cell">{{entidad.ruc}}</td>
+          <td class="table-cell">{{entidad.direccion}}</td>
+          <td class="table-cell">{{entidad.contacto}}</td>
+          <td>
+            <div class="button-container">
+              <ng-container *ngIf="entidad.estado === 'I'">
+                <button class="button" mat-fab style="background-color: #F1C93B; color: #ffffff;" aria-label="Activar"
+                        (click)="activarEntidad(entidad.id)">
+                  <mat-icon>check</mat-icon>
+                </button>
+              </ng-container>
+              <ng-container *ngIf="entidad.estado !== 'I'">
+                <button class="button" mat-fab style="background-color: #F1C93B; color: #ffffff;border-radius: 15px;
+                    margin: 2px;width: 100px;height: 40px;" aria-label="Editar"
+                        (click)="editarEntidad(entidad)">Modificar
+                </button>
+                <button class="button" mat-fab style="background-color: #FF8080; color: #ffffff;border-radius: 15px;
+                    margin: 2px;width: 100px;height: 40px;"
+                        aria-label="Eliminar" (click)="deleteEntidad(entidad.id)">
+                  Eliminar
+                </button>
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #noData>
+        <br>
+        <tr>
+          <td colspan="5" class="text-center py-4 text-gray-500">
+            No hay datos disponibles.
+          </td>
+        </tr>
+      </ng-template>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>

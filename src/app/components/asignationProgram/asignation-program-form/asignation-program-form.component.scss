@@ -1,0 +1,155 @@
+form.registration-form {
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+  background-color: #ffffff;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+
+
+
+.titulo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #40c2d3;
+  color: #fff;
+  padding: 10px;
+}
+
+
+
+.alert.alert-danger {
+  color: red;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.styled-table {
+  margin-top: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.styled-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.styled-table th, .styled-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.styled-table thead {
+  background-color: #f2f2f2;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: none;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f5f5f5;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #eaeaea;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.gradient-button {
+  background: linear-gradient(to right, #FF6B6B, #1E88E5);
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.gradient-button:hover {
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+}
+
+.agregar-button {
+  margin-right: 15px;
+}
+
+.registrar-button {
+  margin-left: 15px;
+}
+
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+
+.gradient-button {
+  position: relative;
+  overflow: hidden;
+
+}
+mat-form-field {
+  width: 100%;
+  margin-bottom: 25px; /* Espacio entre los campos */
+}
+
+mat-error {
+  color: #720202;
+  background-color: #f8a6a6; /* Color de fondo para el mensaje de error */
+  padding: 5px; /* Añade espacio alrededor del mensaje de error */
+  border-radius: 4px; /* Bordes redondeados para el mensaje de error */
+  margin-top: 10px; /* Espacio entre el campo y el mensaje de error */
+  display: block; /* Asegura que el mensaje de error ocupe toda la anchura */
+  text-align: center; /* Centra el texto del mensaje de error */
+}
+
+.custom-toast {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 10px; // Bordes redondeados para un aspecto más suave
+  // Otros estilos personalizados...
+}
+
+@keyframes fadeInScaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ngx-spinner {
+  animation: fadeInScaleUp 1s ease-in-out;
+}

@@ -1,0 +1,101 @@
+.centered-table {
+  width: 100%;
+  margin: 0 auto; /* Para centrar la tabla horizontalmente */
+}
+
+.table-cell {
+  text-align: center;
+  padding: 15px; /* Ajusta el valor según la cantidad de espacio deseada */
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+::ng-deep .ngx-spinner .spinner-layer {
+  border-color: #40c2d3; // Tu color
+}
+
+.date-filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f3f4f6; // Color de fondo suave
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  mat-form-field {
+    width: 200px;
+  }
+
+  button {
+    min-width: 100px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+
+
+.date-filter-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .date-picker {
+    width: 140px;
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .filter-button {
+    background-color: #40c2d3;
+    color: white;
+    &:hover {
+      background-color: darken(#40c2d3, 10%);
+    }
+  }
+}
+.text-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+
+  label {
+    margin-right: 10px;
+  }
+
+  select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    &:focus {
+      outline: none;
+      border-color: #40c2d3;
+    }
+  }
+}
+
+.date-filter-container .mat-form-field.date-picker {
+  width: 200px;
+  margin-right: 10px;
+}
+
+.date-filter-container .filter-button {
+  margin-left: auto;
+  display: block;
+}
+/* ... (código posterior) ... */

@@ -1,0 +1,239 @@
+/* Estilos generales */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #dcdcdc;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor principal con margen y padding */
+.container {
+  max-width: 100%; /* Cambiado a 100% para que se ajuste al ancho de la pantalla */
+  padding: 20px;
+}
+
+/* Estilos para la barra de navegación personalizada */
+.custom-toolbar {
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: max-content;
+}
+
+.custom-logo {
+  max-width: 100%; /* Cambiado a 100% para que la imagen se ajuste al ancho de la pantalla */
+  height: auto;
+}
+
+.custom-main-title {
+  color: #0056b3;
+  font-size: 28px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+
+/* Estilos para el buscador */
+.search-bar {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+  margin: 0 auto;
+  padding: 15px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Input de búsqueda con ancho flexible */
+.search-input {
+  border: none;
+  outline: none;
+  padding: 12px;
+  font-size: 16px;
+  width: 100%; /* Cambiado a 100% para que se ajuste al ancho de su contenedor */
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Estilos para la tabla */
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Estilos para las filas de la tabla */
+.table th,
+.table td {
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.table th {
+  background-color: #0056b3;
+  /* Cambiar el color de fondo del encabezado de la tabla */
+  color: white;
+}
+
+.table-row:hover {
+  background-color: #d2e2f9;
+  /* Cambiar el color de fondo al pasar el cursor */
+}
+
+/* Estilos para los mensajes de no resultados */
+.no-results {
+  font-size: 18px;
+  color: red;
+  margin-top: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Estilos para los botones */
+.custom-button {
+  background-color: #007bff;
+  /* Cambiar el color de fondo del botón */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.custom-button:hover {
+  background-color: #0056b3;
+  /* Cambiar el color de fondo al pasar el cursor */
+}
+
+/* Estilos para el botón "NUEVA BÚSQUEDA" */
+.custom-button-new-search {
+  background-color: green;
+  /* Cambiar el color de fondo del botón */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.custom-button-new-search:hover {
+  background-color: darkgreen;
+  /* Cambiar el color de fondo al pasar el cursor */
+}
+
+.current-datetime {
+  font-size: 25px;
+  font-weight: bold;
+  color: #0056b3;
+  margin-left: auto;
+  /* Separación desde el título y otros elementos */
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Estilos para el filtro */
+.filter-container {
+  margin-top: 20px;
+}
+
+.filter-label {
+  font-size: 16px;
+  color: #0056b3;
+  font-weight: bold;
+  margin-right: 10px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.filter-select {
+  width: 350px; /* Ancho fijo del combo box */
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.separation-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+  margin: 20px auto;
+  padding: 15px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.separation-container:hover {
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para la tarjeta */
+.card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: box-shadow 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.custom-main-title {
+  color: #0056b3;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+
+.card-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Estilos para la imagen */
+.card-img-top {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+/* Estilos para el botón dentro de la tarjeta */
+.card .custom-button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card .custom-button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para la tarjeta personalizada con ancho limitado */
+.custom-card {
+  max-width: 400px; /* Puedes ajustar este valor según tus necesidades */
+  margin: 0 auto;
+}
+

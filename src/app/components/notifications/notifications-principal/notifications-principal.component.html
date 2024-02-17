@@ -1,0 +1,94 @@
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <button mat-raised-button style="background-color: #9ADE7B; color: #ffffff;border-radius: 15px;
+    margin: 2px;
+    width: 171px;" (click)="openDialog()">
+    <mat-icon aria-hidden="false" aria-label="add_circle_outline" fontIcon="add_circle_outline" id="inicio"></mat-icon>
+    <strong>Nuevo Registro</strong>
+  </button>
+  <button mat-raised-button class="me-8 mb-8" style="background-color: #E9B384; color: #ffffff;border-radius: 15px;
+    margin: 2px;
+    width: 150px;" (click)="generarPDF()">
+    <mat-icon>description</mat-icon>Generar PDF</button>
+</div>
+<br>
+<div class="cabecera">
+
+</div>
+<h2>Filtros</h2>
+<br>
+<div class="filtros-container">
+  <div class="filtro-fecha">
+    <mat-form-field appearance="fill">
+      <mat-label>Seleccionar Fecha</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="applyDateFilter()">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field>
+      <mat-label>Entidad cooperativa</mat-label>
+      <mat-select id="id_entities" [(ngModel)]="selectedEntityFilter" name="nombre_entidad" (selectionChange)="applyEntityFilter()">
+        <mat-option *ngFor="let entidad of entidades" [value]="entidad.id">
+          {{ entidad.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field>
+      <mat-label>Funcionario</mat-label>
+      <mat-select id="id_funcionary" [(ngModel)]="selectedFuncionarioFilter" name="nombre_funcionario" (selectionChange)="applyFuncionarioFilter()">
+        <mat-option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">
+          {{ funcionario.name }} {{funcionario.surname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button style="background-color: #96305a; color: #ffffff;border-radius: 15px;
+    margin: 2px;
+    width: 180px;" (click)="clearDateFilter()"><mat-icon>delete</mat-icon>Limpiar Filtro</button>
+
+</div>
+<br>
+<mat-card class="w-100">
+  <mat-card-content>
+    <div class="table-container"> <!-- Agrega la clase table-container aquí -->
+      <table class="table centered-table">
+        <thead>
+        <tr>
+          <th scope="col" class="table-cell">FUNCIONARIO</th>
+          <th scope="col" class="table-cell">ENTIDAD COOPERATIVA</th>
+          <th scope="col" class="table-cell">MOTIVO</th>
+          <th scope="col" class="table-cell">FECHA</th>
+          <th scope="col" class="table-cell">DOCUMENTO</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngIf="data && data.length; else noData">
+          <tr *ngFor="let item of data">
+            <td class="table-cell">{{item.name_funcionary}}</td>
+            <td class="table-cell">{{item.name_entity}}</td>
+            <td class="table-cell">{{item.description}}</td>
+            <td class="table-cell">{{ item.date_notification | date:'dd/MMM/yyyy':'':'es-ES' }}</td>
+            <td class="table-cell">
+              <a [href]="item.url" target="_blank">
+                <mat-icon>description</mat-icon>
+              </a>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #noData>
+          <tr>
+            <td colspan="5" class="text-center py-4 text-gray-500">
+              No hay datos disponibles.
+            </td>
+          </tr>
+        </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

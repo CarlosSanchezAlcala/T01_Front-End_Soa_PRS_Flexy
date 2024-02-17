@@ -1,0 +1,67 @@
+<div class="containerDataForm">
+  <form id="formColumnAsignation" [formGroup]="asignationDataForm" (ngSubmit)="saveAsignation()">
+    <div class="titleWeb" align="center" style="margin-top: -2rem">
+      <figure>
+        <p style="font-size: 45px" class="lead">
+          <!--{{asignationService.transactionSelected ? 'Editar Asignación' : 'Nueva Asignación'}}-->
+        </p>
+        <figcaption class="blockquote-footer">
+          Por favor colocar toda la información que se pide a continuación,
+          con la información
+          <strong><cite title="Source Title">correcta</cite></strong>
+          y
+          <strong><cite title="Source Title">verídica.</cite></strong>
+        </figcaption>
+      </figure>
+    </div>
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Comentario:</mat-label>
+      <input matInput formControlName="notes">
+    </mat-form-field>
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Duración:</mat-label>
+      <input matInput formControlName="duration">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Fecha de Realización</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Actividades</mat-label>
+      <mat-select formControlName="id_activities" >
+        <mat-option *ngFor="let dFunc of funcionaryData" [value]="dFunc.id">
+          {{dFunc.name}} {{dFunc.director}} {{dFunc.address}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-checkbox (change)="selectAllOrDeselectAll()">Seleccionar todo</mat-checkbox>
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Adolescentes</mat-label>
+      <mat-select formControlName="id_teenager" multiple>
+        <mat-option *ngFor="let teen of teenData" [value]="teen.id">
+          {{ teen.name }} {{ teen.father_last_name }} {{ teen.mother_last_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div id="buttonActions">
+      <button type="button" id="buttonCancel" mat-flat-button color="accent" (click)="navigateToAsignationList()">
+        Cancelar
+      </button>
+      <button type="submit" id="buttonSave" mat-flat-button color="primary" [disabled]="asignationDataForm.invalid">
+        <!--{{asignationService.transactionSelected ? 'Modificar' : 'Registrar'}}-->
+      </button>
+    </div>
+  </form>
+</div>
+
+

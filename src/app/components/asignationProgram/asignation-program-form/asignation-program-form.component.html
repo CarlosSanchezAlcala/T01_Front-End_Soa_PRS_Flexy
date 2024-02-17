@@ -1,0 +1,78 @@
+
+<div class="titulo">
+  <h1>Registro Entidad</h1>
+</div>
+
+<div class="center-content">
+  <div class="blur-background">
+
+    <form [formGroup]="registroForm" class="registration-form">
+
+      <br>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Selecciona un Programa</mat-label>
+        <mat-select formControlName="id_programs" required>
+          <mat-option *ngFor="let programa of programas" [value]="programa.id">
+            {{ programa.name }}
+          </mat-option>
+        </mat-select>
+
+
+        <mat-error *ngIf="registroForm.get('id_programs')?.hasError('required')">
+          Este campo es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-checkbox (change)="selectAllOrDeselectAll()">Seleccionar todo</mat-checkbox>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Selecciona Actividades</mat-label>
+        <mat-select formControlName="id_activities" multiple required>
+
+          <mat-option *ngFor="let actividad of actividades" [value]="actividad.id">
+            {{ actividad.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="registroForm.get('id_activities')?.hasError('required')">
+          Este campo es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de Asignación</mat-label>
+        <input formControlName="date_asignation" matInput [matDatepicker]="picker" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="registroForm.get('date_asignation')?.hasError('required')">
+          Este campo es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="direction" />
+        <mat-error *ngIf="registroForm.get('direction')?.hasError('required')">
+          Este campo es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button style="background-color: #9ADE7B; color: #ffffff;" (click)="registrarTransaccional()"
+                type="button" [disabled]="isFormEmpty">
+          Registrar
+        </button>
+
+        <button (click)="onClose()" mat-raised-button style="background-color: #FF8080; color: #ffffff;">CERRAR</button>
+
+
+
+      </div>
+
+      <div class="alert alert-danger mt-4" *ngIf="registroError">
+        Se produjo un error al registrar. Por favor, inténtalo de nuevo.
+      </div>
+    </form>
+  </div>
+</div>
