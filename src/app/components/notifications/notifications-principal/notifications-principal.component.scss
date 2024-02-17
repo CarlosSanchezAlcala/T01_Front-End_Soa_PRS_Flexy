@@ -1,0 +1,84 @@
+.cabecera {
+  color: black;
+  text-align: center;
+  align-items: center;
+  font-family: 'Mochiy Pop P One', sans-serif;
+}
+.titulo{
+  font-family: 'Mochiy Pop P One', sans-serif;
+  font-size:30px;
+}
+.button-container {
+  display: flex; /* Usa un contenedor flexible para alinear los botones uno al lado del otro */
+  text-align: center;
+}
+.button{
+  margin-right:5px;
+}
+td {
+  vertical-align: middle;
+}
+
+.centered-table {
+  width: 100%;
+  margin: 0 auto; /* Para centrar la tabla horizontalmente */
+}
+
+.table-cell {
+  padding: 10px; /* Ajusta el valor según la cantidad de espacio deseada */
+}
+
+
+/* Agrega este bloque de estilos en tu archivo CSS o en línea */
+
+.filtros-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f2f2f2; /* Color de fondo del contenedor */
+  padding: 8px; /* Ajusta el relleno alrededor del contenedor */
+  border-radius: 20px; /* Ajusta el radio de las esquinas para darle forma ovalada */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+}
+
+.filtro-fecha,
+.mb-3 {
+  margin-right: 4px; /* Reduzco el margen entre los elementos */
+}
+
+.table-container {
+  margin: 0 auto; /* Centra el contenedor de la tabla */
+}
+
+
+
+/* Ajusta los estilos según sea necesario */
+
+
+/* Agrega este bloque de estilos en tu archivo CSS o en línea */
+
+.cabecera {
+  text-align: center; /* Centra el título de Filtros */
+}
+
+.filtros-container {
+  display: flex; /* Utiliza un contenedor flexible para alinear elementos en una fila */
+  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+  align-items: center; /* Centra los elementos verticalmente */
+  margin-bottom: 10px; /* Añade un margen inferior para separar los filtros del contenido siguiente */
+}
+
+.filtro-fecha,
+.mb-3 {
+  margin-right: 10px; /* Agrega un margen derecho entre los elementos de filtro */
+}
+
+/* Agrega este bloque de estilos en tu archivo CSS o en línea */
+
+.table-container {
+  margin: 0 auto; /* Centra el contenedor de la tabla */
+}
+
+/* Ajusta los estilos según sea necesario */
+
+/* Ajusta los estilos según sea necesario */

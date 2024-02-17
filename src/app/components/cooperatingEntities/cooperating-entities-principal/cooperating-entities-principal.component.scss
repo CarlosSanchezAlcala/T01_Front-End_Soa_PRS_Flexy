@@ -1,0 +1,59 @@
+.cabecera {
+  color: black;
+  text-align: center;
+  align-items: center;
+  font-family: 'Mochiy Pop P One', sans-serif;
+}
+.titulo{
+  font-family: 'Mochiy Pop P One', sans-serif;
+  font-size:30px;
+}
+.button-container {
+  display: flex; /* Usa un contenedor flexible para alinear los botones uno al lado del otro */
+  text-align: center;
+}
+.button{
+  margin-right:5px;
+}
+td {
+  vertical-align: middle;
+}
+
+/* Estilo para el contenedor personalizado */
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: 200px; /* Ancho personalizado del combo box */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#filtroEstadoContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Estilo para el select */
+#filtroEstado {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Estilo para las opciones del select */
+#filtroEstado option {
+  font-size: 16px;
+  background-color: #fff;
+}
+
+.centered-table {
+  width: 100%;
+  margin: 0 auto; /* Para centrar la tabla horizontalmente */
+}
+
+.table-cell {
+  padding: 10px; /* Ajusta el valor según la cantidad de espacio deseada */
+}

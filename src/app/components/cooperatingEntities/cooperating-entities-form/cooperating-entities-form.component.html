@@ -1,0 +1,60 @@
+<div class="cabecera-modalRegistro">
+  <H1>{{entidadesService.entidadSelected ? 'EDITAR REGISTRO' : 'NUEVO REGISTRO'}}</H1>
+</div>
+<br>
+<div class="formulario">
+  <form [formGroup]="entidadesForm">
+
+    <div class="columna">
+      <div class="fila">
+        <label for="campo1">NOMBRE:</label>
+        <input formControlName="nombre" type="text" placeholder="Ingrese nombre de actividad" id="campo1">
+
+      </div>
+      <div class="fila validator" *ngIf="entidadesForm?.get('nombre')?.invalid && (entidadesForm?.get('nombre')?.dirty || entidadesForm?.get('nombre')?.touched)">
+        <div *ngIf="entidadesForm?.get('nombre')?.errors?.['required']">El nombre es obligatorio.</div>
+      </div>
+      <div class="fila">
+        <label for="campo2">DIRECCIÓN:</label>
+        <input formControlName="direccion" placeholder="Ingrese dirección" type="text" id="campo2">
+      </div>
+      <div class="fila validator" *ngIf="entidadesForm?.get('direccion')?.invalid && (entidadesForm?.get('direccion')?.dirty || entidadesForm?.get('direccion')?.touched)">
+        <div *ngIf="entidadesForm?.get('direccion')?.errors?.['required']">La dirección es obligatoria.</div>
+
+      </div>
+      <div class="fila">
+        <label for="campo4">RUC:</label>
+        <input formControlName="ruc" placeholder="Ingrese ruc" type="text" id="campo4">
+
+      </div>
+      <div class="fila validator" *ngIf="entidadesForm?.get('ruc')?.invalid && (entidadesForm?.get('ruc')?.dirty || entidadesForm?.get('ruc')?.touched)">
+        <div *ngIf="entidadesForm?.get('ruc')?.errors?.['required']">El RUC es obligatorio.</div>
+        <div *ngIf="entidadesForm?.get('ruc')?.errors?.['pattern']">Ingrese solo números de 11 dígitos.</div>
+      </div>
+      <div class="fila">
+        <label for="campo5">CONTACTO:</label>
+        <input formControlName="contacto" placeholder="Ingrese contacto" type="text" id="campo5" >
+
+      </div>
+      <div class="fila validator" *ngIf="entidadesForm?.get('contacto')?.invalid && (entidadesForm?.get('contacto')?.dirty || entidadesForm?.get('contacto')?.touched)">
+        <div *ngIf="entidadesForm?.get('contacto')?.errors?.['required']">El contacto es obligatorio.</div>
+        <div *ngIf="entidadesForm?.get('contacto')?.errors?.['pattern']">Ingrese números que empiecen con 9 y tengan 9 dígitos.</div>
+      </div>
+    </div>
+
+    <div class="columna">
+
+    </div>
+
+    <div class="boton-espacio">
+      <button type="submit" (click)="saveEntidades()" mat-raised-button style="background-color: #9ADE7B; color: #ffffff;">
+        {{entidadesService.entidadSelected ? 'ACTUALIZAR' : 'GUARDAR'}}
+      </button>
+
+      <button (click)="onClose()" mat-raised-button style="background-color: #FF8080; color: #ffffff; margin-left: 12px;">
+        CERRAR
+      </button>
+    </div>
+    <br>
+  </form>
+</div>

@@ -1,0 +1,100 @@
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Estilos para las celdas y encabezados de la tabla */
+.th.mat-header-cell,
+.td.mat-cell {
+  text-align: center;
+  vertical-align: middle;
+  padding: 16px;
+}
+
+td, th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mat-header-cell,
+.mat-cell,
+.mat-footer-cell {
+  padding: 16px;
+}
+
+.th.mat-header-cell {
+  padding: 16px;
+  font-size: 14px;
+}
+
+#buttonEliminar,
+#buttonModificar,
+#buttonReport,
+#buttonRegister {
+  /* Estilo para los botones */
+  margin: 2px;
+  border-radius: 15px;
+  width: 100px;
+}
+#buttonReport {
+  color: white;
+  width: 115px;
+  background:#E9B384;
+
+}
+#buttonRegister {
+  color: white;
+  width: 171px;
+  background:#9ADE7B;
+
+}
+#buttonModificar{
+  background:#F1C93B;
+}
+
+.dialog-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  text-align: center;
+}
+
+.dialog-content {
+  background: #fff;
+  padding: 52px;
+  border-radius: 60px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 600px;
+}
+
+.dialog-content button {
+  display: block;
+  margin-top: 10px;
+}
+
+.container-div-button-close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container-details-teen {
+  margin: 30px;
+}
+
+#tableOfDataFuncionary {
+  border-radius: 10px;
+  /* Ajusta el valor según tu preferencia */
+  border-collapse: collapse;
+  /* Opcional: Fusiona los bordes de las celdas */
+}
+
+.container-active {
+  margin-top: 1.5rem;
+}

@@ -1,0 +1,92 @@
+/* Estilos para el encabezado */
+.cabecera-modalRegistro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #40c2d3;
+  color: #fff;
+  padding: 10px; /* Añade espacio interno al encabezado */
+}
+
+.cabecera-modalRegistro h1 {
+  margin: 0; /* Elimina el margen superior del encabezado */
+}
+
+/* Estilos para el formulario */
+.formulario {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+  justify-content: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-cancelar {
+  border: 3px solid #3f51b5;
+  text-decoration-color: #3f51b5;
+  background: white;
+  color: #3f51b5; /* Cambia el color del texto */
+  margin-right: 10px; /* Añade margen a la derecha del botón cancelar */
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+label {
+  min-width: 200px;
+  margin-right: 10px;
+  float: left;
+  font-family: 'David Libre', serif;
+}
+
+input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.validator {
+  color: #720202;
+  background-color: #f8a6a6;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.boton-espacio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.btn {
+  background-color: #3f51b5;
+  color: #fff;
+}

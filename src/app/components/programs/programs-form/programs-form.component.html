@@ -1,0 +1,76 @@
+<div class="containerDataForm">
+  <form id="formColumn" [formGroup]="funcionaryDataForm" (ngSubmit)="saveOrUpdateFuncionary()">
+    <div class="titleWeb" align="center" style="margin-top: -2rem">
+      <figure>
+        <p style="font-size: 45px" class="lead">
+          <!--{{ _programService.funcionarySelected ? "Editar datos del Funcionario" : "Nuevo Funcionario" }}-->
+        </p>
+        <figcaption class="blockquote-footer">
+          Por favor colocar toda la información que se pide a continuación, con
+          la información
+          <strong><cite title="Source Title">correcta</cite></strong> y <strong><cite title="Source Title">veridica.</cite></strong>
+        </figcaption>
+      </figure>
+    </div>
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Nombre Completo :</mat-label>
+      <input matInput formControlName="name"/>
+      <mat-error *ngIf="funcionaryDataForm.get('name')?.hasError('required')">
+        Obligatorio
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Tipo de Programa :</mat-label>
+      <input matInput formControlName="type"/>
+      <mat-error *ngIf="funcionaryDataForm.get('type')?.hasError('required')">
+        Obligatorio
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Benefiario :</mat-label>
+      <input matInput formControlName="beneficiary"/>
+      <mat-error *ngIf="funcionaryDataForm.get('beneficiary')?.hasError('required')">
+        Obligatorio
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Responsable :</mat-label>
+      <input matInput formControlName="responsible"/>
+      <mat-error *ngIf="funcionaryDataForm.get('responsible')?.hasError('required')">
+        Obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Descripcion :</mat-label>
+      <input matInput formControlName="description"/>
+      <mat-error *ngIf="funcionaryDataForm.get('description')?.hasError('required')">
+        Obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Duración :</mat-label>
+      <input matInput formControlName="duration"/>
+      <mat-error *ngIf="funcionaryDataForm.get('duration')?.hasError('required')">
+        Obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <div id="buttonActions">
+      <button type="button" id="buttonCancel" mat-flat-button color="primary" (click)="navigateToList()">
+        Cancelar
+      </button>
+      <button type="submit" id="buttonSave" mat-flat-button color="accent" [disabled]="funcionaryDataForm.invalid">
+        <!--{{ _programService.funcionarySelected ? "Modificar" : "Registrar" }}-->
+      </button>
+    </div>
+  </form>
+</div>

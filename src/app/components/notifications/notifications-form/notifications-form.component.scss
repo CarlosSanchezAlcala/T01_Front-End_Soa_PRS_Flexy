@@ -1,0 +1,70 @@
+.cabecera-modalRegistro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #40c2d3;
+  color: #fff;
+  padding: 10px; /* Añade espacio interno al encabezado */
+}
+
+h1 {
+  margin: 10px 0; /* Añade margen en la parte superior e inferior del encabezado */
+  font-size: 24px; /* Aumenta el tamaño de la fuente */
+}
+
+.formulario {
+  display: grid;
+  grid-template-columns: 1fr; /* Solo una columna que ocupe todo el ancho */
+  gap: 10px;
+  padding: 20px;
+}
+
+.form-control {
+  border: 1px solid #ced4da;
+  border-radius: 0;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  font-family: 'Arial', sans-serif;
+}
+
+
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Agrega espacio entre los botones */
+  margin-top: 20px; /* Añade espacio en la parte superior del contenedor de botones */
+}
+
+.btn-cancelar {
+  border: 3px solid #3f51b5;
+  background: white;
+  color: #3f51b5;
+  padding: 10px 20px;
+  border-radius: 30px; /* Hace que el botón sea más redondeado */
+  font-weight: 600; /* Aumenta el peso de la fuente */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-cancelar:hover {
+  background-color: #3f51b5;
+  color: #fff;
+}
+
+
+/* Estilos para el cuadro del formulario */
+/* Estilos para el cuadro del formulario */
+.cuadro-formulario {
+  background-color: #3498db;  /* Cambia el color de fondo según tus preferencias */
+  color: #fff;               /* Cambia el color del texto según tus preferencias */
+  padding: 5px 10px;          /* Ajusta el relleno según tus preferencias */
+  cursor: pointer;            /* Cambia el cursor al pasar sobre el cuadro */
+  border-radius: 5px;         /* Agrega esquinas redondeadas si lo deseas */
+  display: inline-block;     /* Permite que el cuadro sea un elemento en línea */
+}
+
+.cuadro-formulario:hover {
+  background-color: #2980b9;  /* Cambia el color de fondo al pasar sobre el cuadro */
+}
+

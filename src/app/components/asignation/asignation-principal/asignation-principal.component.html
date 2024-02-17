@@ -1,14 +1,14 @@
 <div class="container-button">
-  <button
-    mat-raised-button
-    class="me-8 mb-8 buttonRegister"
-    id="button-register"
-    (click)="navigateToForm()"
-  >
+
+  <button mat-raised-button class="me-8 mb-8 buttonRegister" id="button-register" (click)="navigateToForm()">
+    <mat-icon aria-hidden="false" aria-label="add_circle_outline" fontIcon="add_circle_outline"></mat-icon>
     <strong>Nueva Asignación</strong>
   </button>
-  <button (click)="generarPDF()" mat-raised-button class="me-8 mb-8" id="button-pdf" *ngIf="!showDataInactive"><strong>Generar
-    PDF</strong></button>
+
+  <button (click)="generarPDF()" mat-raised-button class="me-8 mb-8" id="button-pdf" *ngIf="!showDataInactive">
+    <strong>Generar PDF</strong>
+  </button>
+
   <div *ngIf="pdfSrc">
     <embed [attr.src]="pdfSrc" type="application/pdf" width="100%" height="600px">
   </div>

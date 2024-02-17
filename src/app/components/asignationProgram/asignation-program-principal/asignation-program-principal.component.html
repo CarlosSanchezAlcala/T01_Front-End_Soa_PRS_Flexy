@@ -1,0 +1,125 @@
+<div class="button-container">
+  <button (click)="openDialog()" mat-raised-button class="custom-button" mat-raised-button
+          style="background-color: #9ADE7B; color: #ffffff;border-radius: 15px;
+    margin: 2px;
+    width: 171px;">
+    <mat-icon aria-hidden="false" aria-label="add_circle_outline" fontIcon="add_circle_outline"></mat-icon>
+    <strong>Nueva Asignación</strong>
+  </button>
+  <br>
+  <div class="flex-spacer"></div>
+  <button (click)="generarPDF()" mat-raised-button class="me-8 mb-8" id="button-pdf" *ngIf="!showDataInactive" style="background-color: #E9B384; color: #ffffff;border-radius: 15px;
+    margin: 2px;
+    width: 150px;">
+    <mat-icon>description</mat-icon><strong>Generar PDF</strong>
+  </button><!-- Este div actúa como espacio flexible -->
+  <div class="text-end">
+    <label for="filtroEstado">Filtrar por estado:</label>
+    <select id="filtroEstado" [(ngModel)]="estadoFiltrado" (change)="filtrarTransaccionesPorEstado()">
+      <option value="A">Activo</option>
+      <option value="I">Inactivo</option>
+    </select>
+  </div>
+</div>
+<br>
+<h2>Filtros</h2>
+<br>
+<div class="date-filter-container">
+  <div class="picker-container">
+    <mat-form-field class="date-picker">
+      <mat-label>Desde</mat-label>
+      <input matInput [matDatepicker]="pickerDesde" [(ngModel)]="fechaDesde">
+      <mat-datepicker-toggle matSuffix [for]="pickerDesde"></mat-datepicker-toggle>
+      <mat-datepicker #pickerDesde></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="picker-container">
+    <mat-form-field class="date-picker">
+      <mat-label>Hasta</mat-label>
+      <input matInput [matDatepicker]="pickerHasta" [(ngModel)]="fechaHasta">
+      <mat-datepicker-toggle matSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+      <mat-datepicker #pickerHasta></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="filter-container">
+    <button mat-raised-button class="filter-button" style="background-color: #96305a; color: #ffffff;border-radius: 15px; margin: 2px; width: 150px;" (click)="filtrarPorFecha()">Filtrar</button>
+  </div>
+</div>
+
+
+<br>
+
+<mat-card class="w-100">
+  <mat-card-content>
+    <div class="containerListData">
+      <table class="table centered-table">
+        <thead>
+        <tr class="bg-yellow-200">
+          <th scope="col" class="table-cell">Nombre Programa</th>
+          <th scope="col" class="table-cell">Nombre Actividad</th>
+          <th scope="col" class="table-cell">Dirección</th>
+          <th scope="col" class="table-cell">Fecha de Asignación</th>
+          <th scope="col" class="table-cell">Acción</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngIf="transaccionesFiltradas.length; else noData">
+          <tr *ngFor="let transaccional of transaccionesFiltradas; let odd = odd"
+              [ngClass]="{ 'bg-gray-100': odd, 'bg-gray-200': !odd }">
+            <td class="table-cell">{{ transaccional.name_programs }}</td>
+            <td class="table-cell">{{ transaccional.name_activities }}</td>
+            <td class="table-cell">{{ transaccional.direction }}</td>
+            <td class="table-cell">{{ transaccional.date_asignation | date : "dd-MMM-yyyy" }}</td>
+            <td>
+              <button mat-fab style="background-color: #F1C93B;color: #ffffff;"
+                      *ngIf="mostrarBotonRestaurar(estadoFiltrado)" (click)="restaurarRegistro(transaccional)">
+                <mat-icon>restore</mat-icon>
+              </button>
+
+              <button mat-fab style="background-color: #F1C93B;color: #ffffff;border-radius: 15px;
+                margin: 2px;
+                width: 150px;height: 40px;"
+                      *ngIf="mostrarBotonActualizar(estadoFiltrado)" (click)="actualizarRegistro(transaccional)">
+                Modificar
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #noData>
+          <tr>
+            <td colspan="7" class="text-center py-4 text-gray-500">
+              No hay datos disponibles.
+            </td>
+          </tr>
+        </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!-- Diálogo de actualización -->
+<ng-template #actualizarDialog>
+  <h2 mat-dialog-title>Actualizar Registro</h2>
+
+  <mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha de Asignación</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="registroSeleccionado.date_asignation" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Dirección</mat-label>
+      <textarea matInput [(ngModel)]="registroSeleccionado.direction"></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button style="background-color: #FF8080; color: #ffffff;" (click)="cerrarDialogo()">Cancelar</button>
+    <button mat-button style="background-color: #9ADE7B; color: #ffffff;" (click)="guardarCambios()">Guardar</button>
+  </mat-dialog-actions>
+</ng-template>

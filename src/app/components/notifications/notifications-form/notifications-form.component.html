@@ -1,0 +1,83 @@
+<div class="cabecera-modalRegistro">
+  <br><br>
+  <h1>NUEVA NOTIFICACIÓN</h1>
+</div>
+<br>
+<div class="formulario">
+  <form>
+
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+      <!-- Paso 1 -->
+      <mat-step #step1>
+        <ng-template matStepLabel>Información del Funcionario</ng-template>
+        <form #form="ngForm" novalidate>
+          <div class="mb-3">
+            <label for="example-nombre" class="form-label">Nombre del Funcionario:</label>
+            <mat-form-field>
+              <mat-label>Funcionario</mat-label>
+              <mat-select [(ngModel)]="idfuncionario" name="nombre_funcionario" required>
+                <mat-option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">
+                  {{ funcionario.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <label for="example-ruc" class="form-label">Entidad cooperativa:</label>
+            <mat-form-field>
+              <mat-label>Entidad cooperativa</mat-label>
+              <mat-select [(ngModel)]="identidad" name="nombre_entidad" required>
+                <mat-option *ngFor="let entidad of entidades" [value]="entidad.id">
+                  {{ entidad.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <label for="example-ruc" class="form-label">Fecha:</label>
+            <mat-form-field>
+              <mat-label>Fecha</mat-label>
+              <input matInput [matDatepicker]="picker" [(ngModel)]="fecha" name="fecha" required>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-label>Accion a realizar:</mat-label>
+            <mat-form-field>
+              <mat-label>Acciones</mat-label>
+              <mat-select [(ngModel)]="accionSeleccionada" name="accionSeleccionada" required>
+                <mat-option *ngFor="let food of actionsWithLinks" [value]="food.value">
+                  {{ food.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="button-container">
+            <button mat-flat-button color="primary" [disabled]="!form.valid" (click)="stepper.next()"
+                    style="color: rgb(255, 255, 255);">Siguiente
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <!-- Paso 2 -->
+      <mat-step #step2 [completed]="step1.completed && form.valid">
+        <ng-template matStepLabel>Llenado de formulario</ng-template>
+        <div class="popup">
+          <iframe width="100%" height="400" [src]="getSelectedLink()" frameborder="0" marginheight="0"
+                  marginwidth="0">Cargando...</iframe>
+        </div>
+
+        <div class="button-container">
+          <button mat-flat-button color="primary" [disabled]="!form.valid" (click)="onSave()"
+                  style="color: rgb(255, 255, 255);">Guardar
+          </button>
+          <button mat-raised-button color="warn" (click)="stepper.previous()">Atrás</button>
+        </div>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+  </form>
+</div>

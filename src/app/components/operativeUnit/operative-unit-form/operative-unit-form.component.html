@@ -1,0 +1,71 @@
+<div class="containerDataForm">
+  <form id="formColumn" [formGroup]="funcionaryDataForm" (ngSubmit)="saveOrUpdateFuncionary()">
+    <div class="titleWeb" align="center" style="margin-top: -2rem">
+      <figure>
+        <p style="font-size: 45px" class="lead">
+          <!--{{ _operativeunitService.funcionarySelected ? "EDITAR LOS DATOS DE UNA UNIDAS OPERATIVA" : "NUEVA UNIDAD OPERATIVA" }}-->
+        </p>
+        <figcaption class="blockquote-footer">
+
+          "Por favor, asegúrese de incluir todos los datos solicitados a continuación junto con la información necesaria."
+          <strong><cite title="Source Title">De manera compresiva</cite></strong> y <strong><cite title="Source Title">correcta.</cite></strong>
+        </figcaption>
+      </figure>
+    </div>
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Nombre Completo:</mat-label>
+      <input matInput formControlName="name"/>
+      <mat-error *ngIf="funcionaryDataForm.get('name')?.hasError('required')">
+        Obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Director :</mat-label>
+      <input matInput formControlName="director"/>
+      <mat-error *ngIf="funcionaryDataForm.get('director')?.hasError('required')">
+        Obligatorio
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Número de celular:</mat-label>
+      <input maxlength="9" minlength="9" pattern="[0-9]*" matInput formControlName="phonenumber"/>
+      <mat-error *ngIf="funcionaryDataForm.get('phonenumber')?.hasError('required')">
+        Obligatorio
+      </mat-error>
+      <mat-error *ngIf="funcionaryDataForm.get('phonenumber')?.hasError('pattern')">
+        Ingresar Teléfono Correcto
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Dirección:</mat-label>
+      <input matInput formControlName="address"/>
+      <mat-error *ngIf="funcionaryDataForm.get('address')?.hasError('required')">
+        Obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="formForRegister formForRegister">
+      <mat-label>Ubicación:</mat-label>
+      <mat-select matInput formControlName="codubi">
+        <mat-option *ngFor="let dUbi of ubigeoData" [value]="dUbi.codubi">
+          {{ dUbi.depar }} - {{ dUbi.provi }} - {{ dUbi.distri }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div id="buttonActions">
+      <button type="button" id="buttonCancel" mat-flat-button color="primary" (click)="navigateToList()">
+        Cancelar
+      </button>
+      <button type="submit" id="buttonSave" mat-flat-button color="accent" [disabled]="funcionaryDataForm.invalid">
+        <!--{{ _operativeunitService.funcionarySelected ? "Modificar" : "Registrar" }}-->
+      </button>
+    </div>
+  </form>
+</div>
