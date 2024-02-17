@@ -4,50 +4,26 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FullComponent } from './layouts/full/full.component';
 import { TeenPrincipalComponent } from './components/teen/teen-principal/teen-principal.component';
 import { TeenFormComponent } from "./components/teen/teen-form/teen-form.component";
-import {
-  AsignationPrincipalComponent
-} from "./components/asignation/asignation-principal/asignation-principal.component";
+import { AsignationPrincipalComponent } from "./components/asignation/asignation-principal/asignation-principal.component";
 import { AsignationFormComponent } from "./components/asignation/asignation-form/asignation-form.component";
-import {
-  FuncionaryPrincipalComponent
-} from "./components/funcionary/funcionary-principal/funcionary-principal.component";
+import { FuncionaryPrincipalComponent } from "./components/funcionary/funcionary-principal/funcionary-principal.component";
 import { FuncionaryFormComponent } from './components/funcionary/funcionary-form/funcionary-form.component';
 import { permissionsGuard } from './components/component-funcionality/guards/permissions.guard';
-import {WelcomePrincipalComponent} from "./components/welcome/welcome-principal/welcome-principal.component";
-import {
-  ActivitiesPrincipalComponent
-} from "./components/activities/activities-principal/activities-principal.component";
-import {
-  CooperatingEntitiesPrincipalComponent
-} from "./components/cooperatingEntities/cooperating-entities-principal/cooperating-entities-principal.component";
-import {
-  AsignationProgramPrincipalComponent
-} from "./components/asignationProgram/asignation-program-principal/asignation-program-principal.component";
-import {
-  NotificationsPrincipalComponent
-} from "./components/notifications/notifications-principal/notifications-principal.component";
-import {RecordPrincipalComponent} from "./components/record/record-principal/record-principal.component";
-import {
-  AsignationActTeenPrincipalComponent
-} from "./components/asignationActTeen/asignation-act-teen-principal/asignation-act-teen-principal.component";
-import {
-  AsignationActTeenFormComponent
-} from "./components/asignationActTeen/asignation-act-teen-form/asignation-act-teen-form.component";
-import {
-  OperativeUnitPrincipalComponent
-} from "./components/operativeUnit/operative-unit-principal/operative-unit-principal.component";
-import {OperativeUnitFormComponent} from "./components/operativeUnit/operative-unit-form/operative-unit-form.component";
-import {ProgramsPrincipalComponent} from "./components/programs/programs-principal/programs-principal.component";
-import {ProgramsFormComponent} from "./components/programs/programs-form/programs-form.component";
-import {
-  OperativeUnitAsignationProgramPrincipalComponent
-} from "./components/operativeUnitAsignationProgram/operative-unit-asignation-program-principal/operative-unit-asignation-program-principal.component";
-import {
-  OperativeUnitAsignationProgramFormComponent
-} from "./components/operativeUnitAsignationProgram/operative-unit-asignation-program-form/operative-unit-asignation-program-form.component";
-import {
-  DigitalExpedientPrincipalComponent
-} from "./components/digitalExpedient/digital-expedient-principal/digital-expedient-principal.component";
+import { WelcomePrincipalComponent } from "./components/welcome/welcome-principal/welcome-principal.component";
+import { ActivitiesPrincipalComponent } from "./components/activities/activities-principal/activities-principal.component";
+import { CooperatingEntitiesPrincipalComponent } from "./components/cooperatingEntities/cooperating-entities-principal/cooperating-entities-principal.component";
+import { AsignationProgramPrincipalComponent } from "./components/asignationProgram/asignation-program-principal/asignation-program-principal.component";
+import { NotificationsPrincipalComponent } from "./components/notifications/notifications-principal/notifications-principal.component";
+import { RecordPrincipalComponent } from "./components/record/record-principal/record-principal.component";
+import { AsignationActTeenPrincipalComponent } from "./components/asignationActTeen/asignation-act-teen-principal/asignation-act-teen-principal.component";
+import { AsignationActTeenFormComponent } from "./components/asignationActTeen/asignation-act-teen-form/asignation-act-teen-form.component";
+import { OperativeUnitPrincipalComponent } from "./components/operativeUnit/operative-unit-principal/operative-unit-principal.component";
+import { OperativeUnitFormComponent } from "./components/operativeUnit/operative-unit-form/operative-unit-form.component";
+import { ProgramsPrincipalComponent } from "./components/programs/programs-principal/programs-principal.component";
+import { ProgramsFormComponent } from "./components/programs/programs-form/programs-form.component";
+import { OperativeUnitAsignationProgramPrincipalComponent } from "./components/operativeUnitAsignationProgram/operative-unit-asignation-program-principal/operative-unit-asignation-program-principal.component";
+import { OperativeUnitAsignationProgramFormComponent } from "./components/operativeUnitAsignationProgram/operative-unit-asignation-program-form/operative-unit-asignation-program-form.component";
+import { DigitalExpedientPrincipalComponent } from "./components/digitalExpedient/digital-expedient-principal/digital-expedient-principal.component";
 
 const routes: Routes = [
   {
@@ -86,4 +62,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
