@@ -24,36 +24,48 @@ import { ProgramsFormComponent } from "./components/programs/programs-form/progr
 import { OperativeUnitAsignationProgramPrincipalComponent } from "./components/operativeUnitAsignationProgram/operative-unit-asignation-program-principal/operative-unit-asignation-program-principal.component";
 import { OperativeUnitAsignationProgramFormComponent } from "./components/operativeUnitAsignationProgram/operative-unit-asignation-program-form/operative-unit-asignation-program-form.component";
 import { DigitalExpedientPrincipalComponent } from "./components/digitalExpedient/digital-expedient-principal/digital-expedient-principal.component";
+import {
+  AsignationMasivPrincipalComponent
+} from "./components/asignationMasivData/asignation-masiv-principal/asignation-masiv-principal.component";
+import {
+  AttendancePrincipalComponent
+} from "./components/attendance/attendance-principal/attendance-principal.component";
+import {
+  ViewAttendancePrincipalComponent
+} from "./components/viewAttendance/view-attendance-principal/view-attendance-principal.component";
 
 const routes: Routes = [
   {
     path: "",
     component: FullComponent,
     children: [
-      { path: "", redirectTo: "welcome", pathMatch: "full" },
-      { path: "home", canActivate: [permissionsGuard], component: DashboardComponent },
-      { path: "asignation", canActivate: [permissionsGuard], component: AsignationPrincipalComponent },
-      { path: "teen", canActivate: [permissionsGuard], component: TeenPrincipalComponent },
-      { path: "teen-form", canActivate: [permissionsGuard], component: TeenFormComponent },
-      { path: "asignation-form", canActivate: [permissionsGuard], component: AsignationFormComponent },
-      { path: "asignation-list", component: AsignationPrincipalComponent },
-      { path: "funcionary", canActivate: [permissionsGuard], component: FuncionaryPrincipalComponent },
-      { path: "funcionary-form", canActivate: [permissionsGuard], component: FuncionaryFormComponent },
-      { path: "welcome", component: WelcomePrincipalComponent},
-      { path: "activities", canActivate: [permissionsGuard], component: ActivitiesPrincipalComponent },
-      { path: "entities", canActivate: [permissionsGuard], component: CooperatingEntitiesPrincipalComponent },
-      { path: "asignationProgram", canActivate: [permissionsGuard], component: AsignationProgramPrincipalComponent },
-      { path: "notifications", canActivate: [permissionsGuard], component: NotificationsPrincipalComponent },
-      { path: "record", canActivate: [permissionsGuard], component: RecordPrincipalComponent },
-      { path: "asignationActTeen", canActivate: [permissionsGuard], component: AsignationActTeenPrincipalComponent },
-      { path: "asignationActTeenForm", canActivate: [permissionsGuard], component: AsignationActTeenFormComponent },
-      { path: "operativeUnit", canActivate: [permissionsGuard], component: OperativeUnitPrincipalComponent },
-      { path: "operativeUnitForm", canActivate: [permissionsGuard], component: OperativeUnitFormComponent },
-      { path: "programsAsist", canActivate: [permissionsGuard], component: ProgramsPrincipalComponent },
-      { path: "programsAsitForm", canActivate: [permissionsGuard], component: ProgramsFormComponent },
-      { path: "unitOperativeProgram", canActivate: [permissionsGuard], component: OperativeUnitAsignationProgramPrincipalComponent },
-      { path: "unitOperativeProgramForm", canActivate: [permissionsGuard], component: OperativeUnitAsignationProgramFormComponent },
-      { path: "digitalExpedient", canActivate: [permissionsGuard], component: DigitalExpedientPrincipalComponent },
+      { path: ""                            , redirectTo: "welcome"           , pathMatch: "full" },
+      { path: "home"                        , canActivate: [permissionsGuard] , component: DashboardComponent },
+      { path: "asignation"                  , canActivate: [permissionsGuard] , component: AsignationPrincipalComponent },
+      { path: "teen"                        , canActivate: [permissionsGuard] , component: TeenPrincipalComponent },
+      { path: "teen-form"                   , canActivate: [permissionsGuard] , component: TeenFormComponent },
+      { path: "asignation-form"             , canActivate: [permissionsGuard] , component: AsignationFormComponent },
+      { path: "asignation-list"                                               , component: AsignationPrincipalComponent },
+      { path: "funcionary"                  , canActivate: [permissionsGuard] , component: FuncionaryPrincipalComponent },
+      { path: "funcionary-form"             , canActivate: [permissionsGuard] , component: FuncionaryFormComponent },
+      { path: "welcome"                                                       , component: WelcomePrincipalComponent},
+      { path: "activities"                  , canActivate: [permissionsGuard] , component: ActivitiesPrincipalComponent },
+      { path: "entities"                    , canActivate: [permissionsGuard] , component: CooperatingEntitiesPrincipalComponent },
+      { path: "asignationProgram"           , canActivate: [permissionsGuard] , component: AsignationProgramPrincipalComponent },
+      { path: "notifications"               , canActivate: [permissionsGuard] , component: NotificationsPrincipalComponent },
+      { path: "record"                      , canActivate: [permissionsGuard] , component: RecordPrincipalComponent },
+      { path: "asignationActTeen"           , canActivate: [permissionsGuard] , component: AsignationActTeenPrincipalComponent },
+      { path: "asignationActTeenForm"       , canActivate: [permissionsGuard] , component: AsignationActTeenFormComponent },
+      { path: "operativeUnit"               , canActivate: [permissionsGuard] , component: OperativeUnitPrincipalComponent },
+      { path: "operativeUnitForm"           , canActivate: [permissionsGuard] , component: OperativeUnitFormComponent },
+      { path: "programsAsist"               , canActivate: [permissionsGuard] , component: ProgramsPrincipalComponent },
+      { path: "programsAsitForm"            , canActivate: [permissionsGuard] , component: ProgramsFormComponent },
+      { path: "unitOperativeProgram"        , canActivate: [permissionsGuard] , component: OperativeUnitAsignationProgramPrincipalComponent },
+      { path: "unitOperativeProgramForm"    , canActivate: [permissionsGuard] , component: OperativeUnitAsignationProgramFormComponent },
+      { path: "digitalExpedient"            , canActivate: [permissionsGuard] , component: DigitalExpedientPrincipalComponent },
+      { path: "asignationMasiv"             , canActivate: [permissionsGuard] , component: AsignationMasivPrincipalComponent },
+      { path: "attendance"                  , canActivate: [permissionsGuard] , component: AttendancePrincipalComponent },
+      { path: "viewAttendance"              , canActivate: [permissionsGuard] , component: ViewAttendancePrincipalComponent },
     ]
   },
 ];

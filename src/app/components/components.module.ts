@@ -31,6 +31,9 @@ import { ProgramsFormComponent } from './programs/programs-form/programs-form.co
 import { OperativeUnitAsignationProgramPrincipalComponent } from './operativeUnitAsignationProgram/operative-unit-asignation-program-principal/operative-unit-asignation-program-principal.component';
 import { OperativeUnitAsignationProgramFormComponent } from './operativeUnitAsignationProgram/operative-unit-asignation-program-form/operative-unit-asignation-program-form.component';
 import { DigitalExpedientPrincipalComponent } from './digitalExpedient/digital-expedient-principal/digital-expedient-principal.component';
+import { AsignationMasivPrincipalComponent } from './asignationMasivData/asignation-masiv-principal/asignation-masiv-principal.component';
+import { AttendancePrincipalComponent } from './attendance/attendance-principal/attendance-principal.component';
+import { ViewAttendancePrincipalComponent } from './viewAttendance/view-attendance-principal/view-attendance-principal.component';
 
 @NgModule({
     imports: [
@@ -69,6 +72,9 @@ import { DigitalExpedientPrincipalComponent } from './digitalExpedient/digital-e
     OperativeUnitAsignationProgramPrincipalComponent,
     OperativeUnitAsignationProgramFormComponent,
     DigitalExpedientPrincipalComponent,
+    AsignationMasivPrincipalComponent,
+    AttendancePrincipalComponent,
+    ViewAttendancePrincipalComponent,
   ]
 })
 export class ComponentsModule { }

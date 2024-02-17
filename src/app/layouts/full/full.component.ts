@@ -127,7 +127,7 @@ export class FullComponent implements OnInit {
       menu: "Listado de Programas",
     },
     {
-      link: "/bulk-Allocation",
+      link: "/asignationMasiv",
       icon: "divide-circle",
       menu: "Asignación Masiva",
     },
@@ -137,7 +137,7 @@ export class FullComponent implements OnInit {
       menu: "Asistencia",
     },
     {
-      link: "/view-attendance",
+      link: "/viewAttendance",
       icon: "menu",
       menu: "Vista de Asistencia",
     },
